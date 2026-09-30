@@ -1,0 +1,8 @@
+# ── Training & data-pipeline dependencies ───────────────────────────────
+# Install ONLY when you need to process raw INCLUDE-50 videos or re-train.
+# DO NOT install in a production server image.
+-r requirements.txt
+
+opencv-python>=4.9.0
+mediapipe>=0.10.14
+remotezip>=0.12.0

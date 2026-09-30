@@ -1,0 +1,328 @@
+/* ═══════════════════════════════════════════════════════════
+   MOVA Dashboard / Features Hub
+   ═══════════════════════════════════════════════════════════ */
+
+.dash-root {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ── Hero Banner ─────────────────────────────────────────── */
+.dash-hero {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 2.5rem 2.75rem;
+}
+
+.dash-hero-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0B4FE0;
+  background: #EEF4FF;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+  border: 1px solid #BFDBFE;
+}
+
+.dash-hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.12;
+  color: #0A0F2C;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.75rem;
+}
+
+.dash-hero-title-blue {
+  color: #0B4FE0;
+}
+
+.dash-hero-sub {
+  font-size: 1.05rem;
+  color: #4B5A7A;
+  margin-bottom: 1.75rem;
+  line-height: 1.55;
+  max-width: 560px;
+}
+
+.dash-hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dash-btn-primary {
+  background: #0B4FE0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.dash-btn-primary:hover {
+  background: #0942BF;
+  transform: translateY(-1px);
+}
+
+.dash-btn-outline {
+  background: #ffffff;
+  color: #0A0F2C;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.dash-btn-outline:hover {
+  border-color: #CBD5E1;
+  background: #F8FAFC;
+}
+
+/* ── Filter Bar ──────────────────────────────────────────── */
+.dash-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dash-categories {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dash-cat-btn {
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  border: 1.5px solid #E2E8F0;
+  background: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #4B5A7A;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.dash-cat-btn:hover {
+  border-color: #CBD5E1;
+  color: #0A0F2C;
+}
+
+.dash-cat-btn.active {
+  background: #0B4FE0;
+  color: #ffffff;
+  border-color: #0B4FE0;
+}
+
+.dash-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  min-width: 260px;
+  transition: border-color 0.15s;
+}
+
+.dash-search-wrap:focus-within {
+  border-color: #0B4FE0;
+}
+
+.dash-search-icon {
+  color: #94A3B8;
+  flex-shrink: 0;
+}
+
+.dash-search {
+  border: none;
+  outline: none;
+  font-size: 0.88rem;
+  color: #0A0F2C;
+  background: transparent;
+  width: 100%;
+  font-family: inherit;
+}
+
+.dash-search::placeholder { color: #94A3B8; }
+
+/* ── Feature Grid ────────────────────────────────────────── */
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.dash-card {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: all 0.2s;
+}
+
+.dash-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.dash-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.dash-card-icon-wrap {
+  width: 40px;
+  height: 40px;
+  background: #F8FAFC;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dash-card-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.dash-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0A0F2C;
+  letter-spacing: -0.02em;
+}
+
+.dash-card-desc {
+  font-size: 0.88rem;
+  color: #64748B;
+  line-height: 1.45;
+  flex: 1;
+}
+
+.dash-card-cta {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: #ffffff;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0A0F2C;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  margin-top: 0.5rem;
+  font-family: inherit;
+}
+
+.dash-card-cta:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+}
+
+/* ── Impact Stats ────────────────────────────────────────── */
+.dash-impact {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 2.5rem 2.75rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.dash-impact-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #94A3B8;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.dash-impact-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0A0F2C;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.dash-impact-sub {
+  font-size: 0.95rem;
+  color: #4B5A7A;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.dash-impact-stats {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.dash-stat {
+  text-align: center;
+}
+
+.dash-stat-value {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #0B4FE0;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.dash-stat-label {
+  font-size: 0.8rem;
+  color: #64748B;
+  font-weight: 500;
+  white-space: pre-line;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dash-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-impact { grid-template-columns: 1fr; }
+  .dash-impact-stats { flex-wrap: wrap; }
+}
+
+@media (max-width: 600px) {
+  .dash-grid { grid-template-columns: 1fr; }
+  .dash-hero { padding: 1.75rem 1.5rem; }
+  .dash-hero-title { font-size: 1.75rem; }
+  .dash-filter-bar { flex-direction: column; align-items: flex-start; }
+  .dash-search-wrap { min-width: 100%; }
+}

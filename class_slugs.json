@@ -1,0 +1,202 @@
+{
+  "loud": {
+    "parent_label": "Adjectives",
+    "label": "1. loud"
+  },
+  "quiet": {
+    "parent_label": "Adjectives",
+    "label": "2. quiet"
+  },
+  "happy": {
+    "parent_label": "Adjectives",
+    "label": "3. happy"
+  },
+  "long": {
+    "parent_label": "Adjectives",
+    "label": "78. long"
+  },
+  "short": {
+    "parent_label": "Adjectives",
+    "label": "79. short"
+  },
+  "big_large": {
+    "parent_label": "Adjectives",
+    "label": "83. big large"
+  },
+  "small_little": {
+    "parent_label": "Adjectives",
+    "label": "84. small little"
+  },
+  "hot": {
+    "parent_label": "Adjectives",
+    "label": "87. hot"
+  },
+  "new": {
+    "parent_label": "Adjectives",
+    "label": "91. new"
+  },
+  "good": {
+    "parent_label": "Adjectives",
+    "label": "94. good"
+  },
+  "dry": {
+    "parent_label": "Adjectives",
+    "label": "97. dry"
+  },
+  "dog": {
+    "parent_label": "Animals",
+    "label": "1. Dog"
+  },
+  "bird": {
+    "parent_label": "Animals",
+    "label": "4. Bird"
+  },
+  "cow": {
+    "parent_label": "Animals",
+    "label": "5. Cow"
+  },
+  "hat": {
+    "parent_label": "Clothes",
+    "label": "37. Hat"
+  },
+  "tshirt": {
+    "parent_label": "Clothes",
+    "label": "42. T-Shirt"
+  },
+  "shoes": {
+    "parent_label": "Clothes",
+    "label": "44. Shoes"
+  },
+  "red": {
+    "parent_label": "Colours",
+    "label": "47. Red"
+  },
+  "black": {
+    "parent_label": "Colours",
+    "label": "54. Black"
+  },
+  "white": {
+    "parent_label": "Colours",
+    "label": "55. White"
+  },
+  "monday": {
+    "parent_label": "Days_and_Time",
+    "label": "67. Monday"
+  },
+  "year": {
+    "parent_label": "Days_and_Time",
+    "label": "78. Year"
+  },
+  "time": {
+    "parent_label": "Days_and_Time",
+    "label": "86. Time"
+  },
+  "fan": {
+    "parent_label": "Electronics",
+    "label": "53. Fan"
+  },
+  "cell_phone": {
+    "parent_label": "Electronics",
+    "label": "54. Cell phone"
+  },
+  "hello": {
+    "parent_label": "Greetings",
+    "label": "48. Hello"
+  },
+  "good_morning": {
+    "parent_label": "Greetings",
+    "label": "51. Good Morning"
+  },
+  "thank_you": {
+    "parent_label": "Greetings",
+    "label": "55. Thank you"
+  },
+  "window": {
+    "parent_label": "Home",
+    "label": "28. Window"
+  },
+  "pen": {
+    "parent_label": "Home",
+    "label": "34. Pen"
+  },
+  "paint": {
+    "parent_label": "Home",
+    "label": "40. Paint"
+  },
+  "teacher": {
+    "parent_label": "Jobs",
+    "label": "84. Teacher"
+  },
+  "priest": {
+    "parent_label": "Jobs",
+    "label": "91. Priest"
+  },
+  "car": {
+    "parent_label": "Means_of_Transportation",
+    "label": "11. Car"
+  },
+  "train_ticket": {
+    "parent_label": "Means_of_Transportation",
+    "label": "16. train ticket"
+  },
+  "father": {
+    "parent_label": "People",
+    "label": "61. Father"
+  },
+  "brother": {
+    "parent_label": "People",
+    "label": "66. Brother"
+  },
+  "boy": {
+    "parent_label": "People",
+    "label": "77. Boy"
+  },
+  "girl": {
+    "parent_label": "People",
+    "label": "78. Girl"
+  },
+  "house": {
+    "parent_label": "Places",
+    "label": "19. House"
+  },
+  "court": {
+    "parent_label": "Places",
+    "label": "23. Court"
+  },
+  "bank": {
+    "parent_label": "Places",
+    "label": "35. Bank"
+  },
+  "i": {
+    "parent_label": "Pronouns",
+    "label": "40. I"
+  },
+  "it": {
+    "parent_label": "Pronouns",
+    "label": "44. it"
+  },
+  "you_plural": {
+    "parent_label": "Pronouns",
+    "label": "46. you (plural)"
+  },
+  "summer": {
+    "parent_label": "Seasons",
+    "label": "61. Summer"
+  },
+  "fall": {
+    "parent_label": "Seasons",
+    "label": "64. Fall"
+  },
+  "election": {
+    "parent_label": "Society",
+    "label": "14. Election"
+  },
+  "death": {
+    "parent_label": "Society",
+    "label": "2. Death"
+  },
+  "store_shop": {
+    "parent_label": "Places",
+    "label": "28. Store or Shop"
+  }
+}

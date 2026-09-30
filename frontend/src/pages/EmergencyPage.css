@@ -1,0 +1,217 @@
+/* ═══════════════════════════════════════════════════════════
+   MOVA Emergency Page
+   ═══════════════════════════════════════════════════════════ */
+
+.emrg-root {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.emrg-header { margin-bottom: 0.25rem; }
+
+.emrg-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0A0F2C;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.3rem;
+}
+
+.emrg-sub {
+  font-size: 1rem;
+  color: #64748B;
+}
+
+/* Emergency mode banner */
+.emrg-mode-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #FEF2F2;
+  border: 1.5px solid #FCA5A5;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  color: #991B1B;
+  font-size: 0.92rem;
+  flex-wrap: wrap;
+}
+
+.emrg-mode-banner svg { flex-shrink: 0; }
+
+.emrg-mode-deactivate {
+  margin-left: auto;
+  background: #DC2626;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.emrg-mode-deactivate:hover { background: #B91C1C; }
+
+/* Cards Grid */
+.emrg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.emrg-card {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  cursor: default;
+  font-family: inherit;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.emrg-card--clickable {
+  cursor: pointer;
+}
+
+.emrg-card--clickable:hover {
+  border-color: #FCA5A5;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.1);
+  transform: translateY(-2px);
+}
+
+.emrg-card--speaking {
+  border-color: #EF4444 !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15) !important;
+  background: #FFF5F5;
+}
+
+.emrg-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+}
+
+.emrg-card-body { }
+
+.emrg-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0A0F2C;
+  margin-bottom: 0.45rem;
+}
+
+.emrg-card-text {
+  font-size: 0.85rem;
+  color: #4B5A7A;
+  line-height: 1.5;
+}
+
+.emrg-card-ml {
+  font-family: 'Noto Sans Malayalam', sans-serif;
+  color: #64748B;
+}
+
+.emrg-speaking-indicator {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #EF4444;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  animation: emrg-pulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes emrg-pulse {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}
+
+/* Emergency Mode Strip */
+.emrg-mode-strip {
+  background: #FFF5F5;
+  border: 1.5px solid #FECACA;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.emrg-mode-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.emrg-mode-strip-icon {
+  color: #EF4444;
+  flex-shrink: 0;
+}
+
+.emrg-mode-strip-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0A0F2C;
+  margin-bottom: 0.2rem;
+}
+
+.emrg-mode-strip-desc {
+  font-size: 0.82rem;
+  color: #64748B;
+}
+
+.emrg-activate-btn {
+  background: #0A0F2C;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.emrg-activate-btn:hover {
+  background: #1e293b;
+}
+
+.emrg-activate-btn--off {
+  background: #DC2626;
+}
+
+.emrg-activate-btn--off:hover {
+  background: #B91C1C;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .emrg-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .emrg-grid { grid-template-columns: 1fr; }
+  .emrg-mode-strip { flex-direction: column; align-items: flex-start; }
+}

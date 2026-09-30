@@ -1,0 +1,83 @@
+# ── Large media & datasets (NEVER commit) ──────────────────────────────
+include_videos/
+data/
+
+# ── Node / Frontend ─────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ── Python build artefacts ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ── Virtual environments ─────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Environment / secrets ────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Logs ────────────────────────────────────────────────────────────────
+*.log
+logs/
+*.log.*
+
+# ── OS artefacts ────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Desktop.ini
+
+# ── IDE / editor ────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Agent / tool folders ─────────────────────────────────────────────────
+# (antigravity IDE writes here; contains absolute paths and secrets)
+.gemini/
+.agents/
+antigravity-ide/
+
+# ── Download / pipeline state (large & generated) ───────────────────────
+download_state.json
+download.log
+download_failures.log
+shared_videos_report.json
+stage_e_timing_report.json
+include50_map.json
+include_manifest.json
+
+# ── Temporary zips or demo packages ────────────────────────────────────
+*.zip
+*.tar.gz
+*.gz
+
+# ── Test output / scratch ───────────────────────────────────────────────
+scratch/
+tmp/
+
+# Root-level MediaPipe model binary (the committed copy lives in frontend/public/mediapipe/)
+/hand_landmarker.task
+# Keep the self-hosted copies that MUST be committed:
+!frontend/public/mediapipe/hand_landmarker.task
+!frontend/public/mediapipe/wasm/
+

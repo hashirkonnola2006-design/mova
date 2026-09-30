@@ -1,0 +1,402 @@
+[
+  {
+    "label": "1. loud",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 13,
+    "val_clips": 2,
+    "test_clips": 6
+  },
+  {
+    "label": "2. quiet",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "3. happy",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "78. long",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 14,
+    "val_clips": 1,
+    "test_clips": 6
+  },
+  {
+    "label": "79. short",
+    "parent_label": "Adjectives",
+    "total_clips": 22,
+    "train_clips": 14,
+    "val_clips": 2,
+    "test_clips": 6
+  },
+  {
+    "label": "83. big large",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 15,
+    "val_clips": 2,
+    "test_clips": 4
+  },
+  {
+    "label": "84. small little",
+    "parent_label": "Adjectives",
+    "total_clips": 22,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 4
+  },
+  {
+    "label": "87. hot",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 14,
+    "val_clips": 1,
+    "test_clips": 6
+  },
+  {
+    "label": "91. new",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "94. good",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "97. dry",
+    "parent_label": "Adjectives",
+    "total_clips": 21,
+    "train_clips": 19,
+    "val_clips": 2,
+    "test_clips": 0
+  },
+  {
+    "label": "1. Dog",
+    "parent_label": "Animals",
+    "total_clips": 20,
+    "train_clips": 12,
+    "val_clips": 1,
+    "test_clips": 7
+  },
+  {
+    "label": "4. Bird",
+    "parent_label": "Animals",
+    "total_clips": 25,
+    "train_clips": 22,
+    "val_clips": 2,
+    "test_clips": 1
+  },
+  {
+    "label": "5. Cow",
+    "parent_label": "Animals",
+    "total_clips": 21,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "37. Hat",
+    "parent_label": "Clothes",
+    "total_clips": 20,
+    "train_clips": 13,
+    "val_clips": 1,
+    "test_clips": 6
+  },
+  {
+    "label": "42. T-Shirt",
+    "parent_label": "Clothes",
+    "total_clips": 20,
+    "train_clips": 15,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "44. Shoes",
+    "parent_label": "Clothes",
+    "total_clips": 20,
+    "train_clips": 14,
+    "val_clips": 2,
+    "test_clips": 4
+  },
+  {
+    "label": "47. Red",
+    "parent_label": "Colours",
+    "total_clips": 20,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 2
+  },
+  {
+    "label": "54. Black",
+    "parent_label": "Colours",
+    "total_clips": 20,
+    "train_clips": 14,
+    "val_clips": 1,
+    "test_clips": 5
+  },
+  {
+    "label": "55. White",
+    "parent_label": "Colours",
+    "total_clips": 20,
+    "train_clips": 17,
+    "val_clips": 2,
+    "test_clips": 1
+  },
+  {
+    "label": "67. Monday",
+    "parent_label": "Days_and_Time",
+    "total_clips": 14,
+    "train_clips": 11,
+    "val_clips": 1,
+    "test_clips": 2
+  },
+  {
+    "label": "78. Year",
+    "parent_label": "Days_and_Time",
+    "total_clips": 15,
+    "train_clips": 7,
+    "val_clips": 1,
+    "test_clips": 7
+  },
+  {
+    "label": "86. Time",
+    "parent_label": "Days_and_Time",
+    "total_clips": 15,
+    "train_clips": 11,
+    "val_clips": 1,
+    "test_clips": 3
+  },
+  {
+    "label": "53. Fan",
+    "parent_label": "Electronics",
+    "total_clips": 15,
+    "train_clips": 11,
+    "val_clips": 1,
+    "test_clips": 3
+  },
+  {
+    "label": "54. Cell phone",
+    "parent_label": "Electronics",
+    "total_clips": 14,
+    "train_clips": 9,
+    "val_clips": 1,
+    "test_clips": 4
+  },
+  {
+    "label": "48. Hello",
+    "parent_label": "Greetings",
+    "total_clips": 21,
+    "train_clips": 13,
+    "val_clips": 1,
+    "test_clips": 7
+  },
+  {
+    "label": "51. Good Morning",
+    "parent_label": "Greetings",
+    "total_clips": 21,
+    "train_clips": 15,
+    "val_clips": 2,
+    "test_clips": 4
+  },
+  {
+    "label": "55. Thank you",
+    "parent_label": "Greetings",
+    "total_clips": 21,
+    "train_clips": 13,
+    "val_clips": 1,
+    "test_clips": 7
+  },
+  {
+    "label": "28. Window",
+    "parent_label": "Home",
+    "total_clips": 14,
+    "train_clips": 10,
+    "val_clips": 1,
+    "test_clips": 3
+  },
+  {
+    "label": "34. Pen",
+    "parent_label": "Home",
+    "total_clips": 14,
+    "train_clips": 11,
+    "val_clips": 1,
+    "test_clips": 2
+  },
+  {
+    "label": "40. Paint",
+    "parent_label": "Home",
+    "total_clips": 15,
+    "train_clips": 11,
+    "val_clips": 1,
+    "test_clips": 3
+  },
+  {
+    "label": "84. Teacher",
+    "parent_label": "Jobs",
+    "total_clips": 14,
+    "train_clips": 10,
+    "val_clips": 1,
+    "test_clips": 3
+  },
+  {
+    "label": "91. Priest",
+    "parent_label": "Jobs",
+    "total_clips": 15,
+    "train_clips": 13,
+    "val_clips": 1,
+    "test_clips": 1
+  },
+  {
+    "label": "11. Car",
+    "parent_label": "Means_of_Transportation",
+    "total_clips": 20,
+    "train_clips": 14,
+    "val_clips": 2,
+    "test_clips": 4
+  },
+  {
+    "label": "16. train ticket",
+    "parent_label": "Means_of_Transportation",
+    "total_clips": 21,
+    "train_clips": 12,
+    "val_clips": 1,
+    "test_clips": 8
+  },
+  {
+    "label": "61. Father",
+    "parent_label": "People",
+    "total_clips": 20,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 2
+  },
+  {
+    "label": "66. Brother",
+    "parent_label": "People",
+    "total_clips": 21,
+    "train_clips": 14,
+    "val_clips": 2,
+    "test_clips": 5
+  },
+  {
+    "label": "77. Boy",
+    "parent_label": "People",
+    "total_clips": 21,
+    "train_clips": 15,
+    "val_clips": 2,
+    "test_clips": 4
+  },
+  {
+    "label": "78. Girl",
+    "parent_label": "People",
+    "total_clips": 20,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 2
+  },
+  {
+    "label": "19. House",
+    "parent_label": "Places",
+    "total_clips": 21,
+    "train_clips": 18,
+    "val_clips": 2,
+    "test_clips": 1
+  },
+  {
+    "label": "23. Court",
+    "parent_label": "Places",
+    "total_clips": 23,
+    "train_clips": 18,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "28. Store or Shop",
+    "parent_label": "Places",
+    "total_clips": 22,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 4
+  },
+  {
+    "label": "35. Bank",
+    "parent_label": "Places",
+    "total_clips": 22,
+    "train_clips": 14,
+    "val_clips": 2,
+    "test_clips": 6
+  },
+  {
+    "label": "40. I",
+    "parent_label": "Pronouns",
+    "total_clips": 21,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "44. it",
+    "parent_label": "Pronouns",
+    "total_clips": 21,
+    "train_clips": 11,
+    "val_clips": 1,
+    "test_clips": 9
+  },
+  {
+    "label": "46. you (plural)",
+    "parent_label": "Pronouns",
+    "total_clips": 21,
+    "train_clips": 16,
+    "val_clips": 2,
+    "test_clips": 3
+  },
+  {
+    "label": "61. Summer",
+    "parent_label": "Seasons",
+    "total_clips": 14,
+    "train_clips": 10,
+    "val_clips": 1,
+    "test_clips": 3
+  },
+  {
+    "label": "64. Fall",
+    "parent_label": "Seasons",
+    "total_clips": 15,
+    "train_clips": 11,
+    "val_clips": 1,
+    "test_clips": 3
+  },
+  {
+    "label": "14. Election",
+    "parent_label": "Society",
+    "total_clips": 14,
+    "train_clips": 11,
+    "val_clips": 1,
+    "test_clips": 2
+  },
+  {
+    "label": "2. Death",
+    "parent_label": "Society",
+    "total_clips": 14,
+    "train_clips": 8,
+    "val_clips": 1,
+    "test_clips": 5
+  }
+]

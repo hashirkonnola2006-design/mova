@@ -1,0 +1,502 @@
+{
+  "bank": {
+    "english": "Bank",
+    "parent_label": "Places",
+    "label": "35. Bank",
+    "malayalam": "ബാങ്ക്",
+    "needs_review": true,
+    "alternatives": []
+  },
+  "big_large": {
+    "english": "big large",
+    "parent_label": "Adjectives",
+    "label": "83. big large",
+    "malayalam": "വലിയത്",
+    "needs_review": true,
+    "alternatives": [
+      "വലുത്"
+    ]
+  },
+  "bird": {
+    "english": "Bird",
+    "parent_label": "Animals",
+    "label": "4. Bird",
+    "malayalam": "പക്ഷി",
+    "needs_review": true,
+    "alternatives": [
+      "കിളി"
+    ]
+  },
+  "black": {
+    "english": "Black",
+    "parent_label": "Colours",
+    "label": "54. Black",
+    "malayalam": "കറുപ്പ്",
+    "needs_review": true,
+    "alternatives": [
+      "കറുത്ത"
+    ]
+  },
+  "boy": {
+    "english": "Boy",
+    "parent_label": "People",
+    "label": "77. Boy",
+    "malayalam": "ആൺകുട്ടി",
+    "needs_review": true,
+    "alternatives": []
+  },
+  "brother": {
+    "english": "Brother",
+    "parent_label": "People",
+    "label": "66. Brother",
+    "malayalam": "സഹോദരൻ",
+    "needs_review": true,
+    "alternatives": [
+      "അനിയൻ",
+      "ജ്യേഷ്ഠൻ"
+    ]
+  },
+  "car": {
+    "english": "Car",
+    "parent_label": "Means_of_Transportation",
+    "label": "11. Car",
+    "malayalam": "കാർ",
+    "needs_review": true,
+    "alternatives": [
+      "വാഹനം"
+    ]
+  },
+  "cell_phone": {
+    "english": "Cell phone",
+    "parent_label": "Electronics",
+    "label": "54. Cell phone",
+    "malayalam": "മൊബൈൽ ഫോൺ",
+    "needs_review": true,
+    "alternatives": [
+      "ഫോൺ"
+    ]
+  },
+  "court": {
+    "english": "Court",
+    "parent_label": "Places",
+    "label": "23. Court",
+    "malayalam": "കോടതി",
+    "needs_review": true,
+    "alternatives": []
+  },
+  "cow": {
+    "english": "Cow",
+    "parent_label": "Animals",
+    "label": "5. Cow",
+    "malayalam": "പശു",
+    "needs_review": true,
+    "alternatives": [
+      "മാട്"
+    ]
+  },
+  "death": {
+    "english": "Death",
+    "parent_label": "Society",
+    "label": "2. Death",
+    "malayalam": "മരണം",
+    "needs_review": true,
+    "alternatives": [
+      "നിര്യാണം"
+    ]
+  },
+  "dog": {
+    "english": "Dog",
+    "parent_label": "Animals",
+    "label": "1. Dog",
+    "malayalam": "നായ",
+    "needs_review": true,
+    "alternatives": [
+      "പട്ടി"
+    ]
+  },
+  "dry": {
+    "english": "dry",
+    "parent_label": "Adjectives",
+    "label": "97. dry",
+    "malayalam": "ഉണങ്ങിയത്",
+    "needs_review": true,
+    "alternatives": [
+      "വരണ്ടത്",
+      "ഉണങ്ങിയ"
+    ]
+  },
+  "election": {
+    "english": "Election",
+    "parent_label": "Society",
+    "label": "14. Election",
+    "malayalam": "തിരഞ്ഞെടുപ്പ്",
+    "needs_review": true,
+    "alternatives": [
+      "ഇലക്ഷൻ"
+    ]
+  },
+  "fall": {
+    "english": "Fall",
+    "parent_label": "Seasons",
+    "label": "64. Fall",
+    "malayalam": "ശരത്കാലം",
+    "needs_review": true,
+    "alternatives": [
+      "വീഴ്ച",
+      "വീഴുക"
+    ]
+  },
+  "fan": {
+    "english": "Fan",
+    "parent_label": "Electronics",
+    "label": "53. Fan",
+    "malayalam": "ഫാൻ",
+    "needs_review": true,
+    "alternatives": [
+      "വിശറി"
+    ]
+  },
+  "father": {
+    "english": "Father",
+    "parent_label": "People",
+    "label": "61. Father",
+    "malayalam": "അച്ഛൻ",
+    "needs_review": true,
+    "alternatives": [
+      "പിതാവ്"
+    ]
+  },
+  "girl": {
+    "english": "Girl",
+    "parent_label": "People",
+    "label": "78. Girl",
+    "malayalam": "പെൺകുട്ടി",
+    "needs_review": true,
+    "alternatives": []
+  },
+  "good": {
+    "english": "good",
+    "parent_label": "Adjectives",
+    "label": "94. good",
+    "malayalam": "നല്ലത്",
+    "needs_review": true,
+    "alternatives": [
+      "നല്ല"
+    ]
+  },
+  "good_morning": {
+    "english": "Good Morning",
+    "parent_label": "Greetings",
+    "label": "51. Good Morning",
+    "malayalam": "സുപ്രഭാതം",
+    "needs_review": true,
+    "alternatives": [
+      "ശുഭോദയം"
+    ]
+  },
+  "happy": {
+    "english": "happy",
+    "parent_label": "Adjectives",
+    "label": "3. happy",
+    "malayalam": "സന്തോഷം",
+    "needs_review": true,
+    "alternatives": [
+      "സന്തോഷമുള്ള"
+    ]
+  },
+  "hat": {
+    "english": "Hat",
+    "parent_label": "Clothes",
+    "label": "37. Hat",
+    "malayalam": "തൊപ്പി",
+    "needs_review": true,
+    "alternatives": []
+  },
+  "hello": {
+    "english": "Hello",
+    "parent_label": "Greetings",
+    "label": "48. Hello",
+    "malayalam": "നമസ്കാരം",
+    "needs_review": true,
+    "alternatives": []
+  },
+  "hot": {
+    "english": "hot",
+    "parent_label": "Adjectives",
+    "label": "87. hot",
+    "malayalam": "ചൂട്",
+    "needs_review": true,
+    "alternatives": [
+      "ചൂടുള്ള"
+    ]
+  },
+  "house": {
+    "english": "House",
+    "parent_label": "Places",
+    "label": "19. House",
+    "malayalam": "വീട്",
+    "needs_review": true,
+    "alternatives": [
+      "ഭവനം"
+    ]
+  },
+  "i": {
+    "english": "I",
+    "parent_label": "Pronouns",
+    "label": "40. I",
+    "malayalam": "ഞാൻ",
+    "needs_review": true,
+    "alternatives": [
+      "എനിക്ക്"
+    ]
+  },
+  "it": {
+    "english": "it",
+    "parent_label": "Pronouns",
+    "label": "44. it",
+    "malayalam": "അത്",
+    "needs_review": true,
+    "alternatives": [
+      "ഇത്"
+    ]
+  },
+  "long": {
+    "english": "long",
+    "parent_label": "Adjectives",
+    "label": "78. long",
+    "malayalam": "നീളമുള്ളത്",
+    "needs_review": true,
+    "alternatives": [
+      "ദീർഘമായ"
+    ]
+  },
+  "loud": {
+    "english": "loud",
+    "parent_label": "Adjectives",
+    "label": "1. loud",
+    "malayalam": "ഉച്ചത്തിൽ",
+    "needs_review": true,
+    "alternatives": [
+      "വലിയ ശബ്ദം"
+    ]
+  },
+  "monday": {
+    "english": "Monday",
+    "parent_label": "Days_and_Time",
+    "label": "67. Monday",
+    "malayalam": "തിങ്കളാഴ്ച",
+    "needs_review": true,
+    "alternatives": [
+      "തിങ്കൾ"
+    ]
+  },
+  "new": {
+    "english": "new",
+    "parent_label": "Adjectives",
+    "label": "91. new",
+    "malayalam": "പുതിയത്",
+    "needs_review": true,
+    "alternatives": [
+      "പുത്തൻ"
+    ]
+  },
+  "paint": {
+    "english": "Paint",
+    "parent_label": "Home",
+    "label": "40. Paint",
+    "malayalam": "പെയിന്റ്",
+    "needs_review": true,
+    "alternatives": [
+      "നിറം",
+      "ചായം"
+    ]
+  },
+  "pen": {
+    "english": "Pen",
+    "parent_label": "Home",
+    "label": "34. Pen",
+    "malayalam": "പേന",
+    "needs_review": true,
+    "alternatives": []
+  },
+  "priest": {
+    "english": "Priest",
+    "parent_label": "Jobs",
+    "label": "91. Priest",
+    "malayalam": "പുരോഹിതൻ",
+    "needs_review": true,
+    "alternatives": [
+      "പൂജാരി",
+      "അച്ചൻ"
+    ]
+  },
+  "quiet": {
+    "english": "quiet",
+    "parent_label": "Adjectives",
+    "label": "2. quiet",
+    "malayalam": "ശാന്തം",
+    "needs_review": true,
+    "alternatives": [
+      "നിശബ്ദം"
+    ]
+  },
+  "red": {
+    "english": "Red",
+    "parent_label": "Colours",
+    "label": "47. Red",
+    "malayalam": "ചുവപ്പ്",
+    "needs_review": true,
+    "alternatives": [
+      "ചുവന്ന"
+    ]
+  },
+  "shoes": {
+    "english": "Shoes",
+    "parent_label": "Clothes",
+    "label": "44. Shoes",
+    "malayalam": "ഷൂസ്",
+    "needs_review": true,
+    "alternatives": [
+      "പാദരക്ഷകൾ",
+      "ചെരുപ്പ്"
+    ]
+  },
+  "short": {
+    "english": "short",
+    "parent_label": "Adjectives",
+    "label": "79. short",
+    "malayalam": "നീളം കുറഞ്ഞത്",
+    "needs_review": true,
+    "alternatives": [
+      "കുറിയത്"
+    ]
+  },
+  "small_little": {
+    "english": "small little",
+    "parent_label": "Adjectives",
+    "label": "84. small little",
+    "malayalam": "ചെറിയത്",
+    "needs_review": true,
+    "alternatives": [
+      "ചെറുത്"
+    ]
+  },
+  "store_shop": {
+    "english": "Store or Shop",
+    "parent_label": "Places",
+    "label": "28. Store or Shop",
+    "malayalam": "കട",
+    "needs_review": true,
+    "alternatives": [
+      "അങ്ങാടി"
+    ]
+  },
+  "summer": {
+    "english": "Summer",
+    "parent_label": "Seasons",
+    "label": "61. Summer",
+    "malayalam": "വേനൽക്കാലം",
+    "needs_review": true,
+    "alternatives": [
+      "വേനൽ"
+    ]
+  },
+  "teacher": {
+    "english": "Teacher",
+    "parent_label": "Jobs",
+    "label": "84. Teacher",
+    "malayalam": "അധ്യാപകൻ",
+    "needs_review": true,
+    "alternatives": [
+      "അധ്യാപിക",
+      "ഗുരു"
+    ]
+  },
+  "thank_you": {
+    "english": "Thank you",
+    "parent_label": "Greetings",
+    "label": "55. Thank you",
+    "malayalam": "നന്ദി",
+    "needs_review": true,
+    "alternatives": []
+  },
+  "time": {
+    "english": "Time",
+    "parent_label": "Days_and_Time",
+    "label": "86. Time",
+    "malayalam": "സമയം",
+    "needs_review": true,
+    "alternatives": [
+      "നേരം"
+    ]
+  },
+  "train_ticket": {
+    "english": "train ticket",
+    "parent_label": "Means_of_Transportation",
+    "label": "16. train ticket",
+    "malayalam": "ട്രെയിൻ ടിക്കറ്റ്",
+    "needs_review": true,
+    "alternatives": [
+      "തീവണ്ടി ടിക്കറ്റ്"
+    ]
+  },
+  "tshirt": {
+    "english": "T-Shirt",
+    "parent_label": "Clothes",
+    "label": "42. T-Shirt",
+    "malayalam": "ടി-ഷർട്ട്",
+    "needs_review": true,
+    "alternatives": [
+      "കുപ്പായം"
+    ]
+  },
+  "white": {
+    "english": "White",
+    "parent_label": "Colours",
+    "label": "55. White",
+    "malayalam": "വെള്ള",
+    "needs_review": true,
+    "alternatives": [
+      "വെളുപ്പ്"
+    ]
+  },
+  "window": {
+    "english": "Window",
+    "parent_label": "Home",
+    "label": "28. Window",
+    "malayalam": "ജനൽ",
+    "needs_review": true,
+    "alternatives": [
+      "ജനാല"
+    ]
+  },
+  "year": {
+    "english": "Year",
+    "parent_label": "Days_and_Time",
+    "label": "78. Year",
+    "malayalam": "വർഷം",
+    "needs_review": true,
+    "alternatives": [
+      "ആണ്ട്",
+      "കൊല്ലം"
+    ]
+  },
+  "you_plural": {
+    "english": "you (plural)",
+    "parent_label": "Pronouns",
+    "label": "46. you (plural)",
+    "malayalam": "നിങ്ങൾ",
+    "needs_review": true,
+    "alternatives": [
+      "നിങ്ങളെ"
+    ]
+  },
+  "idle": {
+    "english": "Idle",
+    "parent_label": "System",
+    "label": "Idle",
+    "malayalam": "",
+    "needs_review": true,
+    "alternatives": []
+  }
+}

@@ -1,0 +1,279 @@
+/* ═══════════════════════════════════════════════════════════
+   MOVA App Shell — Sidebar + Content layout
+   ═══════════════════════════════════════════════════════════ */
+
+.shell-root {
+  display: flex;
+  min-height: 100vh;
+  background: #F8FAFC;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0A0F2C;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Override dark body from index.css */
+body:has(.shell-root) {
+  background-color: #F8FAFC !important;
+  color: #0A0F2C !important;
+  background-image: none !important;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.shell-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-right: 1px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width 0.2s ease;
+}
+
+.shell-collapsed .shell-sidebar {
+  width: 64px;
+}
+
+/* Brand */
+.shell-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.25rem 1rem 1rem;
+  border-bottom: 1px solid #F1F5F9;
+  min-height: 64px;
+  position: relative;
+}
+
+.shell-brand-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.shell-brand-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0A0F2C;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.shell-collapse-btn {
+  background: none;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #94A3B8;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.shell-collapse-btn:hover {
+  background: #F1F5F9;
+  color: #0B4FE0;
+}
+
+.shell-collapsed .shell-collapse-btn {
+  margin: 0 auto;
+}
+
+/* Section Label */
+.shell-section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94A3B8;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 1rem 0.4rem;
+}
+
+/* Nav */
+.shell-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem 0.5rem;
+  gap: 0.15rem;
+}
+
+.shell-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4B5A7A;
+  transition: all 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.shell-nav-item:hover {
+  background: #F1F5F9;
+  color: #0A0F2C;
+}
+
+.shell-nav-item--active {
+  background: #EEF4FF;
+  color: #0B4FE0;
+  font-weight: 600;
+}
+
+.shell-nav-item--active .shell-nav-icon {
+  color: #0B4FE0;
+}
+
+.shell-nav-icon {
+  flex-shrink: 0;
+  color: #94A3B8;
+}
+
+.shell-nav-item--active .shell-nav-icon,
+.shell-nav-item:hover .shell-nav-icon {
+  color: inherit;
+}
+
+.shell-nav-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sidebar Footer */
+.shell-sidebar-footer {
+  padding: 1rem 0.75rem;
+  border-top: 1px solid #F1F5F9;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.shell-sidebar-tagline {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #0A0F2C;
+  line-height: 1.3;
+}
+
+.shell-sidebar-tagline-sub {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #94A3B8;
+  margin-top: 0.2rem;
+  line-height: 1.4;
+}
+
+.shell-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: none;
+  background: none;
+  color: #94A3B8;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: inherit;
+}
+
+.shell-logout-btn:hover {
+  background: #FEF2F2;
+  color: #EF4444;
+}
+
+/* ── Top Bar ─────────────────────────────────────────────── */
+.shell-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.75rem;
+  height: 64px;
+  background: #ffffff;
+  border-bottom: 1px solid #E2E8F0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.shell-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-left: auto;
+}
+
+.shell-lang-select {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #4B5A7A;
+}
+
+.shell-lang-dropdown {
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  color: #0A0F2C;
+  background: #F8FAFC;
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
+}
+
+.shell-lang-dropdown:focus {
+  border-color: #0B4FE0;
+}
+
+.shell-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #0B4FE0;
+  color: #ffffff;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s;
+  font-family: inherit;
+}
+
+.shell-avatar:hover { opacity: 0.85; }
+
+/* ── Content Area ─────────────────────────────────────────── */
+.shell-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.shell-page {
+  flex: 1;
+  padding: 2rem 1.75rem;
+  overflow-y: auto;
+}
