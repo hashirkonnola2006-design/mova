@@ -1,0 +1,306 @@
+/* ═══════════════════════════════════════════════════════════
+   MOVA Accessibility Controls Styles
+   ═══════════════════════════════════════════════════════════ */
+
+.acc-root {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.acc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.acc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #D97706;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.acc-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0A0F2C;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.35rem 0;
+}
+
+.acc-sub {
+  font-size: 0.95rem;
+  color: #64748B;
+  margin: 0;
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+.acc-btn-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #0B4FE0;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  box-shadow: 0 4px 12px rgba(11, 79, 224, 0.2);
+}
+
+.acc-btn-save:hover {
+  background: #0942BF;
+  transform: translateY(-1px);
+}
+
+.acc-toast {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #065F46;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  animation: acc-fade-in 0.2s ease-in-out;
+}
+
+@keyframes acc-fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Grid ────────────────────────────────────────────────── */
+.acc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.acc-card {
+  background: #ffffff;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.acc-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.acc-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-blue { background: #EEF4FF; color: #0B4FE0; }
+.icon-purple { background: #F5F3FF; color: #7C3AED; }
+.icon-amber { background: #FFFBEB; color: #D97706; }
+
+.acc-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0A0F2C;
+  margin: 0;
+}
+
+.acc-card-desc {
+  font-size: 0.82rem;
+  color: #64748B;
+  margin: 0.15rem 0 0;
+}
+
+.acc-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.acc-option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.acc-option-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.acc-option-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1E293B;
+}
+
+.acc-option-sub {
+  font-size: 0.78rem;
+  color: #64748B;
+  margin-top: 0.15rem;
+  line-height: 1.4;
+}
+
+/* ── Segmented Control ───────────────────────────────────── */
+.acc-segmented-control {
+  display: flex;
+  background: #F1F5F9;
+  padding: 0.25rem;
+  border-radius: 8px;
+  gap: 0.2rem;
+}
+
+.acc-seg-btn {
+  border: none;
+  background: transparent;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748B;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.acc-seg-btn.active {
+  background: #ffffff;
+  color: #0B4FE0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Switch Toggle ───────────────────────────────────────── */
+.acc-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.acc-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.acc-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #CBD5E1;
+  transition: 0.2s;
+  border-radius: 999px;
+}
+
+.acc-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.2s;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+input:checked + .acc-slider {
+  background-color: #0B4FE0;
+}
+
+input:checked + .acc-slider:before {
+  transform: translateX(20px);
+}
+
+/* ── Shortcuts ───────────────────────────────────────────── */
+.acc-shortcuts-card {
+  background: #ffffff;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.acc-shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.acc-shortcut-item {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.acc-kbd {
+  display: inline-block;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.78rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  color: #0A0F2C;
+  background: #ffffff;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 6px;
+  box-shadow: 0 2px 0 #CBD5E1;
+}
+
+.acc-shortcut-label {
+  font-size: 0.8rem;
+  color: #475569;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .acc-grid { grid-template-columns: 1fr; }
+  .acc-shortcuts-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .acc-shortcuts-grid { grid-template-columns: 1fr; }
+}

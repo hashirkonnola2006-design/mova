@@ -12,12 +12,10 @@ import DashboardPage from './pages/DashboardPage.jsx';
 import SignToTextPage from './pages/SignToTextPage.jsx';
 import TextToSpeechPage from './pages/TextToSpeechPage.jsx';
 import EmergencyPage from './pages/EmergencyPage.jsx';
-import {
-  ConversationPage,
-  LearnSignsPage,
-  AccessibilityPage,
-  SettingsPage,
-} from './pages/PlaceholderPages.jsx';
+import ConversationPage from './pages/ConversationPage.jsx';
+import LearnSignsPage from './pages/LearnSignsPage.jsx';
+import AccessibilityPage from './pages/AccessibilityPage.jsx';
+import SettingsPage from './pages/SettingsPage.jsx';
 
 // Legacy / collector (still accessible)
 import CollectorPage from './components/CollectorPage.jsx';
