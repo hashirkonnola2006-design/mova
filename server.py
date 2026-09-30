@@ -315,6 +315,18 @@ async def websocket_endpoint(websocket: WebSocket):
                 await websocket.send_json({"error": f"Invalid shape {arr.shape}. Expected (30, 126)."})
                 continue
 
+            # Guard: If fewer than 6 frames contain hand landmarks, hands are down -> return idle
+            frames_with_hands = int(np.sum(np.any(arr != 0, axis=1)))
+            if frames_with_hands < 6:
+                await websocket.send_json({
+                    "label": "idle",
+                    "confidence": 1.0,
+                    "malayalam": "",
+                    "top3": [{"label": "idle", "confidence": 1.0, "malayalam": ""}],
+                    "client_timestamp": client_timestamp
+                })
+                continue
+
             tensor_seq = torch.tensor(arr, dtype=torch.float32).unsqueeze(0).to(device)
             with torch.no_grad():
                 logits = model(tensor_seq)

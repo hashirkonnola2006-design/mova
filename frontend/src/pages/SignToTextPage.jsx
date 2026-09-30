@@ -105,9 +105,27 @@ export default function SignToTextPage() {
       top3: data.top3 || []
     });
 
-    // If model predicts idle, clear latch
-    if (label === 'idle') {
+    // Check how many frames in the current window actually had a hand detected
+    const handsInCurrentWindow = slidingWindowRef.current.filter(f => f.hands > 0).length;
+    if (label === 'idle' || handsInCurrentWindow < 6) {
       if (idleRequiredRef.current) releaseIdle();
+      winsCountRef.current = 0;
+      setConsecutiveWins(0);
+      lastCandidateRef.current = null;
+      setCurrentPrediction({
+        label: 'idle',
+        confidence: 0,
+        malayalam: '',
+        top3: []
+      });
+      return;
+    }
+
+    // Only accept supported vocabulary words (filters out unwanted dataset classes like store_shop)
+    const isSupported = VOCABULARY.some(v => v.key === label);
+    if (!isSupported) {
+      winsCountRef.current = 0;
+      setConsecutiveWins(0);
       return;
     }
 
