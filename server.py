@@ -297,7 +297,7 @@ async def websocket_endpoint(websocket: WebSocket):
             data = json.loads(message)
 
             if isinstance(data, dict):
-                raw_seq = data.get("sequence", data.get("landmarks", []))
+                raw_seq = data.get("sequence") or data.get("landmarks") or data.get("window") or []
                 client_timestamp = data.get("client_timestamp", None)
             elif isinstance(data, list):
                 raw_seq = data
@@ -307,6 +307,10 @@ async def websocket_endpoint(websocket: WebSocket):
                 continue
 
             arr = np.array(raw_seq, dtype=np.float32)
+            if arr.ndim == 2 and arr.shape[1] == 126 and arr.shape[0] < 30:
+                pad = np.zeros((30 - arr.shape[0], 126), dtype=np.float32)
+                arr = np.vstack([pad, arr])
+
             if arr.shape != (30, 126):
                 await websocket.send_json({"error": f"Invalid shape {arr.shape}. Expected (30, 126)."})
                 continue
