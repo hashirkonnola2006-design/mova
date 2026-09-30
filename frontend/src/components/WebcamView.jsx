@@ -63,6 +63,9 @@ export default function WebcamView({ onFrame, isSimulateMode }) {
           },
           runningMode: 'VIDEO',
           numHands: 2,
+          minHandDetectionConfidence: 0.3,
+          minHandPresenceConfidence: 0.3,
+          minTrackingConfidence: 0.3,
         });
         console.info(`HandLandmarker loaded with ${delegate} delegate.`);
         break; // success — stop trying
@@ -150,6 +153,8 @@ export default function WebcamView({ onFrame, isSimulateMode }) {
   // ── Render loop ─────────────────────────────────────────────────────────────
   useEffect(() => {
     let lastVideoTime = -1;
+    let lastProcessedTime = 0;
+    let lastTimestampMs = 0;
 
     const renderLoop = () => {
       const video = videoRef.current;
@@ -157,18 +162,28 @@ export default function WebcamView({ onFrame, isSimulateMode }) {
       const landmarker = landmarkerRef.current;
 
       if (video && canvas && landmarker && cameraActive && video.readyState >= 2) {
-        const ctx = canvas.getContext('2d');
-        if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
-          canvas.width = video.videoWidth || 640;
-          canvas.height = video.videoHeight || 480;
-        }
+        const now = performance.now();
+        const timestampMs = Math.max(lastTimestampMs + 1, Math.round(now));
+        lastTimestampMs = timestampMs;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        const startTimeMs = performance.now();
-        if (video.currentTime !== lastVideoTime) {
+        if (video.currentTime !== lastVideoTime || (now - lastProcessedTime) > 30) {
           lastVideoTime = video.currentTime;
-          const results = landmarker.detectForVideo(video, startTimeMs);
+          lastProcessedTime = now;
+
+          let results = null;
+          try {
+            results = landmarker.detectForVideo(video, timestampMs);
+          } catch (err) {
+            console.warn('detectForVideo error:', err);
+          }
+
+          const ctx = canvas.getContext('2d');
+          if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+          }
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
 
           if (results?.landmarks?.length) {
             setHandsDetectedCount(results.landmarks.length);
@@ -176,23 +191,33 @@ export default function WebcamView({ onFrame, isSimulateMode }) {
             for (let hIdx = 0; hIdx < results.landmarks.length; hIdx++) {
               const landmarks = results.landmarks[hIdx];
               const handedness = results.handednesses?.[hIdx]?.[0]?.categoryName;
-              const strokeColor = handedness === 'Left' ? '#10b981' : '#38bdf8';
+              const strokeColor = handedness === 'Left' ? '#10B981' : '#38BDF8';
 
               ctx.strokeStyle = strokeColor;
-              ctx.lineWidth = 3;
+              ctx.lineWidth = 3.5;
+              ctx.lineCap = 'round';
+              ctx.lineJoin = 'round';
+
               for (const [p1, p2] of HAND_CONNECTIONS) {
                 const pt1 = landmarks[p1];
                 const pt2 = landmarks[p2];
-                ctx.beginPath();
-                ctx.moveTo(pt1.x * canvas.width, pt1.y * canvas.height);
-                ctx.lineTo(pt2.x * canvas.width, pt2.y * canvas.height);
-                ctx.stroke();
+                if (pt1 && pt2) {
+                  ctx.beginPath();
+                  ctx.moveTo(pt1.x * canvas.width, pt1.y * canvas.height);
+                  ctx.lineTo(pt2.x * canvas.width, pt2.y * canvas.height);
+                  ctx.stroke();
+                }
               }
 
               for (const pt of landmarks) {
-                ctx.fillStyle = '#f43f5e';
+                ctx.fillStyle = '#F43F5E';
                 ctx.beginPath();
-                ctx.arc(pt.x * canvas.width, pt.y * canvas.height, 4, 0, 2 * Math.PI);
+                ctx.arc(pt.x * canvas.width, pt.y * canvas.height, 4.5, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.fillStyle = '#FFFFFF';
+                ctx.beginPath();
+                ctx.arc(pt.x * canvas.width, pt.y * canvas.height, 2, 0, 2 * Math.PI);
                 ctx.fill();
               }
             }
