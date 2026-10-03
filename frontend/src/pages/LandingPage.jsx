@@ -8,6 +8,7 @@ import {
 import MovaLogo from '../components/MovaLogo.jsx';
 import StartButton from '../components/StartButton.jsx';
 import Header from '../components/landing/Header.jsx';
+import Footer from '../components/Footer.jsx';
 import AccessibilityPanel from '../components/AccessibilityPanel.jsx';
 import HowItWorks from '../components/landing/HowItWorks.jsx';
 import { EMERGENCY_PHRASES } from '../data/emergencyPhrases.js';
@@ -419,36 +420,11 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-
-          {/* Minimal Footer */}
-          <footer className="lp-footer" role="contentinfo">
-            <div className="lp-footer-top">
-              <a
-                href="/"
-                className="lp-footer-logo"
-                onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                aria-label="MOVA"
-              >
-                <MovaLogo height={28} showWordmark={true} />
-              </a>
-
-              <nav className="lp-footer-nav" aria-label="Footer Navigation">
-                <a href="#how-it-works" onClick={e => smoothScroll(e, '#how-it-works')}>How it works</a>
-                <a href="#emergency" onClick={e => smoothScroll(e, '#emergency')}>Emergency</a>
-                <a href="#faq" onClick={e => smoothScroll(e, '#faq')}>FAQ</a>
-                {/* TODO: Verify privacy policy terms before product launch */}
-                <Link to="/privacy">Privacy Policy</Link>
-              </nav>
-            </div>
-
-            <div className="lp-footer-bottom">
-              <p className="lp-footer-copyright">
-                © 2026 MOVA. Real-time Indian Sign Language to Malayalam.
-              </p>
-            </div>
-          </footer>
         </div>
       </section>
+
+      {/* ── Comprehensive Site Footer ─────────────────────────────── */}
+      <Footer />
     </div>
   );
 }

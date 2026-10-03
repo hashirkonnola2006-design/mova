@@ -6,6 +6,13 @@ import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import PrivacyPage from './pages/PrivacyPage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
+import TermsPage from './pages/TermsPage.jsx';
+import AccessibilityStatementPage from './pages/AccessibilityStatementPage.jsx';
+import SupportedSignsPage from './pages/SupportedSignsPage.jsx';
+import HelpPage from './pages/HelpPage.jsx';
+import NotFoundPage from './pages/NotFoundPage.jsx';
 
 // Authenticated shell + pages
 import AppShell from './pages/AppShell.jsx';
@@ -45,6 +52,12 @@ function AppRoutes() {
     <Routes>
       {/* ── Public ─────────────────────────────────────── */}
       <Route path="/" element={<LandingPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/terms" element={<TermsPage />} />
+      <Route path="/accessibility" element={<AccessibilityStatementPage />} />
+      <Route path="/supported-signs" element={<SupportedSignsPage />} />
+      <Route path="/help" element={<HelpPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route
         path="/login"
@@ -85,7 +98,7 @@ function AppRoutes() {
       />
 
       {/* Catch-all */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
