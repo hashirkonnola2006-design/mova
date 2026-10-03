@@ -1,0 +1,106 @@
+[
+  {
+    "id": "hello",
+    "ml": "ഹലോ",
+    "en": "Hello",
+    "category": "Greetings",
+    "videoSrc": "",
+    "description": "Standard one-handed friendly wave gesture."
+  },
+  {
+    "id": "good_morning",
+    "ml": "സുപ്രഭാതം",
+    "en": "Good morning",
+    "category": "Greetings",
+    "videoSrc": "",
+    "description": "Thumbs up followed by rising sun palm gesture."
+  },
+  {
+    "id": "thank_you",
+    "ml": "നന്ദി",
+    "en": "Thank you",
+    "category": "Courtesies",
+    "videoSrc": "",
+    "description": "Flat hand moving outward gently from the chin."
+  },
+  {
+    "id": "good",
+    "ml": "നല്ലത്",
+    "en": "Good",
+    "category": "Expressions",
+    "videoSrc": "",
+    "description": "Upright thumb extended forward steadily."
+  },
+  {
+    "id": "i",
+    "ml": "ഞാൻ",
+    "en": "I / Me",
+    "category": "Pronouns",
+    "videoSrc": "",
+    "description": "Index finger pointing directly toward the chest."
+  },
+  {
+    "id": "you_plural",
+    "ml": "നിങ്ങൾ",
+    "en": "You (all)",
+    "category": "Pronouns",
+    "videoSrc": "",
+    "description": "Index finger sweeping horizontally across the conversation partner."
+  },
+  {
+    "id": "father",
+    "ml": "അച്ഛൻ",
+    "en": "Father",
+    "category": "Family",
+    "videoSrc": "",
+    "description": "Open thumb tapped at the side of the forehead or upper cheek."
+  },
+  {
+    "id": "brother",
+    "ml": "സഹോദരൻ",
+    "en": "Brother",
+    "category": "Family",
+    "videoSrc": "",
+    "description": "Index fingers aligned vertically moving together."
+  },
+  {
+    "id": "boy",
+    "ml": "ആൺകുട്ടി",
+    "en": "Boy",
+    "category": "People",
+    "videoSrc": "",
+    "description": "Thumb and index shaping a cap brim at the forehead."
+  },
+  {
+    "id": "girl",
+    "ml": "പെൺകുട്ടി",
+    "en": "Girl",
+    "category": "People",
+    "videoSrc": "",
+    "description": "Thumb trailing lightly down the jawline."
+  },
+  {
+    "id": "bank",
+    "ml": "ബാങ്ക്",
+    "en": "Bank",
+    "category": "Places",
+    "videoSrc": "",
+    "description": "Hands gesturing counted notes or safe deposit."
+  },
+  {
+    "id": "store_shop",
+    "ml": "കട",
+    "en": "Shop / Store",
+    "category": "Places",
+    "videoSrc": "",
+    "description": "Both palms curved slightly inward nodding toward the person."
+  },
+  {
+    "id": "time",
+    "ml": "സമയം",
+    "en": "Time",
+    "category": "Concepts",
+    "videoSrc": "",
+    "description": "Index finger gently tapping the wrist where a watch rests."
+  }
+]

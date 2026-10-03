@@ -23,7 +23,7 @@ export default function Footer() {
             </Link>
             <p className="ft-tagline">
               Real-time ISL to Malayalam translation.
-              Runs in your browser.
+              Browser camera vision with local AI.
             </p>
             {/* Social links — hidden if empty */}
             {(SITE_INFO.githubUrl || SITE_INFO.linkedinUrl || SITE_INFO.twitterUrl) && (

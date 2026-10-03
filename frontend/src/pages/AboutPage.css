@@ -1,0 +1,614 @@
+/* ═══════════════════════════════════════════════════════════
+   AboutPage.css — Full-Width Light-Theme Redesign for MOVA
+   Layout: Full-bleed alternating bands (#FFFFFF / #F5F8FF),
+   1320px centered container, 120px desktop / 72px mobile section padding.
+   Strict 4.5:1 contrast, no grayscale hover, responsive cutouts.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Full-width wrapper cleanly expanding across the viewport */
+.ab-fullwidth-wrapper {
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #0B1020;
+}
+
+/* Base band */
+.ab-band {
+  width: 100%;
+  padding: 120px 0;
+  box-sizing: border-box;
+}
+
+.ab-band--white {
+  background-color: #FFFFFF;
+}
+
+.ab-band--tint {
+  background-color: #F5F8FF;
+}
+
+.ab-band--soft-blue {
+  background-color: #EAF1FF;
+}
+
+/* Wide Container (max-width 1320px, fluid side padding of 5vw desktop, 20px mobile) */
+.ab-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 5vw;
+  box-sizing: border-box;
+}
+
+/* ── Section 1: Hero ─────────────────────────────────────────── */
+.ab-hero-section {
+  padding-top: 56px;
+  padding-bottom: 96px;
+}
+
+.ab-hero-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 3.5rem;
+}
+
+.ab-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1558E8;
+  background: #EAF1FF;
+  border: 1px solid #BFD8FF;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+.ab-hero-headline {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 800;
+  color: #0B1020;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
+.ab-hero-subline {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: #4A5468;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Full-bleed 21:9 desktop / 4:3 mobile team photo container */
+.ab-team-hero-media {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: #F8FAFC;
+  border: 1.5px solid #E8EDF5;
+  box-shadow: 0 12px 32px rgba(11, 16, 32, 0.04);
+}
+
+.ab-team-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ab-hero-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: #4A5468;
+  background: linear-gradient(180deg, #F8FAFC 0%, #EDF2F7 100%);
+}
+
+.ab-hero-placeholder svg {
+  color: #94A3B8;
+}
+
+.ab-hero-placeholder-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4A5468;
+}
+
+/* ── Section 2: Story Timeline ───────────────────────────────── */
+.ab-story-section {
+  position: relative;
+}
+
+.ab-section-eyebrow {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.ab-section-title {
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #0B1020;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.5rem;
+}
+
+.ab-timeline-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Thin dotted blue connector line */
+.ab-timeline-line {
+  position: absolute;
+  top: 18px;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background-image: radial-gradient(circle, #1558E8 2px, transparent 2.5px);
+  background-size: 14px 2px;
+  background-repeat: repeat-x;
+  z-index: 1;
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ab-timeline-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.ab-step-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid #1558E8;
+  box-shadow: 0 0 0 4px #EAF1FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.ab-step-dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1558E8;
+}
+
+.ab-step-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1558E8;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.ab-step-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0B1020;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.015em;
+}
+
+.ab-step-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4A5468;
+  margin: 0;
+  max-width: 240px;
+}
+
+/* ── Section 3: Built With ───────────────────────────────────── */
+.ab-built-section {
+  text-align: center;
+}
+
+.ab-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+.ab-chip {
+  display: inline-flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #E8EDF5;
+  color: #0B1020;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(11, 16, 32, 0.03);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.ab-chip:hover {
+  transform: translateY(-2px);
+  border-color: #BFD8FF;
+}
+
+.ab-built-author {
+  font-size: 1.125rem;
+  color: #4A5468;
+  margin: 0;
+}
+
+.ab-built-author strong {
+  color: #0B1020;
+  font-weight: 600;
+}
+
+/* ── Section 4: What MOVA is not (Soft band #EAF1FF) ────────── */
+.ab-disclaimer-band {
+  background-color: #EAF1FF;
+  border-top: 1px solid #D5E4FF;
+  border-bottom: 1px solid #D5E4FF;
+  padding: 80px 0;
+}
+
+.ab-disclaimer-box {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ab-disclaimer-text {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  line-height: 1.7;
+  font-weight: 500;
+  color: #0B1020;
+  margin: 0;
+  max-width: 62ch;
+  margin: 0 auto;
+}
+
+/* ── Section 5: Team Section (Light Theme + Cutouts) ─────────── */
+.ab-team-section {
+  background-color: #F5F8FF;
+  position: relative;
+}
+
+.ab-team-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 4.5rem;
+}
+
+.ab-team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Outer Card wrapper for lift and keyboard focus */
+.tm-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  outline: none;
+  border-radius: 20px;
+  padding: 0.5rem;
+  transition: transform 250ms ease-out;
+}
+
+.tm-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.tm-card:focus-visible {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 0 3px #1558E8;
+}
+
+/* The outside drop-shadow wrapper (box-shadow fails on clip-path) */
+.tm-shape-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 3 / 4;
+  margin: 0 auto 1.5rem;
+  filter: drop-shadow(0 10px 24px rgba(21, 88, 232, 0.08));
+  transition: filter 250ms ease-out;
+}
+
+.tm-card:hover .tm-shape-wrapper,
+.tm-card:focus-visible .tm-shape-wrapper {
+  filter: drop-shadow(0 16px 32px rgba(11, 16, 32, 0.14));
+}
+
+/* The clipped inner container with color fill */
+.tm-shape-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color family fills */
+.tm-tone--blue {
+  background-color: #1558E8;
+  color: #FFFFFF;
+}
+
+.tm-tone--sky {
+  background-color: #BFD8FF;
+  color: #0B1020;
+}
+
+.tm-tone--pale {
+  background-color: #EAF1FF;
+  color: #0B1020;
+}
+
+.tm-tone--navy {
+  background-color: #0B1020;
+  color: #FFFFFF;
+}
+
+/* SVG clipPath assignments */
+.tm-clip--shape-figure-eight {
+  clip-path: url(#shape-figure-eight);
+}
+
+.tm-clip--shape-arch {
+  clip-path: url(#shape-arch);
+}
+
+.tm-clip--shape-oval-arch {
+  clip-path: url(#shape-oval-arch);
+}
+
+.tm-clip--shape-triple-lobe {
+  clip-path: url(#shape-triple-lobe);
+}
+
+/* Photo inside clipped container */
+.tm-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Initials placeholder typography */
+.tm-initials {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+/* Team Card Details */
+.tm-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.tm-name {
+  font-size: 1.15rem; /* 18 to 20px */
+  font-weight: 700;
+  color: #0B1020;
+  margin: 0;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.tm-role {
+  font-size: 0.9rem;
+  color: #4A5468;
+  margin: 0;
+  line-height: 1.4;
+  min-height: 1.25rem;
+}
+
+.tm-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  min-height: 28px;
+}
+
+.tm-icon-link {
+  color: #4A5468;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.tm-icon-link:hover {
+  color: #1558E8;
+  background: #FFFFFF;
+  border-color: #BFD8FF;
+  box-shadow: 0 0 0 3px rgba(21, 88, 232, 0.12);
+}
+
+.tm-card:hover .tm-icon-link,
+.tm-card:focus-visible .tm-icon-link {
+  border-color: #BFD8FF;
+  box-shadow: 0 0 0 2px rgba(21, 88, 232, 0.2);
+}
+
+.tm-icon-link:focus-visible {
+  box-shadow: 0 0 0 3px #1558E8 !important;
+  color: #1558E8;
+}
+
+/* ── Section 6: Closing Section ──────────────────────────────── */
+.ab-closing-section {
+  text-align: center;
+  padding: 100px 0 120px;
+}
+
+.ab-closing-box {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.ab-closing-line {
+  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+  line-height: 1.65;
+  color: #4A5468;
+  margin: 0 0 2.5rem;
+}
+
+.ab-btn-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.ab-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.85rem;
+  border-radius: 9999px;
+  border: 1.5px solid #CBD5E1;
+  background: #FFFFFF;
+  color: #0B1020 !important;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  min-height: 48px;
+  box-shadow: 0 2px 6px rgba(11, 16, 32, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ab-contact-btn:hover {
+  background: #F8FAFC;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(11, 16, 32, 0.08);
+}
+
+/* ── Hidden Inline SVG for ClipPaths ─────────────────────────── */
+.ab-svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* ── Responsive Behavior ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ab-band {
+    padding: 96px 0;
+  }
+  .ab-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
+  .ab-timeline-track {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ab-band {
+    padding: 72px 0;
+  }
+  .ab-container {
+    padding: 0 20px;
+  }
+  .ab-team-hero-media {
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+  }
+  .ab-timeline-line {
+    display: none;
+  }
+  .ab-timeline-track {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    text-align: left;
+  }
+  .ab-timeline-step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1.25rem;
+  }
+  .ab-step-dot {
+    margin-bottom: 0;
+  }
+  .ab-step-desc {
+    max-width: none;
+  }
+  .ab-team-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .tm-shape-wrapper {
+    max-width: 200px;
+  }
+  .ab-btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .ab-contact-btn {
+    width: 100%;
+  }
+}
+
+/* ── Prefers Reduced Motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .tm-card,
+  .tm-card:hover,
+  .tm-card:focus-visible,
+  .tm-shape-wrapper,
+  .ab-timeline-line,
+  .ab-timeline-step,
+  .ab-chip,
+  .ab-contact-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}

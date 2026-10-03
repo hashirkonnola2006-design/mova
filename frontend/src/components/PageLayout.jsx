@@ -9,7 +9,7 @@ import './PageLayout.css';
  * Renders the landing header, a page title area, a readable content column,
  * and the full footer. Also scrolls to top on route change.
  */
-export default function PageLayout({ title, description, children }) {
+export default function PageLayout({ title, description, fullWidth = false, children }) {
   const { pathname } = useLocation();
 
   // Scroll to top on route change
@@ -47,10 +47,14 @@ export default function PageLayout({ title, description, children }) {
       )}
 
       {/* ── Content column ─────────────────────────────── */}
-      <main className="pl-content" id="main-content">
-        <div className="pl-content-inner">
-          {children}
-        </div>
+      <main className={`pl-content ${fullWidth ? 'pl-content--fullwidth' : ''}`} id="main-content">
+        {fullWidth ? (
+          children
+        ) : (
+          <div className="pl-content-inner">
+            {children}
+          </div>
+        )}
       </main>
 
       {/* ── Footer ─────────────────────────────────────── */}

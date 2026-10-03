@@ -1,6 +1,6 @@
 # ── Large media & datasets (NEVER commit) ──────────────────────────────
 include_videos/
-data/
+/data/
 
 # ── Node / Frontend ─────────────────────────────────────────────────────
 node_modules/
