@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 // Public pages
 import LandingPage from './pages/LandingPage.jsx';
 import AuthPage from './pages/AuthPage.jsx';
+import PrivacyPage from './pages/PrivacyPage.jsx';
 
 // Authenticated shell + pages
 import AppShell from './pages/AppShell.jsx';
@@ -44,6 +45,7 @@ function AppRoutes() {
     <Routes>
       {/* ── Public ─────────────────────────────────────── */}
       <Route path="/" element={<LandingPage />} />
+      <Route path="/privacy" element={<PrivacyPage />} />
       <Route
         path="/login"
         element={

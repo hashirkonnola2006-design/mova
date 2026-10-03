@@ -84,6 +84,17 @@ export default function AuthPage() {
     }
   };
 
+  const handleGuestBypass = () => {
+    setError('');
+    const guestResult = signUp({
+      name: 'Guest Explorer',
+      email: `guest_${Date.now()}@mova.local`,
+      password: 'guest_bypass_pass',
+    });
+    refresh();
+    navigate('/dashboard');
+  };
+
   return (
     <div className="auth-root">
       {/* Top Bar */}
@@ -93,6 +104,12 @@ export default function AuthPage() {
           <span className="auth-brand-name">MOVA</span>
         </Link>
         <nav className="auth-topbar-right">
+          <button
+            className="auth-btn-bypass-top"
+            onClick={handleGuestBypass}
+          >
+            ⚡ Try it out (Skip login) →
+          </button>
           <span className="auth-topbar-text">Already have an account?</span>
           <button
             className="auth-topbar-login"
@@ -262,6 +279,13 @@ export default function AuthPage() {
               </button>
               <button className="auth-social-btn" onClick={() => handleSocialMock('mobile')}>
                 <MobileIcon /> Continue with Mobile
+              </button>
+              <button
+                type="button"
+                className="auth-bypass-btn"
+                onClick={handleGuestBypass}
+              >
+                🚀 Try it out as Guest (Bypass login)
               </button>
             </div>
 
