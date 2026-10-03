@@ -1,43 +1,43 @@
 /* ═══════════════════════════════════════════════════════════
-   PrivacyPage.css — Full-Width Light Theme with 3D Shield Render
+   AccessibilityStatementPage.css — Full-Width Light Theme
    ═══════════════════════════════════════════════════════════ */
 
-.pv-fullwidth-root {
+.ay-fullwidth-root {
   width: 100%;
   background-color: #FFFFFF;
 }
 
-.pv-container {
+.ay-container {
   max-width: 1320px;
   margin: 0 auto;
   padding: 0 5vw;
   box-sizing: border-box;
 }
 
-.pv-container--narrow {
+.ay-container--narrow {
   max-width: 860px;
 }
 
 /* ── Hero Band ─────────────────────────────────────────────── */
-.pv-hero-band {
+.ay-hero-band {
   background: #F5F8FF;
   border-bottom: 1px solid #E8EDF5;
   padding: 80px 0 96px;
 }
 
-.pv-hero-grid {
+.ay-hero-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 3.5rem;
   align-items: center;
 }
 
-.pv-hero-copy {
+.ay-hero-copy {
   display: flex;
   flex-direction: column;
 }
 
-.pv-pill {
+.ay-pill {
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
@@ -53,7 +53,7 @@
   margin-bottom: 1.25rem;
 }
 
-.pv-title {
+.ay-title {
   font-size: clamp(2.4rem, 4.5vw, 3.4rem);
   font-weight: 800;
   color: #0B1020;
@@ -62,7 +62,7 @@
   margin: 0 0 1.15rem;
 }
 
-.pv-subtitle {
+.ay-subtitle {
   font-size: 1.15rem;
   color: #4A5468;
   line-height: 1.6;
@@ -70,13 +70,13 @@
   max-width: 58ch;
 }
 
-.pv-stat-row {
+.ay-stat-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
 }
 
-.pv-stat-pill {
+.ay-stat-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -90,18 +90,18 @@
   box-shadow: 0 2px 6px rgba(21, 88, 232, 0.06);
 }
 
-.pv-check-icon {
+.ay-check-icon {
   color: #10B981;
 }
 
-/* 3D Shield Graphic */
-.pv-hero-graphic-wrap {
+/* 3D Graphic */
+.ay-hero-graphic-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.pv-3d-card {
+.ay-3d-card {
   width: 100%;
   border-radius: 24px;
   overflow: hidden;
@@ -111,12 +111,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.pv-3d-card:hover {
+.ay-3d-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 28px 56px rgba(21, 88, 232, 0.18);
 }
 
-.pv-3d-img {
+.ay-3d-img {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
@@ -124,19 +124,19 @@
   display: block;
 }
 
-/* ── Architecture Band ─────────────────────────────────────── */
-.pv-arch-band {
+/* ── Features Band ─────────────────────────────────────────── */
+.ay-features-band {
   padding: 96px 0;
   background: #FFFFFF;
 }
 
-.pv-section-header {
+.ay-section-header {
   text-align: center;
   max-width: 700px;
   margin: 0 auto 3.5rem;
 }
 
-.pv-section-title {
+.ay-section-title {
   font-size: clamp(2rem, 3.5vw, 2.6rem);
   font-weight: 800;
   color: #0B1020;
@@ -144,33 +144,33 @@
   margin: 0 0 0.75rem;
 }
 
-.pv-section-sub {
+.ay-section-sub {
   font-size: 1.125rem;
   color: #4A5468;
   margin: 0;
 }
 
-.pv-grid {
+.ay-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
-.pv-card {
+.ay-card {
   background: #F8FAFC;
   border: 1.5px solid #E8EDF5;
   border-radius: 20px;
-  padding: 2.25rem 2rem;
+  padding: 2.25rem 1.85rem;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.pv-card:hover {
+.ay-card:hover {
   transform: translateY(-3px);
   border-color: #BFD8FF;
   box-shadow: 0 10px 24px rgba(21, 88, 232, 0.08);
 }
 
-.pv-card-icon {
+.ay-card-icon {
   width: 52px;
   height: 52px;
   border-radius: 14px;
@@ -178,60 +178,33 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1.25rem;
-}
-
-.pv-card-icon--blue {
   background: #EAF1FF;
   color: #1558E8;
 }
 
-.pv-card-icon--sky {
-  background: #E0F2FE;
-  color: #0284C7;
-}
-
-.pv-card-icon--navy {
-  background: #EDE9FE;
-  color: #6366F1;
-}
-
-.pv-card-icon--green {
-  background: #ECFDF5;
-  color: #059669;
-}
-
-.pv-card h3 {
-  font-size: 1.35rem;
+.ay-card h3 {
+  font-size: 1.25rem;
   font-weight: 700;
   color: #0B1020;
   margin: 0 0 0.65rem;
   letter-spacing: -0.015em;
 }
 
-.pv-card p {
-  font-size: 1rem;
+.ay-card p {
+  font-size: 0.98rem;
   line-height: 1.65;
   color: #4A5468;
   margin: 0;
 }
 
-.pv-card code {
-  font-size: 0.9em;
-  background: #E2E8F0;
-  color: #0F172A;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: monospace;
-}
-
-/* ── Summary Statement Band ────────────────────────────────── */
-.pv-summary-band {
+/* ── Audit Band ────────────────────────────────────────────── */
+.ay-audit-band {
   background: #EAF1FF;
   padding: 80px 0 96px;
   border-top: 1px solid #D5E4FF;
 }
 
-.pv-summary-card {
+.ay-audit-card {
   text-align: center;
   background: #FFFFFF;
   border: 1.5px solid #BFD8FF;
@@ -240,12 +213,12 @@
   box-shadow: 0 12px 36px rgba(21, 88, 232, 0.08);
 }
 
-.pv-summary-shield {
+.ay-audit-icon {
   color: #1558E8;
   margin-bottom: 1rem;
 }
 
-.pv-summary-card h3 {
+.ay-audit-card h3 {
   font-size: 1.6rem;
   font-weight: 800;
   color: #0B1020;
@@ -253,7 +226,7 @@
   letter-spacing: -0.02em;
 }
 
-.pv-summary-card p {
+.ay-audit-card p {
   font-size: 1.1rem;
   line-height: 1.7;
   color: #4A5468;
@@ -263,22 +236,27 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .ay-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 960px) {
-  .pv-hero-grid {
+  .ay-hero-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
-  }
-  .pv-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
 }
 
 @media (max-width: 640px) {
-  .pv-container {
+  .ay-grid {
+    grid-template-columns: 1fr;
+  }
+  .ay-container {
     padding: 0 20px;
   }
-  .pv-summary-card {
+  .ay-audit-card {
     padding: 2rem 1.5rem;
   }
 }

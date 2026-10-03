@@ -1,255 +1,143 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { 
-  ShieldCheck, 
   Lock, 
   EyeOff, 
-  HardDrive, 
   Server, 
   CheckCircle2, 
-  AlertTriangle 
+  ShieldCheck, 
+  Cpu, 
+  Database, 
+  WifiOff 
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout.jsx';
+import './PrivacyPage.css';
 
 export default function PrivacyPage() {
   React.useEffect(() => {
     document.title = 'Privacy Architecture & Data Transparency – MOVA';
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.content = 'Understand how MOVA ensures video privacy through local on-device machine vision with zero cloud uploads.';
+    if (meta) {
+      meta.content = 'Understand how MOVA ensures video privacy through local on-device machine vision with zero cloud uploads.';
+    }
   }, []);
 
   return (
-    <PageLayout
-      title="Privacy Policy"
-      description="We believe privacy is an intrinsic human right. Here is our transparent, complete disclosure of how data flows through MOVA."
-    >
-      {/* Privacy Guarantee Header Card */}
-      <div className="pr-guarantee-card">
-        <div className="pr-guarantee-icon">
-          <EyeOff size={28} />
-        </div>
-        <div>
-          <h2>Your Camera Frames Never Leave Your Device</h2>
-          <p>
-            When you grant camera access, video frames are processed entirely inside your browser's WebAssembly 
-            memory using MediaPipe. MOVA does not stream, capture, or save your camera image feed to any external cloud server.
-          </p>
-        </div>
-      </div>
+    <PageLayout fullWidth={true}>
+      <div className="pv-fullwidth-root">
+        {/* ── Hero Band with 3D Graphic ───────────────────────── */}
+        <section className="pv-hero-band">
+          <div className="pv-container">
+            <div className="pv-hero-grid">
+              <div className="pv-hero-copy">
+                <span className="pv-pill">DATA &amp; PRIVACY GUARANTEE</span>
+                <h1 className="pv-title">Private by Design. Zero Video Uploads.</h1>
+                <p className="pv-subtitle">
+                  We believe privacy is an intrinsic human right. Video feeds never touch a cloud server.
+                  Computer vision landmarks are derived locally in browser WebAssembly memory and processed strictly on your machine.
+                </p>
+                
+                <div className="pv-stat-row">
+                  <div className="pv-stat-pill">
+                    <CheckCircle2 size={18} className="pv-check-icon" />
+                    <span>0 bytes of video streamed to cloud</span>
+                  </div>
+                  <div className="pv-stat-pill">
+                    <CheckCircle2 size={18} className="pv-check-icon" />
+                    <span>Local MediaPipe WASM extraction</span>
+                  </div>
+                </div>
+              </div>
 
-      {/* Technical Data Flow Architecture */}
-      <h2 className="pr-section-title">Data Handling Architecture</h2>
-      <div className="pr-grid">
-        <div className="pr-card">
-          <div className="pr-card-icon pr-card-icon--green">
-            <Lock size={22} />
+              {/* 3D Privacy Shield Render */}
+              <div className="pv-hero-graphic-wrap">
+                <div className="pv-3d-card">
+                  <img
+                    src="/images/3d/privacy-shield.webp"
+                    alt="3D Frosted Glass Security Shield and Data Privacy Illustration"
+                    className="pv-3d-img"
+                    width="640"
+                    height="360"
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <h3>Local Video Processing</h3>
-          <p>
-            Video frames from <code>navigator.mediaDevices.getUserMedia</code> are consumed in-memory by client-side WebAssembly models. When you turn off the camera or navigate away, memory allocations are instantly cleared.
-          </p>
-        </div>
+        </section>
 
-        <div className="pr-card">
-          <div className="pr-card-icon pr-card-icon--blue">
-            <Server size={22} />
+        {/* ── Architecture Cards Band ─────────────────────────── */}
+        <section className="pv-arch-band">
+          <div className="pv-container">
+            <div className="pv-section-header">
+              <span className="pv-pill">HOW IT WORKS</span>
+              <h2 className="pv-section-title">Technical Privacy Architecture</h2>
+              <p className="pv-section-sub">
+                Every frame captured by your webcam stays under your direct hardware control.
+              </p>
+            </div>
+
+            <div className="pv-grid">
+              <div className="pv-card">
+                <div className="pv-card-icon pv-card-icon--blue">
+                  <Lock size={24} />
+                </div>
+                <h3>In-Memory Frame Processing</h3>
+                <p>
+                  Video frames from <code>navigator.mediaDevices.getUserMedia</code> are consumed directly in local memory.
+                  Frames are never written to disk, cookies, or localStorage. When the camera is closed, memory allocations are flushed immediately.
+                </p>
+              </div>
+
+              <div className="pv-card">
+                <div className="pv-card-icon pv-card-icon--sky">
+                  <Cpu size={24} />
+                </div>
+                <h3>126 Coordinate Landmarks Only</h3>
+                <p>
+                  MediaPipe extracts 21 skeletal joints per hand (x, y, z normalized floats).
+                  Only numeric coordinates are passed for translation. No recognizable facial features, room backgrounds, or image pixels are preserved.
+                </p>
+              </div>
+
+              <div className="pv-card">
+                <div className="pv-card-icon pv-card-icon--navy">
+                  <WifiOff size={24} />
+                </div>
+                <h3>Local WebSocket AI Server</h3>
+                <p>
+                  During active translation, coordinate arrays are sent via <code>ws://localhost:8000/ws</code> to a local PyTorch process running on your device.
+                  No external analytics or tracking pixels observe your gestures.
+                </p>
+              </div>
+
+              <div className="pv-card">
+                <div className="pv-card-icon pv-card-icon--green">
+                  <Database size={24} />
+                </div>
+                <h3>No Account Required for Core Use</h3>
+                <p>
+                  MOVA does not require an account or login to translate sign language.
+                  Your translations are entirely ephemeral and disappear as soon as you close your browser tab.
+                </p>
+              </div>
+            </div>
           </div>
-          <h3>Landmark Coordinates</h3>
-          <p>
-            Only normalized skeletal landmark coordinates (x, y, z finger joints) are evaluated for classification. No recognizable human faces, room backgrounds, or image pixels are ever transmitted or stored.
-          </p>
-        </div>
+        </section>
 
-        <div className="pr-card">
-          <div className="pr-card-icon pr-card-icon--purple">
-            <HardDrive size={22} />
+        {/* ── Summary Statement Band ──────────────────────────── */}
+        <section className="pv-summary-band">
+          <div className="pv-container pv-container--narrow">
+            <div className="pv-summary-card">
+              <ShieldCheck size={36} className="pv-summary-shield" />
+              <h3>Academic Research Transparency</h3>
+              <p>
+                MOVA was built at College of Engineering Thalassery as an academic research project.
+                Our complete source code is public on GitHub, allowing independent verification of every privacy and data handling claim.
+              </p>
+            </div>
           </div>
-          <h3>Client-Side Preferences</h3>
-          <p>
-            User preferences (such as speech volume, speech speed, and session state) are saved exclusively to your browser's local storage (<code>localStorage</code>) on your own machine.
-          </p>
-        </div>
+        </section>
       </div>
-
-      <hr />
-
-      {/* Cookies & Tracking Section */}
-      <h2 className="pr-section-title">Zero Analytics or Third-Party Trackers</h2>
-      <div className="pr-text-block">
-        <p>
-          MOVA does not embed Google Analytics, Meta Pixel, PostHog, Mixpanel, or advertising cookies. 
-          There is no cross-site profiling or tracking across your browsing sessions.
-        </p>
-        <p>
-          External requests are strictly limited to necessary CDN assets:
-        </p>
-        <ul>
-          <li><strong>Google Fonts:</strong> Web fonts (Inter and Noto Sans Malayalam) loaded for multilingual typography.</li>
-          <li><strong>Self-Hosted MediaPipe:</strong> The landmark extraction models are served directly from the same origin.</li>
-        </ul>
-      </div>
-
-      {/* Inquiries & Form Submissions */}
-      <h2 className="pr-section-title">Inquiries, Feedback & Contact Data</h2>
-      <div className="pr-text-block">
-        <p>
-          When you send a question, bug report, or sign suggestion through our inquiry forms:
-        </p>
-        <ul>
-          <li><strong>Direct Email Delivery:</strong> Messages are forwarded to Hashir (<code>{SITE_INFO.contactEmail}</code>) through our configured form processing service (such as Formspree or Web3Forms). {/* TODO: Confirm form service provider name and where it stores submission data */}</li>
-          <li><strong>Reply Address Only:</strong> If you provide an email address, it is used strictly to reply to your inquiry. We never share, sell, or subscribe your email to mailing lists.</li>
-          <li><strong>Zero Camera or Media Transmission:</strong> No video frames, camera streams, captured images, or skeletal landmarks are ever attached or transmitted with your messages.</li>
-          <li><strong>Consent-Driven Technical Details:</strong> On troubleshooting pages, technical diagnostic information (browser name, screen dimensions, and camera API support) is transmitted ONLY if you explicitly check "Include technical details to help fix this". It is never collected automatically.</li>
-        </ul>
-      </div>
-
-      <hr />
-
-      {/* Questions & Contact */}
-      <div className="pr-contact-box">
-        <h3>Questions regarding security or data flow?</h3>
-        <p>
-          We are dedicated to total transparency in open source and assistive research. You can email us at{' '}
-          <a href={`mailto:${SITE_INFO.contactEmail}`}>{SITE_INFO.contactEmail}</a> or use our feedback form.
-        </p>
-        <Link to="/contact" className="pr-contact-link">Contact our team →</Link>
-      </div>
-
-      <style>{`
-        .pr-guarantee-card {
-          display: flex;
-          align-items: flex-start;
-          gap: 1.5rem;
-          background: linear-gradient(135deg, #F0FDF4 0%, #FAFCFF 100%);
-          border: 1.5px solid #BBF7D0;
-          border-radius: 20px;
-          padding: 2rem;
-          margin-bottom: 2.75rem;
-          box-shadow: 0 4px 14px rgba(22, 101, 52, 0.04);
-        }
-
-        .pr-guarantee-icon {
-          width: 52px;
-          height: 52px;
-          border-radius: 14px;
-          background: #DCFCE7;
-          color: #15803D;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
-        .pr-guarantee-card h2 {
-          font-size: 1.35rem;
-          font-weight: 800;
-          color: #14532D;
-          margin: 0 0 0.5rem;
-          letter-spacing: -0.02em;
-        }
-
-        .pr-guarantee-card p {
-          font-size: 1rem;
-          color: #166534;
-          line-height: 1.6;
-          margin: 0;
-        }
-
-        .pr-section-title {
-          font-size: 1.45rem;
-          font-weight: 800;
-          color: #0F172A;
-          letter-spacing: -0.02em;
-          margin-bottom: 1.25rem;
-        }
-
-        .pr-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 1.25rem;
-          margin-bottom: 2.5rem;
-        }
-
-        .pr-card {
-          background: #FFFFFF;
-          border: 1.5px solid #E2E8F0;
-          border-radius: 18px;
-          padding: 1.5rem;
-          box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
-        }
-
-        .pr-card-icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 1rem;
-        }
-
-        .pr-card-icon--green { background: #ECFDF5; color: #059669; }
-        .pr-card-icon--blue { background: #EFF6FF; color: #1558E8; }
-        .pr-card-icon--purple { background: #F5F3FF; color: #7C3AED; }
-
-        .pr-card h3 {
-          font-size: 1.1rem;
-          font-weight: 700;
-          color: #0F172A;
-          margin: 0 0 0.45rem;
-        }
-
-        .pr-card p {
-          font-size: 0.92rem;
-          color: #64748B;
-          line-height: 1.6;
-          margin: 0;
-        }
-
-        .pr-text-block {
-          font-size: 1rem;
-          color: #334155;
-          line-height: 1.7;
-        }
-
-        .pr-contact-box {
-          background: #F8FAFC;
-          border: 1px solid #E2E8F0;
-          border-radius: 18px;
-          padding: 1.75rem 2rem;
-        }
-
-        .pr-contact-box h3 {
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: #0F172A;
-          margin: 0 0 0.35rem;
-        }
-
-        .pr-contact-box p {
-          font-size: 0.92rem;
-          color: #64748B;
-          margin: 0 0 0.85rem;
-        }
-
-        .pr-contact-link {
-          font-size: 0.92rem;
-          font-weight: 600;
-          color: #1558E8;
-          text-decoration: none;
-        }
-
-        .pr-contact-link:hover {
-          text-decoration: underline;
-        }
-
-        @media (max-width: 640px) {
-          .pr-guarantee-card {
-            flex-direction: column;
-            gap: 1rem;
-          }
-        }
-      `}</style>
     </PageLayout>
   );
 }
