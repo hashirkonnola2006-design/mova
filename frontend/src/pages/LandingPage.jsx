@@ -221,59 +221,61 @@ export default function LandingPage() {
               <span className="lp-meta-dot">·</span>
               <span>Malayalam, Hindi and English</span>
             </div>
+          </div>
+        </div>
 
+        {/* Feature Dock anchored in hero section */}
+        <div className="lp-feature-strip-wrap">
+          <div className="lp-feature-container">
             <div className="lp-feature-eyebrow">
               BUILT FOR A MORE INCLUSIVE TOMORROW
+            </div>
+
+            <div className="lp-feature-row" role="region" aria-label="Feature Quick Access Dock">
+              {FEATURES.map((f, i) => {
+                const IconComponent = f.icon;
+                const isAnchor = f.to?.startsWith('#');
+                return (
+                  <React.Fragment key={f.id}>
+                    {i > 0 && <div className="lp-feature-divider" aria-hidden="true" />}
+                    {isAnchor ? (
+                      <a
+                        href={f.to}
+                        className="lp-feature-card"
+                        onClick={e => smoothScroll(e, f.to)}
+                        title={f.title}
+                      >
+                        <div className="lp-feature-icon-box" aria-hidden="true">
+                          <IconComponent size={22} strokeWidth={2} />
+                        </div>
+                        <div className="lp-feature-content">
+                          <div className="lp-feature-title">{f.title}</div>
+                          <div className="lp-feature-subtitle">{f.subtitle}</div>
+                        </div>
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        className="lp-feature-card"
+                        onClick={() => navigate(f.to)}
+                        title={f.title}
+                      >
+                        <div className="lp-feature-icon-box" aria-hidden="true">
+                          <IconComponent size={22} strokeWidth={2} />
+                        </div>
+                        <div className="lp-feature-content">
+                          <div className="lp-feature-title">{f.title}</div>
+                          <div className="lp-feature-subtitle">{f.subtitle}</div>
+                        </div>
+                      </button>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
-
-      {/* ── Persistent Floating Feature Dock (Across Entire Landing Page) ── */}
-      <nav className="lp-floating-dock-wrap" aria-label="Quick Feature Navigation">
-        <div className="lp-floating-dock">
-          {FEATURES.map((f, i) => {
-            const IconComponent = f.icon;
-            const isAnchor = f.to?.startsWith('#');
-            return (
-              <React.Fragment key={f.id}>
-                {i > 0 && <div className="lp-dock-divider" aria-hidden="true" />}
-                {isAnchor ? (
-                  <a
-                    href={f.to}
-                    className="lp-dock-item"
-                    onClick={e => smoothScroll(e, f.to)}
-                    title={f.title}
-                  >
-                    <div className="lp-dock-icon-box" aria-hidden="true">
-                      <IconComponent size={20} strokeWidth={2} />
-                    </div>
-                    <div className="lp-dock-content">
-                      <div className="lp-dock-title">{f.title}</div>
-                      <div className="lp-dock-subtitle">{f.subtitle}</div>
-                    </div>
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    className="lp-dock-item"
-                    onClick={() => navigate(f.to)}
-                    title={f.title}
-                  >
-                    <div className="lp-dock-icon-box" aria-hidden="true">
-                      <IconComponent size={20} strokeWidth={2} />
-                    </div>
-                    <div className="lp-dock-content">
-                      <div className="lp-dock-title">{f.title}</div>
-                      <div className="lp-dock-subtitle">{f.subtitle}</div>
-                    </div>
-                  </button>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </div>
-      </nav>
 
       {/* ── SECTION 2: HOW IT WORKS (Sticky Scroll-Reveal Component) ── */}
       <HowItWorks onToast={showToast} />
