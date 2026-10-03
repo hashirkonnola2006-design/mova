@@ -855,6 +855,43 @@
   color: var(--lp-slate);
 }
 
+.lp-faq-ask-wrap {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.lp-faq-ask-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lp-blue-soft);
+  color: var(--lp-blue);
+  border: 1.5px solid var(--lp-blue-soft);
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.lp-faq-ask-btn:hover {
+  background: var(--lp-blue);
+  color: #FFFFFF;
+}
+
+.lp-faq-form-card {
+  max-width: 680px;
+  margin: 1.5rem auto 0;
+  text-align: left;
+  background: #FFFFFF;
+  border: 1px solid var(--lp-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(11, 16, 32, 0.05);
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
    SECTION 6: FINAL CTA + FOOTER
    ────────────────────────────────────────────────────────────────────────── */

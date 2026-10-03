@@ -11,6 +11,7 @@ import Header from '../components/landing/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import AccessibilityPanel from '../components/AccessibilityPanel.jsx';
 import HowItWorks from '../components/landing/HowItWorks.jsx';
+import InquiryForm from '../components/InquiryForm.jsx';
 import { EMERGENCY_PHRASES } from '../data/emergencyPhrases.js';
 import { FAQ_ITEMS } from '../data/faq.js';
 import { LANDING_ASSETS } from '../data/landingAssets.js';
@@ -69,6 +70,7 @@ export default function LandingPage() {
 
   // FAQ accordion state (one open at a time)
   const [openFaqId, setOpenFaqId] = useState(FAQ_ITEMS[0]?.id || null);
+  const [showFaqForm, setShowFaqForm] = useState(false);
 
   // Section in-view states
   const [howIn, setHowIn] = useState(false);
@@ -399,6 +401,29 @@ export default function LandingPage() {
                 </div>
               );
             })}
+          </div>
+
+          {/* Ask Us Inquiry Prompt */}
+          <div className="lp-faq-ask-wrap">
+            {!showFaqForm ? (
+              <button
+                type="button"
+                className="lp-faq-ask-btn"
+                onClick={() => setShowFaqForm(true)}
+              >
+                Didn't find your answer? Ask us
+              </button>
+            ) : (
+              <div className="lp-faq-form-card">
+                <InquiryForm
+                  source="/#faq"
+                  type="Question"
+                  compact={true}
+                  onCancel={() => setShowFaqForm(false)}
+                  onSent={() => setShowFaqForm(false)}
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>

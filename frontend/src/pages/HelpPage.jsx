@@ -10,9 +10,10 @@ import {
   ExternalLink,
   MessageSquareQuote,
   ShieldCheck,
-  CheckCircle2
+  MessageCircleQuestion
 } from 'lucide-react';
 import PageLayout from '../components/PageLayout.jsx';
+import InquiryForm from '../components/InquiryForm.jsx';
 
 const HELP_SECTIONS = [
   {
@@ -85,6 +86,7 @@ export default function HelpPage() {
   }, []);
 
   const [openSection, setOpenSection] = useState('camera-denied');
+  const [activeFormSection, setActiveFormSection] = useState(null);
 
   const toggleSection = (id) => {
     setOpenSection(prev => prev === id ? null : id);
@@ -108,6 +110,7 @@ export default function HelpPage() {
       <div className="hp-accordion-container" role="region" aria-label="Troubleshooting Topics">
         {HELP_SECTIONS.map((section) => {
           const isOpen = openSection === section.id;
+          const isFormOpen = activeFormSection === section.id;
           const IconComp = section.icon;
 
           return (
@@ -150,6 +153,39 @@ export default function HelpPage() {
                       </li>
                     ))}
                   </ol>
+
+                  {/* "Still stuck? Ask us" button & compact form */}
+                  <div className="hp-ask-wrap">
+                    {!isFormOpen ? (
+                      <button
+                        type="button"
+                        className="hp-ask-btn"
+                        onClick={() => setActiveFormSection(section.id)}
+                        aria-expanded="false"
+                      >
+                        <MessageCircleQuestion size={16} />
+                        <span>Still stuck? Ask us</span>
+                      </button>
+                    ) : (
+                      <div className="hp-inline-form-box">
+                        <div className="hp-inline-form-header">
+                          <h4>Ask us about: {section.title}</h4>
+                        </div>
+                        <InquiryForm
+                          source={`/help#${section.id}`}
+                          type="Help with the app"
+                          compact={true}
+                          allowTechDetails={true}
+                          techContext={{
+                            troubleshootingTopic: section.title,
+                            troubleshootingSectionId: section.id
+                          }}
+                          onCancel={() => setActiveFormSection(null)}
+                          onSent={() => setActiveFormSection(null)}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
@@ -278,7 +314,7 @@ export default function HelpPage() {
         .hp-steps-list {
           list-style: none;
           padding: 0;
-          margin: 0;
+          margin: 0 0 1.25rem 0;
           display: flex;
           flex-direction: column;
           gap: 0.85rem;
@@ -306,6 +342,46 @@ export default function HelpPage() {
           font-weight: 700;
           color: #1558E8;
           margin-top: 2px;
+        }
+
+        .hp-ask-wrap {
+          border-top: 1px solid #E8EDF5;
+          padding-top: 1rem;
+        }
+
+        .hp-ask-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: #F0F5FF;
+          border: 1px solid #D8E5FD;
+          border-radius: 8px;
+          padding: 0.5rem 0.95rem;
+          font-size: 0.88rem;
+          font-weight: 600;
+          color: #1558E8;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          font-family: inherit;
+        }
+
+        .hp-ask-btn:hover {
+          background: #E0EBFB;
+        }
+
+        .hp-inline-form-box {
+          background: #F8FAFC;
+          border: 1px solid #E8EDF5;
+          border-radius: 14px;
+          padding: 1.25rem;
+          margin-top: 0.5rem;
+        }
+
+        .hp-inline-form-header h4 {
+          font-size: 1rem;
+          font-weight: 700;
+          color: #0B1020;
+          margin: 0 0 0.75rem;
         }
 
         .hp-footer-prompt {

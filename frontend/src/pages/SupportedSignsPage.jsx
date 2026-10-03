@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { Volume2, Search, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Volume2, Search, Sparkles, CheckCircle2, AlertCircle, PlusCircle } from 'lucide-react';
 import PageLayout from '../components/PageLayout.jsx';
+import InquiryForm from '../components/InquiryForm.jsx';
 import { SIGNS, ACTIVE_SIGN_KEYS } from '../data/signs.js';
 
 function speakSign(malayalam, english) {
@@ -25,6 +26,10 @@ export default function SupportedSignsPage() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [playingKey, setPlayingKey] = useState(null);
+
+  // Active inquiry modals / inline states
+  const [reportingSign, setReportingSign] = useState(null);
+  const [suggestingSign, setSuggestingSign] = useState(false);
 
   const categories = useMemo(() => {
     return ['All', ...new Set(SIGNS.map(s => s.category))].sort((a, b) => a === 'All' ? -1 : a.localeCompare(b));
@@ -122,6 +127,8 @@ export default function SupportedSignsPage() {
           {filtered.map(sign => {
             const isActive = activeSet.has(sign.key);
             const isPlaying = playingKey === sign.key;
+            const isReporting = reportingSign?.key === sign.key;
+
             return (
               <li key={sign.key} className={`ss-item-card ${isActive ? 'ss-item-card--active' : ''}`}>
                 <div className="ss-card-top">
@@ -152,12 +159,83 @@ export default function SupportedSignsPage() {
                     <Volume2 size={16} />
                     <span>Pronounce</span>
                   </button>
+
+                  <button
+                    type="button"
+                    className="ss-report-btn"
+                    onClick={() => setReportingSign(isReporting ? null : sign)}
+                    title={`Report wrong sign for ${sign.english}`}
+                    aria-label={`Report wrong sign for ${sign.english}`}
+                  >
+                    <AlertCircle size={14} />
+                    <span>Report</span>
+                  </button>
                 </div>
+
+                {/* Inline compact report form */}
+                {isReporting && (
+                  <div className="ss-card-report-box">
+                    <div className="ss-card-report-header">
+                      <span>Report "{sign.english} ({sign.malayalam})"</span>
+                      <button
+                        type="button"
+                        className="ss-card-report-close"
+                        onClick={() => setReportingSign(null)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <InquiryForm
+                      source={`/supported-signs#${sign.key}`}
+                      type="Wrong translation"
+                      initialMessage={`Sign ID: ${sign.key}\nWord: ${sign.english} (${sign.malayalam})\nCategory: ${sign.category}\nIssue: `}
+                      compact={true}
+                      onCancel={() => setReportingSign(null)}
+                      onSent={() => setReportingSign(null)}
+                    />
+                  </div>
+                )}
               </li>
             );
           })}
         </ul>
       )}
+
+      {/* Suggest a Sign Section at bottom */}
+      <div className="ss-suggest-wrap">
+        <div className="ss-suggest-card">
+          <div className="ss-suggest-info">
+            <PlusCircle size={28} className="ss-suggest-icon" />
+            <div>
+              <h3>Know a sign that should be in MOVA?</h3>
+              <p>We continually expand our vocabulary with input from the Deaf and hard-of-hearing community.</p>
+            </div>
+          </div>
+          {!suggestingSign ? (
+            <button
+              type="button"
+              className="ss-suggest-btn"
+              onClick={() => setSuggestingSign(true)}
+            >
+              Suggest a sign
+            </button>
+          ) : (
+            <div className="ss-suggest-form-box">
+              <div className="ss-suggest-form-header">
+                <h4>Suggest a new sign or vocabulary addition</h4>
+              </div>
+              <InquiryForm
+                source="/supported-signs#suggest"
+                type="I can help with signs"
+                initialMessage="I'd like to suggest adding this sign / word:\nMalayalam:\nEnglish:\nDescription / Context: "
+                compact={true}
+                onCancel={() => setSuggestingSign(false)}
+                onSent={() => setSuggestingSign(false)}
+              />
+            </div>
+          )}
+        </div>
+      </div>
 
       <style>{`
         .ss-tag-active {
@@ -287,7 +365,7 @@ export default function SupportedSignsPage() {
         /* Card Grid */
         .ss-cards-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
           gap: 1.25rem;
           list-style: none;
           padding: 0;
@@ -304,11 +382,12 @@ export default function SupportedSignsPage() {
           justify-content: space-between;
           box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+          position: relative;
         }
 
         .ss-item-card:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 12px 24px rgba(21, 88, 232, 0.08);
+          transform: translateY(-2px);
+          box-shadow: 0 10px 22px rgba(21, 88, 232, 0.08);
           border-color: #BFDBFE;
         }
 
@@ -345,12 +424,12 @@ export default function SupportedSignsPage() {
 
         .ss-card-body {
           text-align: center;
-          margin: 0.5rem 0 1.25rem;
+          margin: 0.5rem 0 1.1rem;
         }
 
         .ss-malayalam-word {
           font-family: 'Noto Sans Malayalam', sans-serif;
-          font-size: 1.7rem;
+          font-size: 1.65rem;
           font-weight: 700;
           color: #0F172A;
           line-height: 1.25;
@@ -366,20 +445,22 @@ export default function SupportedSignsPage() {
         .ss-card-footer {
           margin-top: auto;
           display: flex;
+          align-items: center;
+          gap: 0.5rem;
         }
 
         .ss-audio-btn {
-          width: 100%;
+          flex: 1;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          gap: 0.45rem;
-          padding: 0.55rem;
-          border-radius: 10px;
+          gap: 0.4rem;
+          padding: 0.5rem 0.6rem;
+          border-radius: 9px;
           border: 1px solid #E2E8F0;
           background: #F8FAFC;
           color: #1E293B;
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.15s ease;
@@ -396,6 +477,127 @@ export default function SupportedSignsPage() {
           background: #1558E8 !important;
           color: #FFFFFF !important;
           border-color: #1558E8 !important;
+        }
+
+        .ss-report-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.3rem;
+          padding: 0.5rem 0.6rem;
+          border-radius: 9px;
+          border: 1px solid #E2E8F0;
+          background: #FFFFFF;
+          color: #64748B;
+          font-size: 0.78rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          font-family: inherit;
+        }
+
+        .ss-report-btn:hover {
+          background: #FEF2F2;
+          border-color: #FECACA;
+          color: #DC2626;
+        }
+
+        .ss-card-report-box {
+          margin-top: 0.85rem;
+          border-top: 1px solid #E8EDF5;
+          padding-top: 0.75rem;
+          text-align: left;
+        }
+
+        .ss-card-report-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 0.82rem;
+          font-weight: 600;
+          color: #0B1020;
+          margin-bottom: 0.4rem;
+        }
+
+        .ss-card-report-close {
+          background: none;
+          border: none;
+          color: #64748B;
+          cursor: pointer;
+          font-size: 0.85rem;
+        }
+
+        /* Suggest a sign section */
+        .ss-suggest-wrap {
+          margin-top: 3.5rem;
+        }
+
+        .ss-suggest-card {
+          background: #F8FAFC;
+          border: 1.5px solid #E2E8F0;
+          border-radius: 20px;
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
+        .ss-suggest-info {
+          display: flex;
+          align-items: flex-start;
+          gap: 1.25rem;
+        }
+
+        .ss-suggest-icon {
+          color: #1558E8;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
+        .ss-suggest-info h3 {
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: #0F172A;
+          margin: 0 0 0.35rem;
+        }
+
+        .ss-suggest-info p {
+          font-size: 0.95rem;
+          color: #64748B;
+          margin: 0;
+          line-height: 1.55;
+        }
+
+        .ss-suggest-btn {
+          align-self: flex-start;
+          background: #1558E8;
+          color: #FFFFFF;
+          border: none;
+          padding: 0.75rem 1.6rem;
+          border-radius: 10px;
+          font-size: 0.95rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.15s ease;
+          font-family: inherit;
+        }
+
+        .ss-suggest-btn:hover {
+          background: #1048C6;
+        }
+
+        .ss-suggest-form-box {
+          background: #FFFFFF;
+          border: 1px solid #E8EDF5;
+          border-radius: 14px;
+          padding: 1.5rem;
+        }
+
+        .ss-suggest-form-header h4 {
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: #0B1020;
+          margin: 0 0 0.75rem;
         }
 
         /* Empty State */
@@ -445,14 +647,11 @@ export default function SupportedSignsPage() {
 
         @media (max-width: 640px) {
           .ss-cards-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.85rem;
+            grid-template-columns: 1fr;
           }
-          .ss-item-card {
-            padding: 1rem 0.85rem;
-          }
-          .ss-malayalam-word {
-            font-size: 1.4rem;
+          .ss-suggest-info {
+            flex-direction: column;
+            gap: 0.75rem;
           }
         }
       `}</style>

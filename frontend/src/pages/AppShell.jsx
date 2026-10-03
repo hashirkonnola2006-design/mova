@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NavLink, useNavigate, Outlet } from 'react-router-dom';
 import {
   Home, Scan, Volume2, MessageCircle, Shield,
   BookOpen, Accessibility, Settings,
-  Globe, ChevronDown, LogOut
+  Globe, ChevronDown, LogOut, MessageSquarePlus, X
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
+import InquiryForm from '../components/InquiryForm.jsx';
 import './AppShell.css';
 
 const NAV_ITEMS = [
@@ -24,8 +25,86 @@ export default function AppShell() {
   const navigate = useNavigate();
   const [selectedLang, setSelectedLang] = useState('English (US)');
 
+  // Avatar dropdown & feedback dialog state
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+
+  const menuRef = useRef(null);
+  const avatarBtnRef = useRef(null);
+  const dialogRef = useRef(null);
+
   const userInitial = session?.avatar || session?.name?.charAt(0).toUpperCase() || 'H';
   const userName = session?.name || 'User';
+
+  // Close avatar dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    }
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [menuOpen]);
+
+  // Focus trap & Escape key handler for Feedback Dialog
+  useEffect(() => {
+    if (!feedbackOpen) return;
+
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setFeedbackOpen(false);
+        if (avatarBtnRef.current) avatarBtnRef.current.focus();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        if (!dialogRef.current) return;
+        const focusable = dialogRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Initial focus into dialog
+    const timer = setTimeout(() => {
+      if (dialogRef.current) {
+        const firstInput = dialogRef.current.querySelector('textarea, select, button');
+        if (firstInput) firstInput.focus();
+      }
+    }, 50);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      clearTimeout(timer);
+    };
+  }, [feedbackOpen]);
+
+  const handleOpenFeedback = () => {
+    setMenuOpen(false);
+    setFeedbackOpen(true);
+  };
+
+  const handleCloseFeedback = () => {
+    setFeedbackOpen(false);
+    if (avatarBtnRef.current) avatarBtnRef.current.focus();
+  };
 
   return (
     <div className="shell-root">
@@ -95,15 +174,53 @@ export default function AppShell() {
             {/* Subtle Divider */}
             <span className="shell-topbar-divider" />
 
-            {/* User Avatar */}
-            <button
-              className="shell-avatar"
-              aria-label="User profile"
-              onClick={() => navigate('/app/settings')}
-              title={session?.name || 'User Profile'}
-            >
-              {userInitial}
-            </button>
+            {/* User Avatar & Menu */}
+            <div className="shell-avatar-wrap" ref={menuRef}>
+              <button
+                ref={avatarBtnRef}
+                className="shell-avatar"
+                aria-label="User profile and feedback menu"
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen(!menuOpen)}
+                title={session?.name || 'User Menu'}
+              >
+                {userInitial}
+              </button>
+
+              {menuOpen && (
+                <div className="shell-avatar-menu" role="menu">
+                  <div className="shell-menu-header">
+                    <span className="shell-menu-name">{userName}</span>
+                    <span className="shell-menu-email">{session?.email || 'Logged in'}</span>
+                  </div>
+                  <button
+                    className="shell-menu-item"
+                    role="menuitem"
+                    onClick={handleOpenFeedback}
+                  >
+                    <MessageSquarePlus size={16} />
+                    <span>Send feedback</span>
+                  </button>
+                  <button
+                    className="shell-menu-item"
+                    role="menuitem"
+                    onClick={() => { setMenuOpen(false); navigate('/app/settings'); }}
+                  >
+                    <Settings size={16} />
+                    <span>Settings</span>
+                  </button>
+                  <div className="shell-menu-sep" />
+                  <button
+                    className="shell-menu-item shell-menu-item--logout"
+                    role="menuitem"
+                    onClick={() => { setMenuOpen(false); logOut(); }}
+                  >
+                    <LogOut size={16} />
+                    <span>Log out</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 
@@ -112,6 +229,43 @@ export default function AppShell() {
           <Outlet />
         </main>
       </div>
+
+      {/* Accessible Feedback Modal Dialog */}
+      {feedbackOpen && (
+        <div className="shell-modal-backdrop" role="presentation">
+          <div
+            className="shell-modal-dialog"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="feedback-dialog-title"
+          >
+            <div className="shell-modal-header">
+              <h3 id="feedback-dialog-title">Send Feedback to Team</h3>
+              <button
+                type="button"
+                className="shell-modal-close"
+                onClick={handleCloseFeedback}
+                aria-label="Close feedback dialog"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="shell-modal-body">
+              <InquiryForm
+                source={window.location.pathname}
+                type="Suggestion"
+                compact={false}
+                allowTechDetails={true}
+                onCancel={handleCloseFeedback}
+                onSent={() => {
+                  setTimeout(() => handleCloseFeedback(), 1500);
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

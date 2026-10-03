@@ -89,6 +89,20 @@ export default function PrivacyPage() {
         </ul>
       </div>
 
+      {/* Inquiries & Form Submissions */}
+      <h2 className="pr-section-title">Inquiries, Feedback & Contact Data</h2>
+      <div className="pr-text-block">
+        <p>
+          When you send a question, bug report, or sign suggestion through our inquiry forms:
+        </p>
+        <ul>
+          <li><strong>Direct Email Delivery:</strong> Messages are forwarded to Hashir (<code>{SITE_INFO.contactEmail}</code>) through our configured form processing service (such as Formspree or Web3Forms). {/* TODO: Confirm form service provider name and where it stores submission data */}</li>
+          <li><strong>Reply Address Only:</strong> If you provide an email address, it is used strictly to reply to your inquiry. We never share, sell, or subscribe your email to mailing lists.</li>
+          <li><strong>Zero Camera or Media Transmission:</strong> No video frames, camera streams, captured images, or skeletal landmarks are ever attached or transmitted with your messages.</li>
+          <li><strong>Consent-Driven Technical Details:</strong> On troubleshooting pages, technical diagnostic information (browser name, screen dimensions, and camera API support) is transmitted ONLY if you explicitly check "Include technical details to help fix this". It is never collected automatically.</li>
+        </ul>
+      </div>
+
       <hr />
 
       {/* Questions & Contact */}
