@@ -1,7 +1,23 @@
 /* ═══════════════════════════════════════════════════════════
-   MOVA App Shell — Sidebar + Content layout (Matches Reference)
+   MOVA App Shell — Hover-expand sidebar layout
    ═══════════════════════════════════════════════════════════ */
 
+/* ── CSS Variables ──────────────────────────────────────── */
+:root {
+  --sidebar-collapsed: 64px;
+  --sidebar-expanded: 228px;
+  --sidebar-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-bg: #ffffff;
+  --sidebar-border: rgba(0, 0, 0, 0.07);
+  --nav-active-bg: #EEF4FF;
+  --nav-active-color: #0B4FE0;
+  --nav-hover-bg: #F8FAFC;
+  --nav-text: #475569;
+  --nav-text-hover: #0A0F2C;
+  --topbar-h: 64px;
+}
+
+/* ── Root layout ─────────────────────────────────────────── */
 .shell-root {
   display: flex;
   min-height: 100vh;
@@ -17,156 +33,330 @@ body:has(.shell-root) {
   background-image: none !important;
 }
 
-/* ── Sidebar ─────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR — collapsed by default, expands on hover
+   ═══════════════════════════════════════════════════════════ */
 .shell-sidebar {
-  width: 220px;
+  width: var(--sidebar-collapsed);
   flex-shrink: 0;
-  background: #ffffff;
-  border-right: 1px solid #E2E8F0;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
   display: flex;
   flex-direction: column;
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  transition: width 0.2s ease;
-  z-index: 40;
+  overflow: hidden;
+  transition: width var(--sidebar-transition),
+              box-shadow var(--sidebar-transition);
+  z-index: 50;
 }
 
-.shell-collapsed .shell-sidebar {
-  width: 68px;
+/* On hover: expand the sidebar */
+.shell-sidebar:hover {
+  width: var(--sidebar-expanded);
+  box-shadow: 4px 0 24px rgba(11, 79, 224, 0.08),
+              2px 0 8px rgba(0, 0, 0, 0.06);
 }
 
-/* Brand */
+/* ── Brand ────────────────────────────────────────────────── */
 .shell-brand {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.1rem;
-  min-height: 64px;
+  gap: 0.75rem;
+  padding: 0 0 0 calc((var(--sidebar-collapsed) - 26px) / 2);
+  height: var(--topbar-h);
+  min-height: var(--topbar-h);
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--sidebar-border);
+  transition: padding var(--sidebar-transition);
 }
 
-.shell-brand-left {
+.shell-sidebar:hover .shell-brand {
+  padding-left: 1.1rem;
+}
+
+.shell-brand-icon-wrap {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  cursor: pointer;
+  justify-content: center;
 }
 
 .shell-brand-icon {
   width: 26px;
   height: 26px;
   object-fit: contain;
-  flex-shrink: 0;
 }
 
 .shell-brand-name {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: #0A0F2C;
   letter-spacing: -0.03em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--sidebar-transition),
+              transform var(--sidebar-transition);
 }
 
-.shell-collapse-btn {
-  background: none;
-  border: 1px solid #E2E8F0;
-  border-radius: 6px;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #94A3B8;
-  flex-shrink: 0;
-  transition: all 0.15s;
+.shell-sidebar:hover .shell-brand-name {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.shell-collapse-btn:hover {
-  background: #F1F5F9;
-  color: #0B4FE0;
-}
-
-/* Nav */
+/* ── Nav ─────────────────────────────────────────────────── */
 .shell-nav {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0.75rem;
-  gap: 0.25rem;
+  padding: 0.75rem 0;
+  gap: 0.15rem;
+  overflow: hidden;
 }
 
 .shell-nav-item {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.65rem 0.85rem;
-  border-radius: 8px;
+  gap: 0.875rem;
+  /* Center icon when collapsed */
+  padding: 0.7rem calc((var(--sidebar-collapsed) - 18px) / 2);
+  border-radius: 0;
   text-decoration: none;
-  font-size: 0.88rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: #475569;
-  transition: all 0.15s;
+  color: var(--nav-text);
+  transition: background 0.15s ease,
+              color 0.15s ease,
+              padding var(--sidebar-transition);
+  overflow: hidden;
   white-space: nowrap;
 }
 
+.shell-sidebar:hover .shell-nav-item {
+  padding: 0.7rem 0.875rem 0.7rem 1.1rem;
+  border-radius: 0;
+}
+
 .shell-nav-item:hover {
-  background: #F8FAFC;
-  color: #0A0F2C;
+  background: var(--nav-hover-bg);
+  color: var(--nav-text-hover);
 }
 
 .shell-nav-item--active {
-  background: #EEF4FF;
-  color: #0B4FE0;
+  background: var(--nav-active-bg);
+  color: var(--nav-active-color);
   font-weight: 600;
 }
 
-.shell-nav-icon {
-  flex-shrink: 0;
-  color: #64748B;
-}
-
 .shell-nav-item--active .shell-nav-icon {
-  color: #0B4FE0;
+  color: var(--nav-active-color);
 }
 
+/* Icon wrapper keeps the icon fixed in place */
+.shell-nav-icon-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.shell-nav-icon {
+  color: #64748B;
+  flex-shrink: 0;
+}
+
+/* Nav label — hidden when collapsed, visible on hover */
 .shell-nav-label {
-  font-size: 0.88rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--sidebar-transition),
+              transform var(--sidebar-transition);
+  pointer-events: none;
 }
 
-/* Sidebar Footer */
+.shell-sidebar:hover .shell-nav-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Tooltip shown when sidebar is NOT expanded (no hover) */
+.shell-nav-tooltip {
+  position: absolute;
+  left: calc(var(--sidebar-collapsed) + 8px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  background: #0A0F2C;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+}
+
+.shell-nav-tooltip::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left: 0;
+  border-right-color: #0A0F2C;
+}
+
+/* Show tooltip only when sidebar is narrow (not hovered) */
+.shell-nav-item:hover .shell-nav-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+.shell-sidebar:hover .shell-nav-tooltip {
+  display: none;
+}
+
+/* ── Active accent bar ───────────────────────────────────── */
+.shell-nav-item--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: var(--nav-active-color);
+  border-radius: 0 3px 3px 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SIDEBAR FOOTER — User card
+   ═══════════════════════════════════════════════════════════ */
 .shell-sidebar-footer {
-  padding: 1.5rem 1rem 1.25rem;
-  margin-top: auto;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--sidebar-border);
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.shell-footer-title {
+.shell-user-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem calc((var(--sidebar-collapsed) - 28px) / 2);
+  overflow: hidden;
+  cursor: default;
+  transition: padding var(--sidebar-transition),
+              background 0.15s ease;
+  border-radius: 0;
+}
+
+.shell-sidebar:hover .shell-user-card {
+  padding: 0.55rem 0.75rem 0.55rem 1rem;
+}
+
+.shell-user-card:hover {
+  background: var(--nav-hover-bg);
+}
+
+.shell-user-avatar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0B4FE0 0%, #7C3AED 100%);
+  color: #fff;
   font-size: 0.78rem;
   font-weight: 700;
-  color: #0A0F2C;
-  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
 }
 
-.shell-footer-desc {
+.shell-user-info {
+  flex: 1;
+  min-width: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--sidebar-transition),
+              transform var(--sidebar-transition);
+}
+
+.shell-sidebar:hover .shell-user-info {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.shell-user-name {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #0A0F2C;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shell-user-role {
   font-size: 0.72rem;
   color: #94A3B8;
-  margin-top: 0.25rem;
-  line-height: 1.4;
+  margin-top: 1px;
 }
 
-/* ── Top Bar ─────────────────────────────────────────────── */
+.shell-logout-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: #94A3B8;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--sidebar-transition),
+              color 0.15s ease,
+              background 0.15s ease;
+}
+
+.shell-sidebar:hover .shell-logout-btn {
+  opacity: 1;
+}
+
+.shell-logout-btn:hover {
+  color: #ef4444;
+  background: #FEF2F2;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TOP BAR
+   ═══════════════════════════════════════════════════════════ */
 .shell-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  height: 64px;
+  height: var(--topbar-h);
   background: #ffffff;
-  border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid var(--sidebar-border);
   position: sticky;
   top: 0;
   z-index: 30;
+  flex-shrink: 0;
 }
 
 .shell-topbar-right {
@@ -179,21 +369,23 @@ body:has(.shell-root) {
 .shell-lang-pill {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  font-size: 0.85rem;
+  gap: 0.4rem;
+  font-size: 0.83rem;
   font-weight: 500;
   color: #334155;
   cursor: pointer;
   user-select: none;
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  transition: background 0.15s;
 }
 
-.shell-globe-icon {
-  color: #64748B;
+.shell-lang-pill:hover {
+  background: #F1F5F9;
 }
 
-.shell-chevron-icon {
-  color: #94A3B8;
-}
+.shell-globe-icon { color: #64748B; }
+.shell-chevron-icon { color: #94A3B8; }
 
 .shell-topbar-divider {
   width: 1px;
@@ -205,24 +397,27 @@ body:has(.shell-root) {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #0B4FE0;
+  background: linear-gradient(135deg, #0B4FE0 0%, #7C3AED 100%);
   color: #ffffff;
   border: none;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
   font-family: inherit;
 }
 
 .shell-avatar:hover {
-  opacity: 0.9;
+  opacity: 0.88;
+  transform: scale(1.05);
 }
 
-/* ── Content Area ─────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   CONTENT AREA
+   ═══════════════════════════════════════════════════════════ */
 .shell-content {
   flex: 1;
   display: flex;

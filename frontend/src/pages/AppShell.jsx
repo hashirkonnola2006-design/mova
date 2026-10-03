@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate, Outlet } from 'react-router-dom';
 import {
   Home, Scan, Volume2, MessageCircle, Shield,
-  BookOpen, Accessibility, Settings, ChevronLeft, ChevronRight,
+  BookOpen, Accessibility, Settings,
   Globe, ChevronDown, LogOut
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -22,28 +22,21 @@ const NAV_ITEMS = [
 export default function AppShell() {
   const { session, logOut } = useAuth();
   const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false);
   const [selectedLang, setSelectedLang] = useState('English (US)');
 
   const userInitial = session?.avatar || session?.name?.charAt(0).toUpperCase() || 'H';
+  const userName = session?.name || 'User';
 
   return (
-    <div className={`shell-root ${collapsed ? 'shell-collapsed' : ''}`}>
+    <div className="shell-root">
       {/* ── Sidebar ─────────────────────────────────────── */}
-      <aside className="shell-sidebar">
+      <aside className="shell-sidebar" aria-label="Sidebar navigation">
         {/* Brand */}
-        <div className="shell-brand">
-          <div className="shell-brand-left" onClick={() => navigate('/dashboard')}>
+        <div className="shell-brand" onClick={() => navigate('/dashboard')}>
+          <div className="shell-brand-icon-wrap">
             <img src="/mova-icon.png" alt="MOVA" className="shell-brand-icon" />
-            {!collapsed && <span className="shell-brand-name">MOVA</span>}
           </div>
-          <button
-            className="shell-collapse-btn"
-            onClick={() => setCollapsed(v => !v)}
-            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          >
-            {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
-          </button>
+          <span className="shell-brand-name">MOVA</span>
         </div>
 
         {/* Nav Links */}
@@ -56,24 +49,33 @@ export default function AppShell() {
                 `shell-nav-item ${isActive ? 'shell-nav-item--active' : ''}`
               }
               end={item.to === '/dashboard'}
-              title={collapsed ? item.label : undefined}
             >
-              <item.icon size={19} className="shell-nav-icon" />
-              {!collapsed && <span className="shell-nav-label">{item.label}</span>}
+              <span className="shell-nav-icon-wrap">
+                <item.icon size={18} className="shell-nav-icon" />
+              </span>
+              <span className="shell-nav-label">{item.label}</span>
+              <span className="shell-nav-tooltip">{item.label}</span>
             </NavLink>
           ))}
         </nav>
 
-        {/* Sidebar Footer */}
+        {/* Sidebar Footer — user card */}
         <div className="shell-sidebar-footer">
-          {!collapsed ? (
-            <div className="shell-sidebar-info">
-              <div className="shell-footer-title">MOVA Accessibility</div>
-              <div className="shell-footer-desc">Bridging communication for a more inclusive world.</div>
+          <div className="shell-user-card">
+            <div className="shell-user-avatar">{userInitial}</div>
+            <div className="shell-user-info">
+              <div className="shell-user-name">{userName}</div>
+              <div className="shell-user-role">Member</div>
             </div>
-          ) : (
-            <div className="shell-footer-dot" title="MOVA Accessibility" />
-          )}
+            <button
+              className="shell-logout-btn"
+              onClick={logOut}
+              title="Sign out"
+              aria-label="Sign out"
+            >
+              <LogOut size={14} />
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -85,9 +87,9 @@ export default function AppShell() {
           <div className="shell-topbar-right">
             {/* Language Selector */}
             <div className="shell-lang-pill">
-              <Globe size={16} className="shell-globe-icon" />
+              <Globe size={15} className="shell-globe-icon" />
               <span className="shell-lang-text">{selectedLang}</span>
-              <ChevronDown size={14} className="shell-chevron-icon" />
+              <ChevronDown size={13} className="shell-chevron-icon" />
             </div>
 
             {/* Subtle Divider */}
