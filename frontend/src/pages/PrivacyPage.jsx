@@ -94,7 +94,10 @@ export default function PrivacyPage() {
       {/* Questions & Contact */}
       <div className="pr-contact-box">
         <h3>Questions regarding security or data flow?</h3>
-        <p>We are dedicated to total transparency in open source and assistive research.</p>
+        <p>
+          We are dedicated to total transparency in open source and assistive research. You can email us at{' '}
+          <a href={`mailto:${SITE_INFO.contactEmail}`}>{SITE_INFO.contactEmail}</a> or use our feedback form.
+        </p>
         <Link to="/contact" className="pr-contact-link">Contact our team →</Link>
       </div>
 
