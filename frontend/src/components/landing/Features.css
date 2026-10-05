@@ -6,8 +6,160 @@
 .lp-features-hover-wrap {
   width: 100%;
   max-width: 1280px;
-  margin: 1.5rem auto 0;
+  margin: 2rem auto 0;
   text-align: left;
+}
+
+.lp-features-hover-wrap .grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  position: relative !important;
+  z-index: 10 !important;
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+  max-width: 80rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media (max-width: 1024px) {
+  .lp-features-hover-wrap .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .lp-features-hover-wrap .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.lp-features-hover-wrap .group\/feature {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+  border-style: solid !important;
+  border-color: #E2E8F0 !important;
+  border-width: 0 !important;
+  border-right-width: 1px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@media (min-width: 1024px) {
+  .lp-features-hover-wrap .group\/feature.lg\:border-l {
+    border-left-width: 1px !important;
+  }
+  .lp-features-hover-wrap .group\/feature.lg\:border-b {
+    border-bottom-width: 1px !important;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 641px) {
+  .lp-features-hover-wrap .group\/feature:nth-child(odd) {
+    border-left-width: 1px !important;
+  }
+  .lp-features-hover-wrap .group\/feature {
+    border-bottom-width: 1px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .lp-features-hover-wrap .group\/feature {
+    border-left-width: 1px !important;
+    border-bottom-width: 1px !important;
+  }
+}
+
+/* Gradient background overlay on hover */
+.lp-features-hover-wrap .group\/feature .bg-gradient-to-t {
+  background-image: linear-gradient(to top, rgba(238, 244, 255, 0.75), transparent) !important;
+}
+
+.lp-features-hover-wrap .group\/feature .bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, rgba(238, 244, 255, 0.75), transparent) !important;
+}
+
+.lp-features-hover-wrap .group\/feature:hover > div:first-child {
+  opacity: 1 !important;
+}
+
+/* Icon container */
+.lp-features-hover-wrap .group\/feature .mb-4 {
+  margin-bottom: 1rem !important;
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+  color: var(--lp-blue, #1558E8) !important;
+  position: relative !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.lp-features-hover-wrap .group\/feature .mb-4 svg {
+  width: 28px !important;
+  height: 28px !important;
+  stroke-width: 2 !important;
+}
+
+/* Title container and blue accent indicator bar */
+.lp-features-hover-wrap .group\/feature .text-lg {
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif) !important;
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  position: relative !important;
+  z-index: 10 !important;
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* Left Accent Indicator Bar */
+.lp-features-hover-wrap .group\/feature .absolute.left-0 {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 1.5rem !important;
+  width: 3.5px !important;
+  border-top-right-radius: 9999px !important;
+  border-bottom-right-radius: 9999px !important;
+  background-color: #CBD5E1 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.lp-features-hover-wrap .group\/feature:hover .absolute.left-0 {
+  height: 2rem !important;
+  background-color: var(--lp-blue, #1558E8) !important;
+  box-shadow: 0 0 10px rgba(21, 88, 232, 0.45) !important;
+}
+
+/* Title text transition on hover */
+.lp-features-hover-wrap .group\/feature .text-lg span {
+  display: inline-block !important;
+  color: #0B1020 !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease !important;
+}
+
+.lp-features-hover-wrap .group\/feature:hover .text-lg span {
+  transform: translateX(0.5rem) !important;
+  color: var(--lp-blue, #1558E8) !important;
+}
+
+/* Description paragraph */
+.lp-features-hover-wrap .group\/feature p {
+  font-family: var(--font-body, "Inter", "Noto Sans Malayalam", system-ui, sans-serif) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  color: #4A5468 !important;
+  max-width: 20rem !important;
+  position: relative !important;
+  z-index: 10 !important;
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+  margin: 0 !important;
 }
 
 .lp-features-grid {

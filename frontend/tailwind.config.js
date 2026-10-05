@@ -3,6 +3,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/components/ui/feature-section-with-hover-effects.tsx",
   ],
   darkMode: "class",
   theme: {
