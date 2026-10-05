@@ -1,0 +1,295 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   FEATURES SECTION STYLES
+   Minimal, accessible, responsive card grid adhering to MOVA design system.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.lp-features-hover-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 1.5rem auto 0;
+  text-align: left;
+}
+
+.lp-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1140px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.lp-feature-grid-item {
+  display: flex;
+}
+
+.lp-feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1.6rem 1.6rem 1.5rem;
+  background: #FFFFFF;
+  border: 1px solid var(--lp-border, #E8EDF5);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(11, 16, 32, 0.03);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+  overflow: hidden;
+}
+
+/* Staggered entrance animation triggered when section is in view */
+.lp-feature-card--in {
+  animation: featureCardFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 45ms);
+}
+
+@keyframes featureCardFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Lift */
+.lp-feature-card--live:hover {
+  transform: translateY(-4px);
+  border-color: #BFDBFE;
+  box-shadow: 0 16px 36px rgba(21, 88, 232, 0.08);
+}
+
+/* Featured Core Card Highlight */
+.lp-feature-card--featured {
+  border-color: #D6E4FF;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%);
+}
+
+.lp-feature-card--featured:hover {
+  border-color: var(--lp-blue, #1558E8);
+  box-shadow: 0 20px 42px rgba(21, 88, 232, 0.12);
+}
+
+/* Coming Soon Card: Dashed / Softer Border & Muted Tone */
+.lp-feature-card--soon {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px dashed #CBD5E1;
+  box-shadow: 0 2px 8px rgba(11, 16, 32, 0.02);
+}
+
+.lp-feature-card--soon:hover {
+  transform: translateY(-2px);
+  border-color: #94A3B8;
+  background: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(11, 16, 32, 0.05);
+}
+
+/* Interactive Link Card Focus & Hover */
+.lp-feature-card--interactive {
+  cursor: pointer;
+}
+
+.lp-feature-card--interactive:focus-visible {
+  outline: 2px solid var(--lp-blue, #1558E8);
+  outline-offset: 3px;
+}
+
+/* Card Header: Icon + Badges */
+.lp-feature-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.lp-feature-card-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--lp-blue-soft, #EAF1FF);
+  color: var(--lp-blue, #1558E8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.lp-feature-card--live:hover .lp-feature-card-icon-wrap {
+  transform: scale(1.05);
+}
+
+.lp-feature-card-icon-wrap--soon {
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+/* Badges */
+.lp-feature-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lp-feature-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  line-height: 1.2;
+}
+
+.lp-feature-badge--core {
+  background: var(--lp-blue-soft, #EAF1FF);
+  color: var(--lp-blue, #1558E8);
+  border: 1px solid #BFDBFE;
+}
+
+.lp-feature-badge--soon {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+}
+
+.lp-feature-card-link-icon {
+  color: var(--lp-slate, #4A5468);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #F8FAFC;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.lp-feature-card--interactive:hover .lp-feature-card-link-icon {
+  transform: translate(2px, -2px);
+  color: var(--lp-blue, #1558E8);
+  background: var(--lp-blue-soft, #EAF1FF);
+}
+
+/* Card Body */
+.lp-feature-card-body {
+  position: relative;
+  z-index: 2;
+}
+
+.lp-feature-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--lp-navy, #0B1020);
+  line-height: 1.3;
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.015em;
+}
+
+.lp-feature-card-desc {
+  font-size: 0.92rem;
+  font-weight: 450;
+  color: var(--lp-slate, #4A5468);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Micro Hand Landmark Illustration for Featured Card */
+.lp-feature-landmark-wrap {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1rem;
+  width: 58px;
+  height: 58px;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.lp-feature-card--featured:hover .lp-feature-landmark-wrap {
+  opacity: 0.85;
+  transform: scale(1.06);
+}
+
+.lp-feature-landmark-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.lp-landmark-pulse {
+  animation: landmarkGlow 2.4s ease-in-out infinite alternate;
+}
+
+.lp-landmark-pulse--main {
+  animation: landmarkGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes landmarkGlow {
+  0% {
+    r: 2.2;
+    fill: #1558E8;
+    opacity: 0.6;
+  }
+  100% {
+    r: 3.5;
+    fill: #3B82F6;
+    opacity: 1;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+   Mobile: 1 column
+   Tablet: 2 columns
+   Desktop: 3 columns
+   ────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .lp-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .lp-features-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .lp-feature-card {
+    padding: 1.35rem 1.35rem 1.25rem;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   ACCESSIBILITY: Respect Reduced Motion
+   ────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .lp-feature-card--in {
+    animation: none !important;
+  }
+
+  .lp-feature-card,
+  .lp-feature-card-icon-wrap,
+  .lp-feature-card-link-icon,
+  .lp-feature-landmark-wrap {
+    transition: none !important;
+  }
+
+  .lp-feature-card:hover {
+    transform: none !important;
+  }
+
+  .lp-landmark-pulse {
+    animation: none !important;
+  }
+}

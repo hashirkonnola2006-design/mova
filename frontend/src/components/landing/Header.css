@@ -110,6 +110,7 @@
 }
 
 .lp-header-link {
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
   font-size: 0.94rem;
   font-weight: 500;
   color: var(--lp-slate, #4A5468);
@@ -139,14 +140,6 @@
   outline-offset: 2px;
 }
 
-.lp-header-emergency-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--lp-emergency, #D92D20);
-  border-radius: 50%;
-  display: inline-block;
-}
-
 /* ──────────────────────────────────────────────────────────────────────────
    DESKTOP ACTIONS (Log in + Try MOVA)
    ────────────────────────────────────────────────────────────────────────── */
@@ -157,6 +150,7 @@
 }
 
 .lp-header-login-link {
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
   font-size: 0.94rem;
   font-weight: 600;
   color: var(--lp-navy, #0B1020);
@@ -192,6 +186,161 @@
   background: var(--lp-blue-hover, #1048C6) !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 6px 18px rgba(21, 88, 232, 0.35) !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   DESKTOP TRY MOVA + MENU BUTTON GROUP & DROPDOWN CARD
+   ────────────────────────────────────────────────────────────────────────── */
+.lp-header-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.lp-header-menu-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.lp-header-menu-btn {
+  height: 42px;
+  width: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid var(--lp-border, #E8EDF5);
+  border-radius: 12px;
+  color: var(--lp-navy, #0B1020);
+  box-shadow: 0 2px 6px rgba(11, 16, 32, 0.04);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  outline: none;
+}
+
+.lp-header-menu-btn:hover {
+  color: var(--lp-blue, #1558E8);
+  border-color: #BFDBFE;
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(21, 88, 232, 0.12);
+  transform: translateY(-1px);
+}
+
+.lp-header-menu-btn--open {
+  color: var(--lp-blue, #1558E8);
+  border-color: #BFDBFE;
+  background: var(--lp-blue-soft, #EAF1FF);
+  box-shadow: 0 0 0 3px rgba(21, 88, 232, 0.12);
+}
+
+.lp-header-menu-btn:focus-visible {
+  outline: 2px solid var(--lp-blue, #1558E8);
+  outline-offset: 2px;
+}
+
+.lp-menu-icon {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.lp-menu-icon--close {
+  animation: lpIconRotateIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lp-menu-icon--open {
+  animation: lpIconFadeIn 0.18s ease;
+}
+
+@keyframes lpIconRotateIn {
+  from {
+    transform: rotate(-90deg) scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes lpIconFadeIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Dropdown Menu Card */
+.lp-nav-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 230px;
+  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--lp-border, #E8EDF5);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(11, 16, 32, 0.1), 0 4px 12px rgba(11, 16, 32, 0.04);
+  padding: 8px;
+  z-index: 1000;
+  transform-origin: top right;
+  opacity: 0;
+  transform: scale(0.95) translateY(-6px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 180ms;
+}
+
+.lp-nav-dropdown--open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.lp-nav-dropdown-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lp-nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.65rem 0.95rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--lp-slate, #4A5468);
+  text-decoration: none;
+  transition: all 0.15s ease;
+  outline: none;
+}
+
+.lp-nav-dropdown-item:hover {
+  color: var(--lp-navy, #0B1020);
+  background: var(--lp-blue-subtle, #F0F5FF);
+}
+
+.lp-nav-dropdown-item:focus-visible {
+  outline: 2px solid var(--lp-blue, #1558E8);
+  outline-offset: -1px;
+  background: var(--lp-blue-subtle, #F0F5FF);
+  color: var(--lp-navy, #0B1020);
+}
+
+.lp-nav-dropdown-item--active {
+  color: var(--lp-blue, #1558E8) !important;
+  background: var(--lp-blue-soft, #EAF1FF) !important;
+  font-weight: 600;
 }
 
 /* Mobile Toggle Button */
@@ -316,15 +465,51 @@
     color: var(--lp-blue, #1558E8);
   }
 
-  .lp-mobile-emergency-badge {
+  /* Mobile "More" Subnav */
+  .lp-mobile-menu-divider {
+    height: 1px;
+    background: var(--lp-border, #E8EDF5);
+    margin: 1.25rem 0 0.85rem;
+  }
+
+  .lp-mobile-group-label {
     font-size: 0.75rem;
     font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--lp-emergency, #D92D20);
-    background: var(--lp-emergency-bg, #FEF3F2);
-    border: 1px solid var(--lp-emergency-border, #FECDCA);
-    padding: 0.25rem 0.65rem;
-    border-radius: 9999px;
+    color: var(--lp-text-muted, #64748B);
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .lp-mobile-subnav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .lp-mobile-subnav-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--lp-navy, #0B1020);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .lp-mobile-subnav-link:hover {
+    background: #F8FAFC;
+    color: var(--lp-blue, #1558E8);
+  }
+
+  .lp-mobile-subnav-link--active {
+    background: var(--lp-blue-soft, #EAF1FF);
+    color: var(--lp-blue, #1558E8);
+    font-weight: 600;
   }
 
   /* Pinned Footer in Mobile Menu */
@@ -373,7 +558,10 @@
   .lp-header,
   .lp-mobile-menu-overlay,
   .lp-skip-to-content,
-  .lp-header-link {
+  .lp-header-link,
+  .lp-nav-dropdown,
+  .lp-header-menu-btn,
+  .lp-menu-icon {
     transition: none !important;
     animation: none !important;
   }

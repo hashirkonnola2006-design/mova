@@ -28,20 +28,15 @@ import SettingsPage from './pages/SettingsPage.jsx';
 // Legacy / collector (still accessible)
 import CollectorPage from './components/CollectorPage.jsx';
 
-/** Guards authenticated routes — redirects to /login if not signed in */
+/** Allows guest access to app routes without blocking */
 function RequireAuth({ children }) {
-  const { isAuthenticated } = useAuth();
-  const location = useLocation();
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
   return children;
 }
 
-/** Prevents logged-in users from revisiting the auth page */
+/** Prevents logged-in users with email accounts from revisiting the auth page */
 function RequireGuest({ children }) {
-  const { isAuthenticated } = useAuth();
-  if (isAuthenticated) {
+  const { session } = useAuth();
+  if (session && session.email) {
     return <Navigate to="/dashboard" replace />;
   }
   return children;

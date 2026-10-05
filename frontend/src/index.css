@@ -1,4 +1,22 @@
+@import '@fontsource-variable/outfit/index.css';
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/outfit-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@tailwind components;
+@tailwind utilities;
+
 :root {
+  --font-heading: "Outfit Variable", "Outfit", "Noto Sans Malayalam", system-ui, sans-serif;
+  --font-body: "Inter", "Noto Sans Malayalam", system-ui, sans-serif;
+  --font-ui: var(--font-body);
+  --font-ml: 'Noto Sans Malayalam', var(--font-body);
   --bg-primary: #0b0f19;
   --bg-secondary: #131b2e;
   --bg-card: rgba(23, 32, 54, 0.7);
@@ -12,8 +30,6 @@
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-ml: 'Noto Sans Malayalam', 'Inter', sans-serif;
 }
 
 * {
@@ -25,12 +41,49 @@
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-ui);
+  font-family: var(--font-body);
   min-height: 100vh;
   overflow-x: clip;
   background-image: 
     radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
     radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-heading,
+.lp-hero-title,
+.lp-headline,
+.lp-section-title,
+.lp-pill,
+.lp-badge,
+.lp-step-title,
+.lp-feature-card-title,
+.lp-header-link,
+.lp-header-login-link,
+.tm-name {
+  font-family: var(--font-heading);
+}
+
+h1, h2, .lp-hero-title, .lp-headline {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+button, .btn, .lp-btn-primary, .lp-btn-secondary, .lp-header-link, .lp-header-login-link {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: normal;
+}
+
+p, caption, small, .lp-hero-sub, .lp-feature-card-desc, .ft-tagline, .faq-answer, input, textarea, select {
+  font-family: var(--font-body);
 }
 
 body:has(.pl-root),

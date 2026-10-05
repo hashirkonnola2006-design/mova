@@ -212,7 +212,145 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 25%;
   display: block;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Step 2: Real-time Landmark & Viewfinder Overlay
+   ────────────────────────────────────────────────────────────────────────── */
+.hiw-landmarks-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Corner bracket viewfinder framing the hand */
+.hiw-viewfinder-frame {
+  position: absolute;
+  top: 38%;
+  left: 20%;
+  width: 44%;
+  height: 48%;
+  pointer-events: none;
+}
+
+.hiw-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid #38BDF8;
+}
+
+.hiw-corner--tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 4px;
+}
+
+.hiw-corner--tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 4px;
+}
+
+.hiw-corner--bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+  border-bottom-left-radius: 4px;
+}
+
+.hiw-corner--br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 4px;
+}
+
+/* Landmark SVG skeleton */
+.hiw-landmarks-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hiw-landmark-bone {
+  stroke: rgba(56, 189, 248, 0.85);
+  stroke-width: 0.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.6));
+}
+
+.hiw-landmark-dot {
+  fill: #FFFFFF;
+  stroke: #0284C7;
+  stroke-width: 0.6;
+  filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.9));
+}
+
+.hiw-landmark-dot--tip {
+  fill: #38BDF8;
+  stroke: #FFFFFF;
+  stroke-width: 0.5;
+}
+
+.hiw-landmark-dot--wrist {
+  fill: #0284C7;
+  stroke: #FFFFFF;
+  stroke-width: 0.5;
+}
+
+/* 21 LANDMARKS Status Pill */
+.hiw-landmarks-pill {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(11, 16, 32, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.hiw-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #38BDF8;
+  box-shadow: 0 0 8px #38BDF8;
+  animation: hiwPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes hiwPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
 }
 
 /* Step 3 Image Overlay Badge */

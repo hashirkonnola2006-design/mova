@@ -40,18 +40,6 @@ export const LANDING_ASSETS = [
     // 'Clean editorial photograph of a smartphone display in hand showing translated text in Malayalam script, warm ambient lighting, modern UI with sound wave speaker icon, subtle depth of field with a conversational partner in the soft background.'
   },
   {
-    id: 'emergency-phone',
-    webp: '/images/landing/emergency-mockup.webp',
-    png: '/images/landing/emergency-mockup.png',
-    altText: 'Phone held out displaying urgent medical emergency phrase in large red Malayalam script',
-    intendedWidth: 1400,
-    intendedHeight: 1000,
-    aspectRatio: '7/5',
-    status: 'final',
-    // Prompt for future reshoots:
-    // 'High quality candid photograph of a person holding out a smartphone displaying an urgent red medical assistance card with Malayalam text toward a doctor or service worker, warm realistic lighting, clean compositional depth, high key studio setting.'
-  },
-  {
     id: 'cta-hands-bg',
     webp: '/images/landing/cta-hands-bg.webp',
     png: '/images/landing/cta-hands-bg.png',

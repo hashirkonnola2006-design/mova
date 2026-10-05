@@ -1,0 +1,127 @@
+/* ==========================================================================
+   LogoMarquee Component Styles
+   Floating, infinitely scrolling marquee with gradient edge masks,
+   pause/slow on hover, original brand colors, and reduced-motion fallback.
+   ========================================================================== */
+
+.lm-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Faded left and right edge gradient masks */
+.lm-fade-left,
+.lm-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(40px, 8vw, 100px);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.lm-fade-left {
+  left: 0;
+  background: linear-gradient(to right, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.lm-fade-right {
+  right: 0;
+  background: linear-gradient(to left, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* Motion row containing marquee items */
+.lm-track {
+  display: flex;
+  align-items: center;
+  gap: var(--marquee-gap, 2.5rem);
+  width: max-content;
+  will-change: transform;
+}
+
+/* Individual Logo Item Card */
+.lm-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.15rem;
+  background: #FFFFFF;
+  border: 1px solid #E8EDF5;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(11, 16, 32, 0.04);
+  flex-shrink: 0;
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lm-item:hover {
+  transform: translateY(-2px);
+  border-color: #BFD8FF;
+  box-shadow: 0 6px 16px rgba(21, 88, 232, 0.1);
+}
+
+/* Logo icon image - strictly original brand colors, no grayscale or invert filters */
+.lm-logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .lm-logo-img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Technology label */
+.lm-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #0B1020;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+/* Text badge for non-logo items (e.g. AI4Bharat) */
+.lm-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1558E8;
+  background: #EAF1FF;
+  border: 1px solid #BFD8FF;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  height: 28px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .lm-badge {
+    height: 32px;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Static wrapped fallback for prefers-reduced-motion */
+.lm-static-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.5rem;
+}

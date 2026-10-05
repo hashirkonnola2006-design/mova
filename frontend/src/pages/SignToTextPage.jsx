@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Copy, Check, Trash2, Volume2, RefreshCw, Sparkles, Hand, Zap, ShieldCheck } from 'lucide-react';
 import WebcamView from '../components/WebcamView.jsx';
 import { generateSyntheticSequence } from '../utils/simulate.js';
+import { useAuth } from '../context/AuthContext.jsx';
+import { saveTranslation } from '../services/userData.js';
 import labelsMap from '../labels_ml.json';
 import './SignToTextPage.css';
 
@@ -31,6 +33,9 @@ const VOCABULARY = [
 ];
 
 export default function SignToTextPage() {
+  const { session } = useAuth();
+  const userId = session?.id || session?.email || null;
+
   const [connectionStatus, setConnectionStatus] = useState('connecting');
   const [currentPrediction, setCurrentPrediction] = useState({
     label: 'idle',
@@ -157,6 +162,12 @@ export default function SignToTextPage() {
     if (winsCountRef.current >= REQUIRED_CONSECUTIVE_WINS) {
       setDetectedWords(prev => [...prev, { label, ml }]);
       speak(ml || label);
+
+      // Persist real translation to user dashboard
+      const matched = VOCABULARY.find(v => v.key === label);
+      const en = matched ? matched.en : label;
+      saveTranslation(userId, { en, ml: ml || label, confidence });
+
       idleRequiredRef.current = true;
       latchSetAtRef.current = performance.now();
       setIdleRequired(true);
@@ -164,7 +175,7 @@ export default function SignToTextPage() {
       setConsecutiveWins(0);
       lastCandidateRef.current = null;
     }
-  }, [releaseIdle, speak]);
+  }, [releaseIdle, speak, userId]);
 
   // Connect WebSocket
   const connectWebSocket = useCallback(() => {

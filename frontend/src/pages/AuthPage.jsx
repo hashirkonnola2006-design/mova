@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { signUp, logIn } from '../utils/auth.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import NavMenuDropdown from '../components/NavMenuDropdown.jsx';
 import './AuthPage.css';
 
 // Google SVG icon
@@ -118,6 +119,7 @@ export default function AuthPage() {
             Log in
           </button>
           <Link to="/" className="auth-topbar-public">← Public Site</Link>
+          <NavMenuDropdown />
         </nav>
       </header>
 

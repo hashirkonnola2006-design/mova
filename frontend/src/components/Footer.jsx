@@ -59,6 +59,7 @@ export default function Footer() {
             <nav aria-label="Product navigation">
               <ul className="ft-links">
                 <li><a href="/#how-it-works" className="ft-link">How it works</a></li>
+                <li><a href="/#features" className="ft-link">Features</a></li>
                 <li><a href="/#faq" className="ft-link">FAQ</a></li>
                 <li><Link to="/supported-signs" className="ft-link">Supported signs</Link></li>
                 <li><Link to="/login" className="ft-link">Start translating</Link></li>
@@ -85,8 +86,7 @@ export default function Footer() {
         {/* ── Bottom row ──────────────────────────────── */}
         <div className="ft-bottom">
           <p className="ft-copyright">
-            © {year} MOVA.{' '}
-            <span>Built at {SITE_INFO.collegeName}.</span>
+            © {year} MOVA.
           </p>
           <p className="ft-disclaimer">
             MOVA is a communication aid. Not for emergency or medical use.

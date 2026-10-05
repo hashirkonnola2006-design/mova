@@ -1,0 +1,361 @@
+/* ═══════════════════════════════════════════════════════════
+   MiniCameraPanel.css — Live Mini Camera Panel for Dashboard
+   ═══════════════════════════════════════════════════════════ */
+
+.mini-cam-root {
+  width: 100%;
+  max-width: 380px;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(11, 16, 32, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top Bar ─────────────────────────────────────────────── */
+.mini-cam-topbar {
+  background: #0A0F2C;
+  color: #FFFFFF;
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mini-cam-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #F8FAFC;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-transform: uppercase;
+}
+
+.mini-cam-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: miniPulse 1.6s infinite;
+}
+
+@keyframes miniPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+.mini-cam-stop-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mini-cam-stop-btn:hover {
+  background: rgba(239, 68, 68, 0.85);
+  border-color: #EF4444;
+}
+
+/* ── 4:3 Viewfinder Area ─────────────────────────────────── */
+.mini-cam-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #F5F8FF;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Corner Viewfinder Brackets in Blue */
+.mini-corner-bracket {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: #1558E8;
+  border-style: solid;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.85;
+}
+
+.mini-corner-tl {
+  top: 12px;
+  left: 12px;
+  border-width: 2.5px 0 0 2.5px;
+  border-top-left-radius: 4px;
+}
+
+.mini-corner-tr {
+  top: 12px;
+  right: 12px;
+  border-width: 2.5px 2.5px 0 0;
+  border-top-right-radius: 4px;
+}
+
+.mini-corner-bl {
+  bottom: 12px;
+  left: 12px;
+  border-width: 0 0 2.5px 2.5px;
+  border-bottom-left-radius: 4px;
+}
+
+.mini-corner-br {
+  bottom: 12px;
+  right: 12px;
+  border-width: 0 2.5px 2.5px 0;
+  border-bottom-right-radius: 4px;
+}
+
+/* ── Idle State ──────────────────────────────────────────── */
+.mini-cam-idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+}
+
+.mini-cam-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #EAF1FF;
+  border: 1.5px solid #BFDBFE;
+  color: #1558E8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-cam-idle-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0A0F2C;
+  margin: 0;
+}
+
+.mini-cam-idle-desc {
+  font-size: 0.78rem;
+  color: #64748B;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 240px;
+}
+
+.mini-cam-start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #1558E8;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(21, 88, 232, 0.25);
+  transition: all 0.2s ease;
+  margin-top: 0.25rem;
+  font-family: inherit;
+}
+
+.mini-cam-start-btn:hover {
+  background: #1048C6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(21, 88, 232, 0.35);
+}
+
+.mini-cam-start-btn:focus-visible {
+  outline: 2px solid #1558E8;
+  outline-offset: 2px;
+}
+
+/* ── Error / Denied State ────────────────────────────────── */
+.mini-cam-denied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.25rem;
+  gap: 0.6rem;
+  background: #FFF1F2;
+  width: 100%;
+  height: 100%;
+}
+
+.mini-cam-denied-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #FFE4E6;
+  color: #E11D48;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-cam-denied-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #9F1239;
+  margin: 0;
+}
+
+.mini-cam-denied-desc {
+  font-size: 0.78rem;
+  color: #64748B;
+  margin: 0;
+  max-width: 250px;
+  line-height: 1.4;
+}
+
+.mini-cam-help-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1558E8;
+  text-decoration: underline;
+  margin-top: 0.2rem;
+}
+
+.mini-cam-retry-btn {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #0A0F2C;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mini-cam-retry-btn:hover {
+  background: #F8FAFC;
+}
+
+/* ── Active Video & Canvas Container ─────────────────────── */
+.mini-cam-active-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #000000;
+}
+
+.mini-cam-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirrored preview */
+  display: block;
+}
+
+.mini-cam-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ── Output Bar Below Preview ────────────────────────────── */
+.mini-cam-results {
+  background: #FFFFFF;
+  padding: 0.85rem 1.15rem;
+  border-top: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mini-cam-res-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-cam-res-sub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #94A3B8;
+  text-transform: uppercase;
+}
+
+.mini-cam-res-ml {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0A0F2C;
+  line-height: 1.2;
+  font-family: var(--font-ml, 'Noto Sans Malayalam', sans-serif);
+}
+
+.mini-cam-res-en {
+  font-size: 0.8rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.mini-cam-speak-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #EEF4FF;
+  border: 1px solid #BFDBFE;
+  color: #1558E8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mini-cam-speak-btn:hover {
+  background: #1558E8;
+  color: #FFFFFF;
+}
+
+/* ── Footer Link ─────────────────────────────────────────── */
+.mini-cam-footer {
+  padding: 0.65rem 1rem;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  text-align: center;
+}
+
+.mini-cam-full-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1558E8;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+
+.mini-cam-full-link:hover {
+  text-decoration: underline;
+  color: #1048C6;
+}

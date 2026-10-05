@@ -5,7 +5,7 @@
 .ft-root {
   background: #F5F8FF;
   border-top: 1px solid #E8EDF5;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -90,6 +90,7 @@
 
 /* ── Nav columns ─────────────────────────────────────────── */
 .ft-col-heading {
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
   font-size: 0.78rem;
   font-weight: 700;
   color: #0B1020;

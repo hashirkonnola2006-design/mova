@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Home, HelpCircle, Mail, Search } from 'lucide-react';
 import MovaLogo from '../components/MovaLogo.jsx';
+import NavMenuDropdown from '../components/NavMenuDropdown.jsx';
 import Footer from '../components/Footer.jsx';
 
 export default function NotFoundPage() {
@@ -18,6 +19,29 @@ export default function NotFoundPage() {
         <Link to="/" aria-label="MOVA home">
           <MovaLogo height={28} showWordmark={true} />
         </Link>
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <Link
+            to="/login"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#1558E8',
+              color: '#ffffff',
+              padding: '0.55rem 1.25rem',
+              borderRadius: '12px',
+              fontWeight: 600,
+              fontSize: '0.9rem',
+              textDecoration: 'none',
+              boxShadow: '0 2px 8px rgba(21, 88, 232, 0.2)',
+              height: '40px',
+              fontFamily: 'var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif)',
+            }}
+          >
+            Try MOVA
+          </Link>
+          <NavMenuDropdown includeMainLinksOnMobile={true} />
+        </div>
       </header>
 
       {/* Main Hero Card */}
@@ -69,7 +93,7 @@ export default function NotFoundPage() {
           min-height: 100vh;
           background: #FFFFFF;
           color: #0F172A;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-family: var(--font-body, "Inter", "Noto Sans Malayalam", system-ui, sans-serif);
         }
 
         .nf-header {
@@ -97,6 +121,7 @@ export default function NotFoundPage() {
 
         .nf-badge {
           display: inline-block;
+          font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
           font-size: 0.85rem;
           font-weight: 700;
           color: #1558E8;
@@ -108,15 +133,17 @@ export default function NotFoundPage() {
         }
 
         .nf-title {
+          font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
           font-size: clamp(2.2rem, 5vw, 3rem);
-          font-weight: 800;
+          font-weight: 700;
           color: #0F172A;
           margin: 0 0 1rem;
-          letter-spacing: -0.035em;
-          line-height: 1.15;
+          letter-spacing: -0.02em;
+          line-height: 1.1;
         }
 
         .nf-body {
+          font-family: var(--font-body, "Inter", "Noto Sans Malayalam", system-ui, sans-serif);
           font-size: 1.05rem;
           color: #64748B;
           line-height: 1.6;
@@ -136,6 +163,7 @@ export default function NotFoundPage() {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
+          font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
           background: #1558E8;
           color: #FFFFFF;
           border: none;
@@ -157,6 +185,7 @@ export default function NotFoundPage() {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
+          font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
           background: #FFFFFF;
           color: #334155;
           border: 1.5px solid #CBD5E1;

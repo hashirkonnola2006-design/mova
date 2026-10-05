@@ -1,37 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Volume2 } from 'lucide-react';
 import { HOW_IT_WORKS_STEPS } from '../../data/howItWorks.js';
 import './HowItWorks.css';
-
-// Reusable speech synthesis helper for Step 3
-const speakPhrase = (text, fallbackText, lang = 'ml-IN', onToast) => {
-  if (!('speechSynthesis' in window)) {
-    if (onToast) onToast('Speech audio is not supported in this browser.');
-    return;
-  }
-  window.speechSynthesis.cancel();
-
-  const voices = window.speechSynthesis.getVoices();
-  const mlVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ml'));
-
-  let phraseToSpeak = text;
-  let targetLang = lang;
-
-  if (mlVoice) {
-    targetLang = 'ml-IN';
-  } else {
-    phraseToSpeak = fallbackText || text;
-    targetLang = 'en-US';
-    if (onToast) onToast('No Malayalam voice on this device');
-  }
-
-  const utterance = new SpeechSynthesisUtterance(phraseToSpeak);
-  utterance.lang = targetLang;
-  if (mlVoice) utterance.voice = mlVoice;
-  utterance.rate = 0.95;
-
-  window.speechSynthesis.speak(utterance);
-};
 
 export default function HowItWorks({ onToast }) {
   const containerRef = useRef(null);
@@ -42,9 +11,6 @@ export default function HowItWorks({ onToast }) {
 
   // Line fill progress for steps [0..1, 0..1, 0..1]
   const [lineProgress, setLineProgress] = useState([0, 0, 0]);
-
-  // Audio speaking state for Step 3
-  const [speaking, setSpeaking] = useState(false);
 
   // High-performance, frame-accurate scroll tracker for sticky pinned steps
   useEffect(() => {
@@ -120,12 +86,6 @@ export default function HowItWorks({ onToast }) {
     });
   }, []);
 
-  const handleStepAudio = (e) => {
-    e.stopPropagation();
-    setSpeaking(true);
-    speakPhrase('നന്ദി', 'Thank you', 'ml-IN', onToast);
-    setTimeout(() => setSpeaking(false), 1400);
-  };
 
   return (
     <section id="how-it-works" className="hiw-root" ref={containerRef}>
@@ -178,21 +138,7 @@ export default function HowItWorks({ onToast }) {
                       <h3 className="hiw-step-title">{step.title}</h3>
                       <p className="hiw-step-desc">{step.description}</p>
 
-                      {/* Step 3 Speaker Audio Button */}
-                      {idx === 2 && (
-                        <div className="hiw-audio-btn-wrap">
-                          <button
-                            type="button"
-                            className={`hiw-speaker-btn ${speaking ? 'hiw-speaker-btn--active' : ''}`}
-                            onClick={handleStepAudio}
-                            aria-label="Listen to Malayalam pronunciation of Thank You"
-                            title="Click to speak: നന്ദി"
-                          >
-                            <Volume2 size={18} className={speaking ? 'lp-icon-pulse' : ''} />
-                            <span>Hear "നന്ദി"</span>
-                          </button>
-                        </div>
-                      )}
+
                     </div>
                   </button>
                 );
@@ -216,7 +162,7 @@ export default function HowItWorks({ onToast }) {
                       <picture>
                         <source srcSet={step.image.webp} type="image/webp" />
                         <img
-                          src={step.image.png}
+                          src={step.image.fallback || step.image.png}
                           alt={step.image.alt}
                           className="hiw-img"
                           width={step.image.width}
@@ -226,18 +172,72 @@ export default function HowItWorks({ onToast }) {
                         />
                       </picture>
 
-                      {/* Interactive speaker overlay badge on Step 3 */}
-                      {idx === 2 && (
-                        <button
-                          type="button"
-                          className={`hiw-img-audio-overlay ${speaking ? 'hiw-img-audio-overlay--active' : ''}`}
-                          onClick={handleStepAudio}
-                          aria-label="Listen to Malayalam pronunciation"
-                        >
-                          <Volume2 size={20} className={speaking ? 'lp-icon-pulse' : ''} />
-                          <span>Speak aloud</span>
-                        </button>
+                      {/* Step 2 Real-Time Landmarks & Viewfinder Overlay */}
+                      {idx === 1 && (
+                        <div className="hiw-landmarks-overlay" aria-hidden="true">
+                          {/* Corner bracket viewfinder */}
+                          <div className="hiw-viewfinder-frame">
+                            <span className="hiw-corner hiw-corner--tl" />
+                            <span className="hiw-corner hiw-corner--tr" />
+                            <span className="hiw-corner hiw-corner--bl" />
+                            <span className="hiw-corner hiw-corner--br" />
+                          </div>
+
+                          {/* 21 MediaPipe Landmarks SVG */}
+                          <svg className="hiw-landmarks-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            {/* Palm connections */}
+                            <path d="M 40,73 L 42,66 L 44,61 L 43,62 L 40,64 L 40,73 Z" className="hiw-landmark-bone" />
+                            {/* Thumb (0->1->2->3->4) */}
+                            <polyline points="40,73 47,70 51,64 52,59 51,57" className="hiw-landmark-bone" />
+                            {/* Index finger forming the O loop with thumb (0->5->6->7->8) */}
+                            <polyline points="42,66 45,59 47,56 49,56 50,57" className="hiw-landmark-bone" />
+                            {/* Middle finger upright (0->9->10->11->12) */}
+                            <polyline points="44,61 41,53 39,47 38,44" className="hiw-landmark-bone" />
+                            {/* Ring finger upright (0->13->14->15->16) */}
+                            <polyline points="43,62 36,54 34,49 33,46" className="hiw-landmark-bone" />
+                            {/* Pinky finger upright (0->17->18->19->20) */}
+                            <polyline points="40,64 32,58 29,54 28,52" className="hiw-landmark-bone" />
+
+                            {/* 21 Landmark Joint Points */}
+                            {/* Wrist */}
+                            <circle cx="40" cy="73" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--wrist" />
+                            {/* Thumb */}
+                            <circle cx="47" cy="70" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="51" cy="64" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="52" cy="59" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="51" cy="57" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            {/* Index */}
+                            <circle cx="42" cy="66" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="45" cy="59" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="47" cy="56" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="49" cy="56" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="50" cy="57" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            {/* Middle */}
+                            <circle cx="44" cy="61" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="41" cy="53" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="39" cy="47" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="38" cy="44" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            {/* Ring */}
+                            <circle cx="43" cy="62" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="36" cy="54" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="34" cy="49" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="33" cy="46" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            {/* Pinky */}
+                            <circle cx="40" cy="64" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="32" cy="58" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="29" cy="54" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="28" cy="52" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                          </svg>
+
+                          {/* Tracking status badge */}
+                          <div className="hiw-landmarks-pill">
+                            <span className="hiw-pulse-dot" />
+                            21 LANDMARKS · 30 FPS · CLIENT-SIDE
+                          </div>
+                        </div>
                       )}
+
+
                     </div>
                   );
                 })}
@@ -251,12 +251,12 @@ export default function HowItWorks({ onToast }) {
       <div className="hiw-mobile-stacked">
         {HOW_IT_WORKS_STEPS.map((step, idx) => (
           <div key={step.number} className="hiw-mobile-card">
-            {/* Image on top (full width, stable 0.92 aspect ratio) */}
+            {/* Image on top */}
             <div className="hiw-mobile-img-box">
               <picture>
                 <source srcSet={step.image.webp} type="image/webp" />
                 <img
-                  src={step.image.png}
+                  src={step.image.fallback || step.image.png}
                   alt={step.image.alt}
                   className="hiw-img"
                   width={step.image.width}
@@ -265,6 +265,52 @@ export default function HowItWorks({ onToast }) {
                   decoding="async"
                 />
               </picture>
+
+              {/* Step 2 Mobile Overlay */}
+              {idx === 1 && (
+                <div className="hiw-landmarks-overlay" aria-hidden="true">
+                  <div className="hiw-viewfinder-frame">
+                    <span className="hiw-corner hiw-corner--tl" />
+                    <span className="hiw-corner hiw-corner--tr" />
+                    <span className="hiw-corner hiw-corner--bl" />
+                    <span className="hiw-corner hiw-corner--br" />
+                  </div>
+                  <svg className="hiw-landmarks-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path d="M 40,73 L 42,66 L 44,61 L 43,62 L 40,64 L 40,73 Z" className="hiw-landmark-bone" />
+                    <polyline points="40,73 47,70 51,64 52,59 51,57" className="hiw-landmark-bone" />
+                    <polyline points="42,66 45,59 47,56 49,56 50,57" className="hiw-landmark-bone" />
+                    <polyline points="44,61 41,53 39,47 38,44" className="hiw-landmark-bone" />
+                    <polyline points="43,62 36,54 34,49 33,46" className="hiw-landmark-bone" />
+                    <polyline points="40,64 32,58 29,54 28,52" className="hiw-landmark-bone" />
+                    <circle cx="40" cy="73" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--wrist" />
+                    <circle cx="47" cy="70" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="51" cy="64" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="52" cy="59" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="51" cy="57" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <circle cx="42" cy="66" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="45" cy="59" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="47" cy="56" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="49" cy="56" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="50" cy="57" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <circle cx="44" cy="61" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="41" cy="53" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="39" cy="47" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="38" cy="44" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <circle cx="43" cy="62" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="36" cy="54" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="34" cy="49" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="33" cy="46" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <circle cx="40" cy="64" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="32" cy="58" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="29" cy="54" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="28" cy="52" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                  </svg>
+                  <div className="hiw-landmarks-pill">
+                    <span className="hiw-pulse-dot" />
+                    21 LANDMARKS · 30 FPS · CLIENT-SIDE
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Step metadata below */}
@@ -276,17 +322,7 @@ export default function HowItWorks({ onToast }) {
               <h3 className="hiw-step-title">{step.title}</h3>
               <p className="hiw-step-desc">{step.description}</p>
 
-              {idx === 2 && (
-                <button
-                  type="button"
-                  className={`hiw-speaker-btn ${speaking ? 'hiw-speaker-btn--active' : ''}`}
-                  onClick={handleStepAudio}
-                  aria-label="Listen to Malayalam pronunciation of Thank You"
-                >
-                  <Volume2 size={18} className={speaking ? 'lp-icon-pulse' : ''} />
-                  <span>Hear "നന്ദി"</span>
-                </button>
-              )}
+
             </div>
           </div>
         ))}

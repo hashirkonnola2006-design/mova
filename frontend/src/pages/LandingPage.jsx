@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   Menu, X, Volume2, ShieldCheck, Lock, Globe,
-  ChevronDown, AlertCircle, Info, Stethoscope, ShieldAlert,
-  MapPin, Droplets
+  ChevronDown, Info, Video, Sparkles
 } from 'lucide-react';
 import MovaLogo from '../components/MovaLogo.jsx';
 import StartButton from '../components/StartButton.jsx';
@@ -11,52 +10,19 @@ import Header from '../components/landing/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import AccessibilityPanel from '../components/AccessibilityPanel.jsx';
 import HowItWorks from '../components/landing/HowItWorks.jsx';
+import Features from '../components/landing/Features.jsx';
 import InquiryForm from '../components/InquiryForm.jsx';
-import { EMERGENCY_PHRASES } from '../data/emergencyPhrases.js';
 import { FAQ_ITEMS } from '../data/faq.js';
 import { LANDING_ASSETS } from '../data/landingAssets.js';
 import './LandingPage.css';
 
-const FEATURES = [
-  { id: 'sign-to-text', title: 'Sign to Text', subtitle: 'Real-time sign detection', icon: Stethoscope, to: '/app/sign-to-text' },
+const HERO_FEATURES = [
+  { id: 'sign-to-text', title: 'Sign to Text', subtitle: 'Real-time sign detection', icon: Video, to: '/app/sign-to-text' },
   { id: 'text-to-speech', title: 'Text to Speech', subtitle: 'Speech in many languages', icon: Volume2, to: '/app/text-to-speech' },
   { id: 'live-convo', title: 'Live Conversation', subtitle: 'Two-way conversation', icon: Globe, to: '/app/conversation' },
-  { id: 'emergency', title: 'Emergency Support', subtitle: 'Help when it matters', icon: ShieldAlert, to: '#emergency' },
+  { id: 'features', title: 'Features', subtitle: 'Explore all capabilities', icon: Sparkles, to: '#features' },
   { id: 'learn-signs', title: 'Learn Signs', subtitle: 'Practice sign language', icon: ShieldCheck, to: '/app/learn' }
 ];
-
-// Reusable speech synthesis helper with Malayalam voice detection & fallback
-const speakPhrase = (text, fallbackText, lang = 'ml-IN', onFallbackToast) => {
-  if (!('speechSynthesis' in window)) {
-    if (onFallbackToast) onFallbackToast('Speech audio is not supported in this browser.');
-    return;
-  }
-  window.speechSynthesis.cancel();
-
-  const voices = window.speechSynthesis.getVoices();
-  const mlVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ml'));
-
-  let phraseToSpeak = text;
-  let targetLang = lang;
-
-  if (mlVoice) {
-    targetLang = 'ml-IN';
-  } else {
-    // Fallback to English translation
-    phraseToSpeak = fallbackText || text;
-    targetLang = 'en-US';
-    if (onFallbackToast) {
-      onFallbackToast('No Malayalam voice on this device');
-    }
-  }
-
-  const utterance = new SpeechSynthesisUtterance(phraseToSpeak);
-  utterance.lang = targetLang;
-  if (mlVoice) utterance.voice = mlVoice;
-  utterance.rate = 0.95;
-
-  window.speechSynthesis.speak(utterance);
-};
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -64,8 +30,7 @@ export default function LandingPage() {
   // Navigation state
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Audio interaction states
-  const [activeEmergencyChip, setActiveEmergencyChip] = useState(null);
+  // Notification toast state
   const [toastMessage, setToastMessage] = useState(null);
 
   // FAQ accordion state (one open at a time)
@@ -74,7 +39,7 @@ export default function LandingPage() {
 
   // Section in-view states
   const [howIn, setHowIn] = useState(false);
-  const [emergencyIn, setEmergencyIn] = useState(false);
+  const [featuresIn, setFeaturesIn] = useState(false);
   const [trustIn, setTrustIn] = useState(false);
   const [faqIn, setFaqIn] = useState(false);
   const [ctaIn, setCtaIn] = useState(false);
@@ -82,7 +47,7 @@ export default function LandingPage() {
   // Section refs for IntersectionObserver
   const heroRef = useRef(null);
   const howRef = useRef(null);
-  const emergencyRef = useRef(null);
+  const featuresRef = useRef(null);
   const trustRef = useRef(null);
   const faqRef = useRef(null);
   const ctaRef = useRef(null);
@@ -100,7 +65,7 @@ export default function LandingPage() {
     const sectionEntries = [
       { id: 'hero', ref: heroRef, setter: null },
       { id: 'how-it-works', ref: howRef, setter: setHowIn },
-      { id: 'emergency', ref: emergencyRef, setter: setEmergencyIn },
+      { id: 'features', ref: featuresRef, setter: setFeaturesIn },
       { id: 'trust', ref: trustRef, setter: setTrustIn },
       { id: 'faq', ref: faqRef, setter: setFaqIn },
       { id: 'cta', ref: ctaRef, setter: setCtaIn }
@@ -136,13 +101,6 @@ export default function LandingPage() {
       el.scrollIntoView({ behavior: 'smooth' });
       setActiveSection(targetId);
     }
-    setMenuOpen(false);
-  };
-
-  const handleEmergencyClick = (item) => {
-    setActiveEmergencyChip(item.id);
-    speakPhrase(item.ml, item.en, 'ml-IN', showToast);
-    setTimeout(() => setActiveEmergencyChip(null), 1200);
   };
 
   const toggleFaq = (id) => {
@@ -235,7 +193,7 @@ export default function LandingPage() {
             </div>
 
             <div className="lp-feature-row" role="region" aria-label="Feature Quick Access Dock">
-              {FEATURES.map((f, i) => {
+              {HERO_FEATURES.map((f, i) => {
                 const IconComponent = f.icon;
                 const isAnchor = f.to?.startsWith('#');
                 return (
@@ -283,57 +241,8 @@ export default function LandingPage() {
       {/* ── SECTION 2: HOW IT WORKS (Sticky Scroll-Reveal Component) ── */}
       <HowItWorks onToast={showToast} />
 
-      {/* ── SECTION 3: EMERGENCY (id="emergency") ─────────────────────── */}
-      <section id="emergency" className="lp-section lp-section--pale" ref={emergencyRef}>
-        <div className={`lp-section-inner ${emergencyIn ? 'lp-fade-up' : ''}`}>
-          <div className="lp-pill lp-pill--emergency">EMERGENCY</div>
-          <h2 className="lp-headline">Help, one tap away.</h2>
-
-          {/* Large Centered Visual with Depth Cards */}
-          <div className="lp-emergency-hero-visual">
-            <picture>
-              <source srcSet="/images/landing/emergency-mockup.webp" type="image/webp" />
-              <img
-                src="/images/landing/emergency-mockup.png"
-                alt="Phone displaying urgent medical assistance card in Malayalam held toward a caregiver"
-                className="lp-emergency-img"
-                width={1400}
-                height={1000}
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
-          </div>
-
-          {/* Four Large Functional Tappable Chips */}
-          <div className="lp-emergency-chips-grid" role="region" aria-label="Quick emergency voice phrases">
-            {EMERGENCY_PHRASES.map(phrase => {
-              const isPlaying = activeEmergencyChip === phrase.id;
-              return (
-                <button
-                  key={phrase.id}
-                  type="button"
-                  className={`lp-emergency-chip ${isPlaying ? 'lp-emergency-chip--active' : ''}`}
-                  onClick={() => handleEmergencyClick(phrase)}
-                  aria-label={`Speak phrase: ${phrase.en}`}
-                >
-                  <div className="lp-emergency-chip-body">
-                    <span className="lp-emergency-chip-ml">{phrase.ml}</span>
-                    <span className="lp-emergency-chip-en">{phrase.en}</span>
-                  </div>
-                  <div className="lp-emergency-chip-icon" aria-hidden="true">
-                    <Volume2 size={20} className={isPlaying ? 'lp-icon-pulse' : ''} />
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          <p className="lp-emergency-disclaimer">
-            Works as a communication aid. Not a replacement for emergency services.
-          </p>
-        </div>
-      </section>
+      {/* ── SECTION 3: FEATURES (id="features") ───────────────────────── */}
+      <Features ref={featuresRef} inView={featuresIn} />
 
       {/* ── SECTION 4: TRUST STRIP ────────────────────────────────────── */}
       <section id="trust" className="lp-trust-section" ref={trustRef}>

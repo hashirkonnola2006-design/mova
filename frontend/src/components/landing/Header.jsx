@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import MovaLogo from '../MovaLogo.jsx';
 import StartButton from '../StartButton.jsx';
 import MenuToggleIcon from '../ui/MenuToggleIcon.jsx';
@@ -8,8 +9,16 @@ import './Header.css';
 
 const NAV_ITEMS = [
   { label: 'How it works', href: '#how-it-works' },
-  { label: 'Emergency', href: '#emergency', isEmergency: true },
+  { label: 'Features', href: '#features' },
   { label: 'FAQ', href: '#faq' }
+];
+
+const MORE_PAGES = [
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'Accessibility', to: '/accessibility' },
+  { label: 'Privacy Policy', to: '/privacy' },
+  { label: 'Terms of Use', to: '/terms' }
 ];
 
 export default function Header() {
@@ -18,11 +27,15 @@ export default function Header() {
 
   const [activeSection, setActiveSection] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [availableLinks, setAvailableLinks] = useState(NAV_ITEMS);
 
   const toggleBtnRef = useRef(null);
   const mobilePanelRef = useRef(null);
   const firstFocusableRef = useRef(null);
+  const dropdownContainerRef = useRef(null);
+  const dropdownBtnRef = useRef(null);
+  const dropdownLinksRef = useRef([]);
 
   // Check section availability on mount so links to non-existent sections are hidden
   useEffect(() => {
@@ -35,7 +48,7 @@ export default function Header() {
 
   // Scroll-spy with IntersectionObserver
   useEffect(() => {
-    const sectionIds = ['how-it-works', 'emergency', 'faq'];
+    const sectionIds = ['how-it-works', 'features', 'faq'];
     const sections = sectionIds
       .map(id => document.getElementById(id))
       .filter(Boolean);
@@ -111,10 +124,89 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Close menu on route or hash change
+  // Close mobile and desktop menus on route or hash change
   useEffect(() => {
     setMenuOpen(false);
+    setDropdownOpen(false);
   }, [location]);
+
+  // Desktop dropdown: click outside listener
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handleClickOutside = (e) => {
+      if (
+        dropdownContainerRef.current &&
+        !dropdownContainerRef.current.contains(e.target)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('pointerdown', handleClickOutside);
+    return () => document.removeEventListener('pointerdown', handleClickOutside);
+  }, [dropdownOpen]);
+
+  // Desktop dropdown: Escape key closes and returns focus to button
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setDropdownOpen(false);
+        dropdownBtnRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [dropdownOpen]);
+
+  // Desktop dropdown: Close when user scrolls
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const initialScroll = window.scrollY;
+    const handleScroll = () => {
+      if (Math.abs(window.scrollY - initialScroll) > 20) {
+        setDropdownOpen(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [dropdownOpen]);
+
+  // Desktop dropdown: Auto-focus first or active item when opened
+  useEffect(() => {
+    if (dropdownOpen) {
+      const activeIdx = MORE_PAGES.findIndex(p => p.to === location.pathname);
+      const targetIdx = activeIdx >= 0 ? activeIdx : 0;
+      const timer = setTimeout(() => {
+        dropdownLinksRef.current[targetIdx]?.focus();
+      }, 45);
+      return () => clearTimeout(timer);
+    }
+  }, [dropdownOpen, location.pathname]);
+
+  // Desktop dropdown: Keyboard arrow up and down navigation
+  const handleDropdownKeyDown = (e) => {
+    const links = dropdownLinksRef.current.filter(Boolean);
+    if (!links.length) return;
+    const currentIndex = links.indexOf(document.activeElement);
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = currentIndex < links.length - 1 ? currentIndex + 1 : 0;
+      links[nextIndex]?.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : links.length - 1;
+      links[prevIndex]?.focus();
+    } else if (e.key === 'Tab') {
+      // Smooth exit if tabbing out
+      if (!e.shiftKey && currentIndex === links.length - 1) {
+        setDropdownOpen(false);
+      } else if (e.shiftKey && currentIndex === 0) {
+        setDropdownOpen(false);
+        dropdownBtnRef.current?.focus();
+      }
+    }
+  };
 
   // Focus trap & Escape key listener for mobile menu
   useEffect(() => {
@@ -209,11 +301,10 @@ export default function Header() {
                   <a
                     key={item.href}
                     href={item.href}
-                    className={`lp-header-link ${isActive ? 'lp-header-link--active' : ''} ${item.isEmergency ? 'lp-header-link--emergency' : ''}`}
+                    className={`lp-header-link ${isActive ? 'lp-header-link--active' : ''}`}
                     onClick={(e) => handleNavClick(e, item.href)}
                     aria-current={isActive ? 'location' : undefined}
                   >
-                    {item.isEmergency && <span className="lp-header-emergency-dot" aria-hidden="true" />}
                     <span>{item.label}</span>
                   </a>
                 );
@@ -225,11 +316,63 @@ export default function Header() {
               <Link to="/login" className="lp-header-login-link">
                 Log in
               </Link>
-              <StartButton
-                label="Try MOVA"
-                showArrow={false}
-                className="lp-header-try-btn"
-              />
+              <div className="lp-header-btn-group">
+                <StartButton
+                  label="Try MOVA"
+                  showArrow={false}
+                  className="lp-header-try-btn"
+                />
+
+                {/* Desktop Menu Dropdown Toggle */}
+                <div className="lp-header-menu-wrap" ref={dropdownContainerRef}>
+                  <button
+                    ref={dropdownBtnRef}
+                    id="nav-dropdown-button"
+                    type="button"
+                    className={`lp-header-menu-btn ${dropdownOpen ? 'lp-header-menu-btn--open' : ''}`}
+                    onClick={() => setDropdownOpen(prev => !prev)}
+                    aria-label={dropdownOpen ? 'Close menu' : 'Open menu'}
+                    aria-expanded={dropdownOpen}
+                    aria-controls="nav-dropdown-menu"
+                  >
+                    {dropdownOpen ? (
+                      <X size={20} strokeWidth={2.2} className="lp-menu-icon lp-menu-icon--close" />
+                    ) : (
+                      <Menu size={20} strokeWidth={2.2} className="lp-menu-icon lp-menu-icon--open" />
+                    )}
+                  </button>
+
+                  {/* Dropdown Card */}
+                  <div
+                    id="nav-dropdown-menu"
+                    role="menu"
+                    aria-labelledby="nav-dropdown-button"
+                    className={`lp-nav-dropdown ${dropdownOpen ? 'lp-nav-dropdown--open' : ''}`}
+                    aria-hidden={!dropdownOpen}
+                    onKeyDown={handleDropdownKeyDown}
+                  >
+                    <div className="lp-nav-dropdown-inner">
+                      {MORE_PAGES.map((page, idx) => {
+                        const isActive = location.pathname === page.to;
+                        return (
+                          <Link
+                            key={page.to}
+                            ref={el => (dropdownLinksRef.current[idx] = el)}
+                            to={page.to}
+                            role="menuitem"
+                            className={`lp-nav-dropdown-item ${isActive ? 'lp-nav-dropdown-item--active' : ''}`}
+                            onClick={() => setDropdownOpen(false)}
+                            tabIndex={dropdownOpen ? 0 : -1}
+                            aria-current={isActive ? 'page' : undefined}
+                          >
+                            <span>{page.label}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Mobile Hamburger Toggle Button (44x44 tap target) */}
@@ -271,10 +414,27 @@ export default function Header() {
                   aria-current={isActive ? 'location' : undefined}
                 >
                   <span>{item.label}</span>
-                  {item.isEmergency && (
-                    <span className="lp-mobile-emergency-badge">Emergency</span>
-                  )}
                 </a>
+              );
+            })}
+          </nav>
+
+          {/* Separate group for More pages */}
+          <div className="lp-mobile-menu-divider" aria-hidden="true" />
+          <div className="lp-mobile-group-label">More</div>
+          <nav className="lp-mobile-subnav-links" aria-label="More pages">
+            {MORE_PAGES.map(page => {
+              const isActive = location.pathname === page.to;
+              return (
+                <Link
+                  key={page.to}
+                  to={page.to}
+                  className={`lp-mobile-subnav-link ${isActive ? 'lp-mobile-subnav-link--active' : ''}`}
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <span>{page.label}</span>
+                </Link>
               );
             })}
           </nav>

@@ -1,48 +1,63 @@
 /**
  * team.js — Team data for the About page
- * Shape cutouts and brand tones matching the reference design.
+ * Clean, extensible array of team members.
+ * Order: Hashir Muhiyudheen Konnola, Ashiqa Asharaf P K, Mohamed Resin Kizhapat, Aaditya Pramod V.
  */
 import { SITE_INFO } from './siteInfo.js';
 
 export const TEAM_MEMBERS = [
   {
-    name: "Hashir Muhiyudheen Konnola",
-    role: "Website and AI",
-    photo: "/images/about/hashir.webp", // Real photo path (fallback to initials placeholder)
-    cutout: null, // Transparent cutout path if available
+    id: 'hashir',
+    name: 'Hashir Muhiyudheen Konnola',
+    role: 'Website and AI',
+    photo: '/images/about/member_1_hashir.webp',
+    cutout: '/images/about/member_1_hashir.png',
     linkedin: SITE_INFO.linkedin,
-    shape: "shape-figure-eight",
-    tone: "blue", // #1558E8
-    initials: "HMK"
+    website: SITE_INFO.githubUrl,
+    email: SITE_INFO.contactEmail,
+    shape: 'pill',
+    tone: 'periwinkle',
+    initials: 'HMK',
   },
   {
-    name: "Mohamed Resin Kizhapat",
-    role: "", // Left empty for user to fill in
-    photo: null,
-    cutout: null,
-    linkedin: "", // Left empty for user to fill in
-    shape: "shape-arch",
-    tone: "sky", // #BFD8FF
-    initials: "MRK"
+    id: 'ashiqa',
+    name: 'Ashiqa Asharaf P K',
+    role: 'Research & Design',
+    photo: '/images/about/member_2_ashiqa.webp',
+    cutout: '/images/about/member_2_ashiqa.png',
+    email: 'ashiqaasharafpk100@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/ashiqa-asharaf-p-k-a73522385/?isSelfProfile=false',
+    website: '',
+    shape: 'circle',
+    tone: 'peach',
+    initials: 'AAP',
   },
   {
-    name: "Ashiqa Asharaf P K",
-    role: "",
-    photo: null,
-    cutout: null,
-    linkedin: "",
-    shape: "shape-oval-arch",
-    tone: "pale", // #EAF1FF
-    initials: "AAP"
+    id: 'resin',
+    name: 'Mohamed Resin Kizhapat',
+    role: 'Sign Language Data',
+    photo: '/images/about/member_3_resin.webp',
+    cutout: '/images/about/member_3_resin.png',
+    email: 'resinrias@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/mohamed-resin-kizhapat-971624380/',
+    website: '',
+    shape: 'squircle',
+    tone: 'light-blue',
+    initials: 'MRK',
   },
   {
-    name: "Aaditya Pramod V",
-    role: "",
-    photo: null,
-    cutout: null,
-    linkedin: "",
-    shape: "shape-triple-lobe",
-    tone: "navy", // #0B1020
-    initials: "APV"
-  }
+    id: 'aaditya',
+    name: 'Aaditya Pramod V',
+    role: 'Validation & Testing',
+    photo: '/images/about/member_4_aaditya.webp',
+    cutout: '/images/about/member_4_aaditya.png',
+    email: 'aadityapramod2017@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/aadityapramod-v-796704380?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    website: '',
+    shape: 'arch',
+    tone: 'sky',
+    initials: 'APV',
+  },
 ];
+
+export default TEAM_MEMBERS;

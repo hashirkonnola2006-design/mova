@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   BookOpen, Search, Volume2, Video, CheckCircle2,
   Award, Sparkles, ArrowRight, HelpCircle, RotateCcw
 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext.jsx';
+import { recordSignPracticed } from '../services/userData.js';
 import './LearnSignsPage.css';
 
 const ISL_LESSONS = [
@@ -134,13 +136,37 @@ const QUIZ_QUESTIONS = [
 
 export default function LearnSignsPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { session } = useAuth();
+  const userId = session?.id || session?.email || null;
+
+  const targetSignId = location.state?.signId;
+  const initialLesson = (targetSignId && ISL_LESSONS.find(l => l.id === targetSignId)) || ISL_LESSONS[0];
+
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeLesson, setActiveLesson] = useState(ISL_LESSONS[0]);
+  const [activeLesson, setActiveLesson] = useState(initialLesson);
   const [quizIndex, setQuizIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizScore, setQuizScore] = useState(0);
   const [quizAnswered, setQuizAnswered] = useState(false);
+
+  // Sync if location.state.signId updates
+  useEffect(() => {
+    if (location.state?.signId) {
+      const found = ISL_LESSONS.find(l => l.id === location.state.signId);
+      if (found) {
+        setActiveLesson(found);
+      }
+    }
+  }, [location.state?.signId]);
+
+  // Record practice when active lesson changes
+  useEffect(() => {
+    if (activeLesson?.id) {
+      recordSignPracticed(userId, activeLesson.id);
+    }
+  }, [activeLesson?.id, userId]);
 
   // Filter lessons
   const filtered = ISL_LESSONS.filter(item => {
@@ -159,6 +185,9 @@ export default function LearnSignsPage() {
       const utter = new SpeechSynthesisUtterance(text);
       utter.lang = 'ml-IN';
       window.speechSynthesis.speak(utter);
+      if (activeLesson?.id) {
+        recordSignPracticed(userId, activeLesson.id);
+      }
     }
   };
 

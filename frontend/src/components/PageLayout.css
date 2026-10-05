@@ -10,7 +10,7 @@
   flex-direction: column;
   background-color: #FFFFFF !important;
   color: #0B1020 !important;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -53,29 +53,41 @@
   gap: 1.75rem;
 }
 
-.pl-header-nav a:not(.pl-header-cta) {
+.pl-header-nav > a {
   font-size: 0.92rem;
   font-weight: 500;
   color: #4A5468;
   text-decoration: none;
   transition: color 0.15s ease;
   padding: 0.25rem 0;
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
 }
 
-.pl-header-nav a:not(.pl-header-cta):hover {
+.pl-header-nav > a:hover {
   color: #1558E8;
 }
 
+.pl-header-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 .pl-header-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #1558E8;
   color: #ffffff !important;
   padding: 0.55rem 1.25rem;
-  border-radius: 9999px;
+  border-radius: 12px;
   font-weight: 600 !important;
-  font-size: 0.88rem !important;
+  font-size: 0.9rem !important;
   text-decoration: none;
   box-shadow: 0 2px 8px rgba(21, 88, 232, 0.2);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  height: 40px;
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
 }
 
 .pl-header-cta:hover {
@@ -98,10 +110,11 @@
 }
 
 .pl-page-title {
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
   font-size: clamp(2.2rem, 4.5vw, 3rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #0B1020;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
   line-height: 1.15;
   margin: 0 0 0.85rem;
 }
@@ -136,6 +149,7 @@
 
 /* ── Prose Typography & Elements ────────────────────────────── */
 .pl-content-inner h2 {
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
   font-size: 1.45rem;
   font-weight: 700;
   color: #0B1020;
@@ -144,6 +158,7 @@
 }
 
 .pl-content-inner h3 {
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
   font-size: 1.15rem;
   font-weight: 600;
   color: #0B1020;
@@ -211,7 +226,7 @@
     gap: 1rem;
   }
 
-  .pl-header-nav a:not(.pl-header-cta) {
+  .pl-header-nav > a {
     display: none;
   }
 

@@ -1,0 +1,222 @@
+/* ═══════════════════════════════════════════════════════════
+   NavMenuDropdown.css — Universal Header Menu Dropdown for MOVA
+   Matches MOVA design system: Outfit typography, frosted glass,
+   soft shadows, high contrast, WCAG keyboard accessibility.
+   ═══════════════════════════════════════════════════════════ */
+
+.mova-menu-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
+}
+
+/* ── Menu Button ─────────────────────────────────────────── */
+.mova-menu-btn {
+  height: 40px;
+  width: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid var(--lp-border, #E8EDF5);
+  border-radius: 12px;
+  color: var(--lp-navy, #0B1020);
+  box-shadow: 0 2px 6px rgba(11, 16, 32, 0.04);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.mova-menu-btn:hover {
+  color: var(--lp-blue, #1558E8);
+  border-color: #BFDBFE;
+  background: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(21, 88, 232, 0.12);
+  transform: translateY(-1px);
+}
+
+.mova-menu-btn--open {
+  color: var(--lp-blue, #1558E8);
+  border-color: #BFDBFE;
+  background: var(--lp-blue-soft, #EAF1FF);
+  box-shadow: 0 0 0 3px rgba(21, 88, 232, 0.12);
+}
+
+.mova-menu-btn:focus-visible {
+  outline: 2px solid var(--lp-blue, #1558E8);
+  outline-offset: 2px;
+}
+
+/* Icon Morphing Animations */
+.mova-menu-icon {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.mova-menu-icon--close {
+  animation: movaIconRotateIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mova-menu-icon--open {
+  animation: movaIconFadeIn 0.18s ease;
+}
+
+@keyframes movaIconRotateIn {
+  from {
+    transform: rotate(-90deg) scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes movaIconFadeIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── Desktop Dropdown Card ───────────────────────────────── */
+.mova-dropdown-card {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 236px;
+  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--lp-border, #E8EDF5);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(11, 16, 32, 0.1), 0 4px 12px rgba(11, 16, 32, 0.04);
+  padding: 8px;
+  z-index: 10000;
+  transform-origin: top right;
+  opacity: 0;
+  transform: scale(0.95) translateY(-6px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 180ms;
+}
+
+.mova-dropdown-card--open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.mova-dropdown-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Optional Mobile Group Header */
+.mova-dropdown-mobile-header {
+  display: none;
+}
+
+.mova-dropdown-divider {
+  height: 1px;
+  background: var(--lp-border, #E8EDF5);
+  margin: 6px 4px;
+}
+
+/* Dropdown Link Item */
+.mova-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.65rem 0.95rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--lp-slate, #4A5468);
+  text-decoration: none;
+  transition: all 0.15s ease;
+  outline: none;
+  font-family: var(--font-heading, "Outfit Variable", "Outfit", system-ui, sans-serif);
+}
+
+.mova-dropdown-item:hover {
+  color: var(--lp-navy, #0B1020);
+  background: var(--lp-blue-subtle, #F0F5FF);
+}
+
+.mova-dropdown-item:focus-visible {
+  outline: 2px solid var(--lp-blue, #1558E8);
+  outline-offset: -1px;
+  background: var(--lp-blue-subtle, #F0F5FF);
+  color: var(--lp-navy, #0B1020);
+}
+
+.mova-dropdown-item--active {
+  color: var(--lp-blue, #1558E8) !important;
+  background: var(--lp-blue-soft, #EAF1FF) !important;
+  font-weight: 600;
+}
+
+/* Mobile Overlay for backdrop dismissal */
+.mova-dropdown-backdrop {
+  display: none;
+}
+
+/* ──────────────────────────────────────────────────────────
+   MOBILE OPTIMIZATIONS (< 768px)
+   Larger tap targets (min 46px), responsive positioning
+   ────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .mova-dropdown-card {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(calc(100vw - 32px), 280px);
+    padding: 10px;
+  }
+
+  .mova-dropdown-item {
+    min-height: 46px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  .mova-dropdown-mobile-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .mova-dropdown-backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(11, 16, 32, 0.2);
+    z-index: 9999;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────
+   PREFERS REDUCED MOTION
+   ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mova-dropdown-card,
+  .mova-menu-btn,
+  .mova-menu-icon {
+    transition: none !important;
+    animation: none !important;
+  }
+}

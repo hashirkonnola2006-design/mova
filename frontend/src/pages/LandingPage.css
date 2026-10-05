@@ -16,11 +16,9 @@
   --lp-bg-white: #FFFFFF;
   --lp-bg-tint: #F5F8FF;
   --lp-border: #E8EDF5;
-  --lp-border-subtle: #F1F5F9;
-  --lp-emergency: #D92D20;
-  --lp-emergency-bg: #FEF3F2;
-  --lp-emergency-border: #FECDCA;
-  --lp-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --lp-font-heading: var(--font-heading, "Outfit Variable", "Outfit", "Noto Sans Malayalam", system-ui, sans-serif);
+  --lp-font-body: var(--font-body, "Inter", "Noto Sans Malayalam", system-ui, sans-serif);
+  --lp-font-sans: var(--lp-font-body);
   --lp-font-malayalam: 'Noto Sans Malayalam', 'Manjari', 'Nirmala UI', sans-serif;
   --lp-shadow-sm: 0 2px 8px rgba(11, 16, 32, 0.04);
   --lp-shadow-card: 0 12px 36px rgba(11, 16, 32, 0.06);
@@ -188,11 +186,11 @@
 }
 
 .lp-hero-title {
-  font-family: var(--lp-font-sans);
+  font-family: var(--lp-font-heading, var(--font-heading));
   font-size: clamp(2.5rem, min(6.5vw, 7.5vh), 5.75rem);
-  font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.045em;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   margin: 0 0 clamp(0.5rem, 1.4vh, 1.25rem) 0;
 }
 
@@ -226,6 +224,7 @@
 
 /* Primary CTA Button (StartButton default) */
 .lp-btn-primary {
+  font-family: var(--lp-font-heading, var(--font-heading));
   background: var(--lp-blue);
   color: #FFFFFF;
   border: none;
@@ -233,6 +232,7 @@
   padding: clamp(0.7rem, 1.3vh, 0.95rem) clamp(1.4rem, 2.2vw, 2.1rem);
   font-size: clamp(0.92rem, 1.1vw, 1.05rem);
   font-weight: 600;
+  letter-spacing: normal;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -257,6 +257,7 @@
 }
 
 .lp-btn-secondary {
+  font-family: var(--lp-font-heading, var(--font-heading));
   background: #FFFFFF;
   color: var(--lp-blue);
   border: 1.5px solid var(--lp-blue);
@@ -264,6 +265,7 @@
   padding: clamp(0.65rem, 1.2vh, 0.9rem) clamp(1.25rem, 2vw, 1.85rem);
   font-size: clamp(0.92rem, 1.1vw, 1.05rem);
   font-weight: 600;
+  letter-spacing: normal;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -442,9 +444,10 @@
 /* Section Label Pill (Tiny) */
 .lp-pill {
   display: inline-block;
+  font-family: var(--lp-font-heading, var(--font-heading));
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--lp-blue);
   background: var(--lp-blue-soft);
@@ -453,19 +456,14 @@
   margin-bottom: 1.25rem;
 }
 
-.lp-pill--emergency {
-  color: var(--lp-emergency);
-  background: var(--lp-emergency-bg);
-  border: 1px solid var(--lp-emergency-border);
-}
-
-/* Section Headline: 48-56px, 700-800, -0.03em, 1.05 line-height */
+/* Section Headline: 48-56px, 600-700, -0.02em, 1.08 line-height */
 .lp-headline {
+  font-family: var(--lp-font-heading, var(--font-heading));
   font-size: clamp(3rem, 4.4vw, 3.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--lp-navy);
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   margin: 0 0 4rem 0;
 }
 
@@ -627,6 +625,7 @@
 }
 
 .lp-step-title {
+  font-family: var(--lp-font-heading, var(--font-heading));
   font-size: 1.28rem;
   font-weight: 700;
   color: var(--lp-navy);
@@ -634,110 +633,6 @@
   letter-spacing: -0.015em;
 }
 
-/* ──────────────────────────────────────────────────────────────────────────
-   SECTION 3: EMERGENCY (Large Centered Mockup + 4 Tappable Functional Chips)
-   ────────────────────────────────────────────────────────────────────────── */
-.lp-emergency-hero-visual {
-  max-width: 860px;
-  margin: 0 auto 3rem;
-  border-radius: var(--lp-radius-panel);
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(11, 16, 32, 0.08);
-  border: 1px solid var(--lp-border);
-  background: #FFFFFF;
-  transition: transform 0.3s ease;
-}
-
-.lp-emergency-hero-visual:hover {
-  transform: translateY(-4px);
-}
-
-.lp-emergency-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* 4 Large Tappable Emergency Chips */
-.lp-emergency-chips-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
-  max-width: 1100px;
-  margin: 0 auto 2rem;
-}
-
-.lp-emergency-chip {
-  background: #FFFFFF;
-  border: 1.5px solid var(--lp-emergency-border);
-  border-radius: 18px;
-  padding: 1.35rem 1.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 16px rgba(217, 45, 32, 0.04);
-}
-
-.lp-emergency-chip:hover {
-  border-color: var(--lp-emergency);
-  background: var(--lp-emergency-bg);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(217, 45, 32, 0.12);
-}
-
-.lp-emergency-chip--active {
-  background: var(--lp-emergency-bg);
-  border-color: var(--lp-emergency);
-  box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.2);
-}
-
-.lp-emergency-chip-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.lp-emergency-chip-ml {
-  font-family: var(--lp-font-malayalam);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--lp-emergency);
-  line-height: 1.3;
-}
-
-.lp-emergency-chip-en {
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: var(--lp-slate);
-}
-
-.lp-emergency-chip-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--lp-emergency-bg);
-  color: var(--lp-emergency);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.lp-emergency-chip:hover .lp-emergency-chip-icon {
-  background: var(--lp-emergency);
-  color: #FFFFFF;
-}
-
-.lp-emergency-disclaimer {
-  font-size: 0.88rem;
-  color: var(--lp-text-muted);
-  margin: 1.5rem auto 0;
-  max-width: 600px;
-}
 
 /* ──────────────────────────────────────────────────────────────────────────
    SECTION 4: TRUST STRIP (Small, Quiet Row of 3 Badges)
@@ -816,8 +711,9 @@
   justify-content: space-between;
   text-align: left;
   cursor: pointer;
+  font-family: var(--lp-font-heading, var(--font-heading));
   font-size: 1.12rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--lp-navy);
   gap: 1rem;
 }
@@ -873,7 +769,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
+  font-family: var(--lp-font-heading, var(--font-heading));
 }
 
 .lp-faq-ask-btn:hover {
@@ -934,9 +830,10 @@
 }
 
 .lp-cta-title {
+  font-family: var(--lp-font-heading, var(--font-heading));
   font-size: clamp(2.4rem, 4.5vw, 3.6rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.05;
   color: #FFFFFF;
   margin: 0 0 2.5rem 0;
@@ -1020,10 +917,6 @@
     gap: 1.5rem;
   }
 
-  .lp-emergency-chips-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .lp-feature-row {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -1094,10 +987,6 @@
     height: 100%;
     border-top: none;
     border-left: 2px dotted #93C5FD;
-  }
-
-  .lp-emergency-chips-grid {
-    grid-template-columns: 1fr;
   }
 
   .lp-trust-badges {

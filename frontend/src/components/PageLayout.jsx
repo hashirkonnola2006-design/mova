@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MovaLogo from '../components/MovaLogo.jsx';
+import NavMenuDropdown from './NavMenuDropdown.jsx';
 import Footer from './Footer.jsx';
 import './PageLayout.css';
 
@@ -29,7 +30,10 @@ export default function PageLayout({ title, description, fullWidth = false, chil
             <Link to="/#how-it-works">How it works</Link>
             <Link to="/#faq">FAQ</Link>
             <Link to="/contact">Contact</Link>
-            <Link to="/login" className="pl-header-cta">Try MOVA</Link>
+            <div className="pl-header-cta-group">
+              <Link to="/login" className="pl-header-cta">Try MOVA</Link>
+              <NavMenuDropdown includeMainLinksOnMobile={true} />
+            </div>
           </nav>
         </div>
       </header>
