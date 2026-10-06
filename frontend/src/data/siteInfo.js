@@ -32,6 +32,7 @@ export const SITE_INFO = {
 
   // ── Social links ──────────────────────────────────────────────────────────
   githubUrl: "https://github.com/hashirkonnola2006-design/mova",
+  githubProfile: "https://github.com/hashirkonnola2006-design",
   linkedinUrl: "https://www.linkedin.com/in/hashir-muhiyudheen-konnola-8342aa1b9",
   twitterUrl: "",
 

@@ -28,8 +28,12 @@ import SettingsPage from './pages/SettingsPage.jsx';
 // Legacy / collector (still accessible)
 import CollectorPage from './components/CollectorPage.jsx';
 
-/** Allows guest access to app routes without blocking */
+/** Protects app routes — unauthenticated users are redirected to login */
 function RequireAuth({ children }) {
+  const { session } = useAuth();
+  if (!session) {
+    return <Navigate to="/login" replace />;
+  }
   return children;
 }
 
@@ -54,6 +58,7 @@ function AppRoutes() {
       <Route path="/supported-signs" element={<SupportedSignsPage />} />
       <Route path="/help" element={<HelpPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
+      <Route path="/auth" element={<Navigate to="/login" replace />} />
       <Route
         path="/login"
         element={

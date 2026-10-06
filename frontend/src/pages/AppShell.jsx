@@ -106,6 +106,11 @@ export default function AppShell() {
     if (avatarBtnRef.current) avatarBtnRef.current.focus();
   };
 
+  const handleLogout = () => {
+    logOut();
+    navigate('/login', { replace: true });
+  };
+
   return (
     <div className="shell-root">
       {/* ── Sidebar ─────────────────────────────────────── */}
@@ -148,7 +153,7 @@ export default function AppShell() {
             </div>
             <button
               className="shell-logout-btn"
-              onClick={logOut}
+              onClick={handleLogout}
               title="Sign out"
               aria-label="Sign out"
             >
@@ -213,7 +218,7 @@ export default function AppShell() {
                   <button
                     className="shell-menu-item shell-menu-item--logout"
                     role="menuitem"
-                    onClick={() => { setMenuOpen(false); logOut(); }}
+                    onClick={() => { setMenuOpen(false); handleLogout(); }}
                   >
                     <LogOut size={16} />
                     <span>Log out</span>

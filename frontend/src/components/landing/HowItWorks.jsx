@@ -185,48 +185,47 @@ export default function HowItWorks({ onToast }) {
 
                           {/* 21 MediaPipe Landmarks SVG */}
                           <svg className="hiw-landmarks-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            {/* Palm connections */}
-                            <path d="M 40,73 L 42,66 L 44,61 L 43,62 L 40,64 L 40,73 Z" className="hiw-landmark-bone" />
+                            {/* Palm / base connections */}
+                            <path d="M 38.9,85.8 L 44.6,81.9 L 42.3,67.4 L 39.1,66.6 L 36.3,67.9 L 34.1,70.9 L 38.9,85.8 Z" className="hiw-landmark-bone" />
                             {/* Thumb (0->1->2->3->4) */}
-                            <polyline points="40,73 47,70 51,64 52,59 51,57" className="hiw-landmark-bone" />
+                            <polyline points="38.9,85.8 44.6,81.9 49.6,76.8 54.0,73.5 55.5,69.1" className="hiw-landmark-bone" />
                             {/* Index finger forming the O loop with thumb (0->5->6->7->8) */}
-                            <polyline points="42,66 45,59 47,56 49,56 50,57" className="hiw-landmark-bone" />
+                            <polyline points="42.3,67.4 46.5,63.1 50.4,65.1 52.9,68.5" className="hiw-landmark-bone" />
                             {/* Middle finger upright (0->9->10->11->12) */}
-                            <polyline points="44,61 41,53 39,47 38,44" className="hiw-landmark-bone" />
+                            <polyline points="39.1,66.6 39.6,58.6 40.9,53.2 41.7,48.7" className="hiw-landmark-bone" />
                             {/* Ring finger upright (0->13->14->15->16) */}
-                            <polyline points="43,62 36,54 34,49 33,46" className="hiw-landmark-bone" />
+                            <polyline points="36.3,67.9 34.5,60.4 34.5,55.1 34.5,50.9" className="hiw-landmark-bone" />
                             {/* Pinky finger upright (0->17->18->19->20) */}
-                            <polyline points="40,64 32,58 29,54 28,52" className="hiw-landmark-bone" />
+                            <polyline points="34.1,70.9 30.5,66.4 28.6,62.3 27.3,58.5" className="hiw-landmark-bone" />
 
                             {/* 21 Landmark Joint Points */}
                             {/* Wrist */}
-                            <circle cx="40" cy="73" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--wrist" />
+                            <circle cx="38.9" cy="85.8" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--wrist" />
                             {/* Thumb */}
-                            <circle cx="47" cy="70" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="51" cy="64" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="52" cy="59" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="51" cy="57" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            <circle cx="44.6" cy="81.9" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="49.6" cy="76.8" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="54.0" cy="73.5" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="55.5" cy="69.1" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
                             {/* Index */}
-                            <circle cx="42" cy="66" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="45" cy="59" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="47" cy="56" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="49" cy="56" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="50" cy="57" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            <circle cx="42.3" cy="67.4" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="46.5" cy="63.1" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="50.4" cy="65.1" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="52.9" cy="68.5" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
                             {/* Middle */}
-                            <circle cx="44" cy="61" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="41" cy="53" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="39" cy="47" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="38" cy="44" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            <circle cx="39.1" cy="66.6" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="39.6" cy="58.6" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="40.9" cy="53.2" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="41.7" cy="48.7" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
                             {/* Ring */}
-                            <circle cx="43" cy="62" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="36" cy="54" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="34" cy="49" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="33" cy="46" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            <circle cx="36.3" cy="67.9" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="34.5" cy="60.4" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="34.5" cy="55.1" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="34.5" cy="50.9" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
                             {/* Pinky */}
-                            <circle cx="40" cy="64" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="32" cy="58" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="29" cy="54" r="1.1" className="hiw-landmark-dot" />
-                            <circle cx="28" cy="52" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                            <circle cx="34.1" cy="70.9" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="30.5" cy="66.4" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="28.6" cy="62.3" r="1.1" className="hiw-landmark-dot" />
+                            <circle cx="27.3" cy="58.5" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
                           </svg>
 
                           {/* Tracking status badge */}
@@ -276,34 +275,33 @@ export default function HowItWorks({ onToast }) {
                     <span className="hiw-corner hiw-corner--br" />
                   </div>
                   <svg className="hiw-landmarks-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path d="M 40,73 L 42,66 L 44,61 L 43,62 L 40,64 L 40,73 Z" className="hiw-landmark-bone" />
-                    <polyline points="40,73 47,70 51,64 52,59 51,57" className="hiw-landmark-bone" />
-                    <polyline points="42,66 45,59 47,56 49,56 50,57" className="hiw-landmark-bone" />
-                    <polyline points="44,61 41,53 39,47 38,44" className="hiw-landmark-bone" />
-                    <polyline points="43,62 36,54 34,49 33,46" className="hiw-landmark-bone" />
-                    <polyline points="40,64 32,58 29,54 28,52" className="hiw-landmark-bone" />
-                    <circle cx="40" cy="73" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--wrist" />
-                    <circle cx="47" cy="70" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="51" cy="64" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="52" cy="59" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="51" cy="57" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
-                    <circle cx="42" cy="66" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="45" cy="59" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="47" cy="56" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="49" cy="56" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="50" cy="57" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
-                    <circle cx="44" cy="61" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="41" cy="53" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="39" cy="47" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="38" cy="44" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
-                    <circle cx="43" cy="62" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="36" cy="54" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="34" cy="49" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="33" cy="46" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
-                    <circle cx="40" cy="64" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="32" cy="58" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="29" cy="54" r="1.1" className="hiw-landmark-dot" />
-                    <circle cx="28" cy="52" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <path d="M 38.9,85.8 L 44.6,81.9 L 42.3,67.4 L 39.1,66.6 L 36.3,67.9 L 34.1,70.9 L 38.9,85.8 Z" className="hiw-landmark-bone" />
+                    <polyline points="38.9,85.8 44.6,81.9 49.6,76.8 54.0,73.5 55.5,69.1" className="hiw-landmark-bone" />
+                    <polyline points="42.3,67.4 46.5,63.1 50.4,65.1 52.9,68.5" className="hiw-landmark-bone" />
+                    <polyline points="39.1,66.6 39.6,58.6 40.9,53.2 41.7,48.7" className="hiw-landmark-bone" />
+                    <polyline points="36.3,67.9 34.5,60.4 34.5,55.1 34.5,50.9" className="hiw-landmark-bone" />
+                    <polyline points="34.1,70.9 30.5,66.4 28.6,62.3 27.3,58.5" className="hiw-landmark-bone" />
+                    <circle cx="38.9" cy="85.8" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--wrist" />
+                    <circle cx="44.6" cy="81.9" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="49.6" cy="76.8" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="54.0" cy="73.5" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="55.5" cy="69.1" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <circle cx="42.3" cy="67.4" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="46.5" cy="63.1" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="50.4" cy="65.1" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="52.9" cy="68.5" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <circle cx="39.1" cy="66.6" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="39.6" cy="58.6" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="40.9" cy="53.2" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="41.7" cy="48.7" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <circle cx="36.3" cy="67.9" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="34.5" cy="60.4" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="34.5" cy="55.1" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="34.5" cy="50.9" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
+                    <circle cx="34.1" cy="70.9" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="30.5" cy="66.4" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="28.6" cy="62.3" r="1.1" className="hiw-landmark-dot" />
+                    <circle cx="27.3" cy="58.5" r="1.3" className="hiw-landmark-dot hiw-landmark-dot--tip" />
                   </svg>
                   <div className="hiw-landmarks-pill">
                     <span className="hiw-pulse-dot" />

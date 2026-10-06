@@ -105,6 +105,111 @@
   border: 1px solid #E2E8F0;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
   overflow: hidden;
+  position: relative;
+}
+
+.auth-main--not-working {
+  border: 2px solid #F59E0B;
+  box-shadow: 0 0 0 1px #F59E0B, 0 16px 48px rgba(245, 158, 11, 0.16), 0 8px 32px rgba(0, 0, 0, 0.08);
+  animation: authCardPulse 4s ease-in-out infinite;
+}
+
+@keyframes authCardPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1px #F59E0B, 0 16px 48px rgba(245, 158, 11, 0.16), 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    box-shadow: 0 0 0 3px #FBBF24, 0 20px 56px rgba(245, 158, 11, 0.28), 0 10px 36px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ── Top Warning Marquee Strip ───────────────────────────── */
+.auth-top-marquee-strip {
+  grid-column: 1 / -1;
+  background: #FFFBEB;
+  border-bottom: 2px solid #FCD34D;
+  overflow: hidden;
+  padding: 0.55rem 0;
+  user-select: none;
+  z-index: 20;
+}
+
+.auth-top-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: authTopMarquee 26s linear infinite;
+  will-change: transform;
+}
+
+.auth-top-marquee-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #B45309;
+}
+
+.auth-top-marquee-content span {
+  padding: 0 0.5rem;
+}
+
+@keyframes authTopMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Diagonal Caution Marquee Strip Across Card ───────────── */
+.auth-diagonal-tape {
+  position: absolute;
+  top: 48%;
+  left: -25%;
+  width: 150%;
+  transform: translateY(-50%) rotate(-7deg);
+  background: #FACC15;
+  color: #0F172A;
+  border-top: 3.5px solid #0F172A;
+  border-bottom: 3.5px solid #0F172A;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35), 0 4px 16px rgba(245, 158, 11, 0.5);
+  z-index: 25;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  padding: 0.65rem 0;
+}
+
+.auth-tape-track {
+  display: flex;
+  width: max-content;
+  animation: authTapeMarquee 18s linear infinite;
+  will-change: transform;
+}
+
+.auth-tape-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0F172A;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.auth-tape-content span {
+  padding: 0 0.45rem;
+}
+
+.auth-tape-dot {
+  opacity: 0.6;
+}
+
+@keyframes authTapeMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* ── Left Panel ──────────────────────────────────────────── */
@@ -528,4 +633,11 @@
     padding: 2rem 1.5rem;
   }
   .auth-left-hand-wrap { display: none; }
+  .auth-diagonal-tape {
+    top: 40%;
+    padding: 0.5rem 0;
+  }
+  .auth-tape-content {
+    font-size: 0.85rem;
+  }
 }

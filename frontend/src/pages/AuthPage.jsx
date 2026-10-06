@@ -44,45 +44,12 @@ export default function AuthPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
-
-    if (mode === 'signup') {
-      if (!form.name.trim()) { setError('Please enter your full name.'); setLoading(false); return; }
-      if (!form.email.trim()) { setError('Please enter your email address.'); setLoading(false); return; }
-      if (form.password.length < 6) { setError('Password must be at least 6 characters.'); setLoading(false); return; }
-      if (form.password !== form.confirmPassword) { setError('Passwords do not match.'); setLoading(false); return; }
-
-      const result = signUp({ name: form.name.trim(), email: form.email.trim(), password: form.password });
-      if (result.error) { setError(result.error); setLoading(false); return; }
-
-      setSuccess('Account created! Redirecting to your dashboard…');
-      refresh();
-      setTimeout(() => navigate('/dashboard'), 1000);
-    } else {
-      if (!form.email.trim() || !form.password) { setError('Please enter your email and password.'); setLoading(false); return; }
-
-      const result = logIn({ email: form.email.trim(), password: form.password });
-      if (result.error) { setError(result.error); setLoading(false); return; }
-
-      setSuccess('Welcome back! Redirecting…');
-      refresh();
-      setTimeout(() => navigate('/dashboard'), 800);
-    }
+    setError('⚠️ The login system is currently not working. Please click "Try it out as Guest" below to explore MOVA!');
+    setLoading(false);
   };
 
   const handleSocialMock = (provider) => {
-    setError('');
-    // Simulate a social auth success (mock)
-    const mockResult = signUp({
-      name: provider === 'google' ? 'Google User' : 'Mobile User',
-      email: `${provider}_${Date.now()}@mock.mova`,
-      password: 'mock_social_' + Date.now(),
-    });
-    if (mockResult.session || mockResult.error === 'An account with this email already exists.') {
-      refresh();
-      navigate('/dashboard');
-    }
+    setError('⚠️ Social login is currently not working. Please click "Try it out as Guest" below!');
   };
 
   const handleGuestBypass = () => {
@@ -124,7 +91,71 @@ export default function AuthPage() {
       </header>
 
       {/* Main Split */}
-      <main className="auth-main">
+      <main className="auth-main auth-main--not-working">
+        {/* Top Warning Marquee Strip */}
+        <div className="auth-top-marquee-strip">
+          <div className="auth-top-marquee-track">
+            <div className="auth-top-marquee-content">
+              <span>⚠️ NOTICE: LOGIN SYSTEM IS NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>PLEASE USE GUEST ACCESS (SKIP LOGIN) ⚡</span>
+              <span className="auth-tape-dot">•</span>
+              <span>NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>AUTH UNDER MAINTENANCE</span>
+              <span className="auth-tape-dot">•</span>
+              <span>CLICK "TRY IT OUT AS GUEST" BELOW 🚀</span>
+              <span className="auth-tape-dot">•</span>
+            </div>
+            <div className="auth-top-marquee-content" aria-hidden="true">
+              <span>⚠️ NOTICE: LOGIN SYSTEM IS NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>PLEASE USE GUEST ACCESS (SKIP LOGIN) ⚡</span>
+              <span className="auth-tape-dot">•</span>
+              <span>NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>AUTH UNDER MAINTENANCE</span>
+              <span className="auth-tape-dot">•</span>
+              <span>CLICK "TRY IT OUT AS GUEST" BELOW 🚀</span>
+              <span className="auth-tape-dot">•</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Diagonal Caution Marquee Strip Across Card */}
+        <div className="auth-diagonal-tape" aria-hidden="true">
+          <div className="auth-tape-track">
+            <div className="auth-tape-content">
+              <span>⚠️ NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>PLEASE USE GUEST ACCESS ⚡</span>
+              <span className="auth-tape-dot">•</span>
+              <span>NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>LOGIN CURRENTLY DISABLED</span>
+              <span className="auth-tape-dot">•</span>
+              <span>NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>USE GUEST BYPASS 🚀</span>
+              <span className="auth-tape-dot">•</span>
+            </div>
+            <div className="auth-tape-content" aria-hidden="true">
+              <span>⚠️ NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>PLEASE USE GUEST ACCESS ⚡</span>
+              <span className="auth-tape-dot">•</span>
+              <span>NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>LOGIN CURRENTLY DISABLED</span>
+              <span className="auth-tape-dot">•</span>
+              <span>NOT WORKING</span>
+              <span className="auth-tape-dot">•</span>
+              <span>USE GUEST BYPASS 🚀</span>
+              <span className="auth-tape-dot">•</span>
+            </div>
+          </div>
+        </div>
+
         {/* Left Panel */}
         <div className="auth-left">
           <div className="auth-left-badge">AI SIGN LANGUAGE BRIDGE</div>
