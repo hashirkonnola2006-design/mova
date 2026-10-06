@@ -121,8 +121,10 @@
   border: 1.5px solid #E2E8F0;
   border-radius: 16px;
   padding: 2.25rem 2.5rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 400px);
+  gap: 2.5rem;
+  align-items: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
@@ -130,7 +132,15 @@
   display: flex;
   flex-direction: column;
   gap: 1.15rem;
-  max-width: 760px;
+  min-width: 0;
+}
+
+.dash-hero-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
 }
 
 .dash-eyebrow {
@@ -1064,6 +1074,22 @@
 /* ──────────────────────────────────────────────────────────
    RESPONSIVE DESIGN (12-column on desktop, stacked on mobile)
    ────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .dash-hero-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1.75rem;
+  }
+
+  .dash-hero-right {
+    justify-content: center;
+  }
+
+  .dash-hero-right .mini-cam-root {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 960px) {
   .dash-hero-card {
     padding: 1.75rem;

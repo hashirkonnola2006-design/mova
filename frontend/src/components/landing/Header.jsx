@@ -8,9 +8,11 @@ import { useScrolled } from '../../hooks/useScrolled.js';
 import './Header.css';
 
 const NAV_ITEMS = [
+  { label: 'Home', href: '#hero' },
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Features', href: '#features' },
-  { label: 'FAQ', href: '#faq' }
+  { label: 'FAQ', href: '#faq' },
+  { label: 'About', to: '/about' }
 ];
 
 const MORE_PAGES = [
@@ -40,6 +42,7 @@ export default function Header() {
   // Check section availability on mount so links to non-existent sections are hidden
   useEffect(() => {
     const valid = NAV_ITEMS.filter(item => {
+      if (item.to) return true;
       const id = item.href.replace('#', '');
       return !!document.getElementById(id);
     });
@@ -294,6 +297,19 @@ export default function Header() {
             {/* Desktop Navigation Links */}
             <nav className="lp-header-nav" aria-label="Primary">
               {availableLinks.map(item => {
+                if (item.to) {
+                  const isActive = location.pathname === item.to;
+                  return (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className={`lp-header-link ${isActive ? 'lp-header-link--active' : ''}`}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                }
                 const secId = item.href.replace('#', '');
                 const isActive = activeSection === secId;
 
@@ -401,6 +417,21 @@ export default function Header() {
         <div className="lp-mobile-menu-content">
           <nav className="lp-mobile-nav-links" aria-label="Mobile Navigation">
             {availableLinks.map((item, idx) => {
+              if (item.to) {
+                const isActive = location.pathname === item.to;
+                return (
+                  <Link
+                    key={item.to}
+                    ref={idx === 0 ? firstFocusableRef : null}
+                    to={item.to}
+                    className={`lp-mobile-nav-link ${isActive ? 'lp-mobile-nav-link--active' : ''}`}
+                    onClick={() => setMenuOpen(false)}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              }
               const secId = item.href.replace('#', '');
               const isActive = activeSection === secId;
 

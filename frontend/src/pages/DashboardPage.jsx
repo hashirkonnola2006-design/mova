@@ -17,6 +17,7 @@ import {
   formatRelativeTime,
   ALL_SUPPORTED_SIGNS
 } from '../services/userData.js';
+import MiniCameraPanel from '../components/dashboard/MiniCameraPanel.jsx';
 import './DashboardPage.css';
 
 const HELPFUL_TIPS = [
@@ -137,6 +138,23 @@ export default function DashboardPage() {
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  // Handle detection from embedded mini camera
+  const handleMiniSignDetected = useCallback(async (signObj) => {
+    if (!signObj?.en && !signObj?.ml) return;
+    try {
+      const saved = await saveTranslation(userId, {
+        en: signObj.en,
+        ml: signObj.ml,
+        confidence: signObj.confidence || 0.92,
+      });
+      if (saved) {
+        setTranslations(prev => [saved, ...prev.slice(0, 4)]);
+      }
+    } catch (err) {
+      console.warn('Failed to save mini translation:', err);
+    }
+  }, [userId]);
 
   // Speak aloud helper
   const handleSpeak = (text, id = null) => {
@@ -276,6 +294,11 @@ export default function DashboardPage() {
               </button>
             </div>
           </div>
+        </div>
+
+        {/* Right Side: Live Mini Camera Viewfinder & Landmark Detection */}
+        <div className="dash-hero-right">
+          <MiniCameraPanel onSignDetected={handleMiniSignDetected} />
         </div>
       </section>
 
