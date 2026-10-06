@@ -1,4 +1,6 @@
-import { InfiniteRibbon } from "./infinite-ribbon";
+"use client";
+
+import { InfiniteRibbon } from "@/components/ui/infinite-ribbon";
 
 export function InfiniteRibbonPreview() {
   return (
