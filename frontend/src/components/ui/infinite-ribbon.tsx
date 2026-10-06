@@ -1,4 +1,5 @@
 import type * as React from "react";
+
 import { cn } from "@/lib/utils";
 
 export interface InfiniteRibbonProps {
@@ -29,50 +30,53 @@ const ribbonAnimationStyles = `
   }
 }
 
-.animate-iconiq-infinite-ribbon {
-  animation: iconiq-infinite-ribbon linear infinite;
-}
-
-.animate-iconiq-infinite-ribbon-reverse {
-  animation: iconiq-infinite-ribbon-reverse linear infinite;
+@media (prefers-reduced-motion: reduce) {
+  .iconiq-infinite-ribbon-track {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 `;
 
 export function InfiniteRibbon({
-  repeat = 4,
-  duration = 20,
+  repeat = 5,
+  duration = 10,
   reverse = false,
   rotation = 0,
   children,
   className,
 }: InfiniteRibbonProps) {
+  const repeatCount = Math.max(1, Math.floor(repeat));
+  const animationName = reverse
+    ? "iconiq-infinite-ribbon-reverse"
+    : "iconiq-infinite-ribbon";
+
   return (
-    <>
-      <style>{ribbonAnimationStyles}</style>
+    <div
+      className={cn(
+        "w-full max-w-full overflow-hidden bg-yellow-400 py-1 text-black text-lg dark:bg-yellow-500 dark:text-black",
+        className
+      )}
+      style={{ transform: `rotate(${rotation}deg)` }}
+    >
+      <span className="sr-only">{children}</span>
       <div
-        className={cn("w-full overflow-hidden", className)}
-        style={{
-          transform: rotation ? `rotate(${rotation}deg)` : undefined,
-        }}
+        aria-hidden="true"
+        className="iconiq-infinite-ribbon-track flex w-max whitespace-nowrap"
+        style={
+          {
+            "--ribbon-duration": `${Math.max(0.1, duration)}s`,
+            animation: `${animationName} var(--ribbon-duration) linear infinite`,
+          } as React.CSSProperties
+        }
       >
-        <div
-          className={cn(
-            "flex w-max items-center gap-4",
-            reverse
-              ? "animate-iconiq-infinite-ribbon-reverse"
-              : "animate-iconiq-infinite-ribbon"
-          )}
-          style={{
-            animationDuration: `${duration}s`,
-          }}
-        >
-          {Array.from({ length: repeat }).map((_, index) => (
-            <div key={index} className="flex shrink-0 items-center gap-4">
-              {children}
-            </div>
-          ))}
-        </div>
+        {Array.from({ length: repeatCount * 2 }, (_, index) => (
+          <span className="mr-8 inline-block select-none" key={index}>
+            {children}
+          </span>
+        ))}
       </div>
-    </>
+      <style>{ribbonAnimationStyles}</style>
+    </div>
   );
 }

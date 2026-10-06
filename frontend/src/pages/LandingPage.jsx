@@ -14,6 +14,7 @@ import Features from '../components/landing/Features.jsx';
 import InquiryForm from '../components/InquiryForm.jsx';
 import { FAQ_ITEMS } from '../data/faq.js';
 import { LANDING_ASSETS } from '../data/landingAssets.js';
+import { InfiniteRibbon } from '../components/ui/infinite-ribbon.tsx';
 import './LandingPage.css';
 
 const HERO_FEATURES = [
@@ -244,29 +245,41 @@ export default function LandingPage() {
       {/* ── SECTION 3: FEATURES (id="features") ───────────────────────── */}
       <Features ref={featuresRef} inView={featuresIn} />
 
-      {/* ── SECTION 4: TRUST STRIP ────────────────────────────────────── */}
-      <section id="trust" className="lp-trust-section" ref={trustRef}>
-        <div className={`lp-trust-container ${trustIn ? 'lp-fade-up' : ''}`}>
-          <div className="lp-trust-badges">
-            {/* TODO: Verify against code - MediaPipe WebAssembly landmark detection runs purely client-side */}
-            <div className="lp-trust-badge">
-              <ShieldCheck size={20} className="lp-trust-icon" aria-hidden="true" />
-              <span className="lp-trust-text">Runs in your browser</span>
+      {/* ── SECTION 4: TRUST STRIP (Infinite Ribbon Marquee) ─────────── */}
+      <section id="trust" className="lp-trust-section lp-trust-section--marquee" ref={trustRef}>
+        <InfiniteRibbon
+          className="bg-transparent text-slate-800 dark:text-slate-100 py-1 text-base font-semibold border-none"
+          duration={26}
+          repeat={5}
+        >
+          <div className="flex items-center gap-8 select-none">
+            <div className="flex items-center gap-2 text-slate-700">
+              <ShieldCheck size={20} className="text-emerald-500" aria-hidden="true" />
+              <span>Runs in your browser</span>
             </div>
-
-            {/* TODO: Verify against code - Raw camera video frames are processed in-memory and never stored */}
-            <div className="lp-trust-badge">
-              <Lock size={19} className="lp-trust-icon" aria-hidden="true" />
-              <span className="lp-trust-text">Video stays on your device</span>
+            <span className="text-slate-300 font-bold" aria-hidden="true">✦</span>
+            <div className="flex items-center gap-2 text-slate-700">
+              <Lock size={19} className="text-amber-500" aria-hidden="true" />
+              <span>Video stays on your device</span>
             </div>
-
-            {/* TODO: Verify against code - Synthesis and translation output support Malayalam, Hindi, and English */}
-            <div className="lp-trust-badge">
-              <Globe size={20} className="lp-trust-icon" aria-hidden="true" />
-              <span className="lp-trust-text">Malayalam · Hindi · English</span>
+            <span className="text-slate-300 font-bold" aria-hidden="true">✦</span>
+            <div className="flex items-center gap-2 text-slate-700">
+              <Globe size={20} className="text-blue-600" aria-hidden="true" />
+              <span>Malayalam · Hindi · English</span>
             </div>
+            <span className="text-slate-300 font-bold" aria-hidden="true">✦</span>
+            <div className="flex items-center gap-2 text-slate-700">
+              <Sparkles size={20} className="text-indigo-500" aria-hidden="true" />
+              <span>21-Landmark Hand Tracking</span>
+            </div>
+            <span className="text-slate-300 font-bold" aria-hidden="true">✦</span>
+            <div className="flex items-center gap-2 text-slate-700">
+              <Video size={20} className="text-violet-500" aria-hidden="true" />
+              <span>Instant Speech & Audio Playback</span>
+            </div>
+            <span className="text-slate-300 font-bold" aria-hidden="true">✦</span>
           </div>
-        </div>
+        </InfiniteRibbon>
       </section>
 
       {/* ── SECTION 5: FAQ (id="faq") ─────────────────────────────────── */}

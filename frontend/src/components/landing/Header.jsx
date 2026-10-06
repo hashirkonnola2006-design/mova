@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import MovaLogo from '../MovaLogo.jsx';
 import StartButton from '../StartButton.jsx';
@@ -26,11 +26,12 @@ const MORE_PAGES = [
 export default function Header() {
   const isScrolled = useScrolled(10);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('hero');
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [availableLinks, setAvailableLinks] = useState(NAV_ITEMS);
+  const availableLinks = NAV_ITEMS;
 
   const toggleBtnRef = useRef(null);
   const mobilePanelRef = useRef(null);
@@ -39,19 +40,9 @@ export default function Header() {
   const dropdownBtnRef = useRef(null);
   const dropdownLinksRef = useRef([]);
 
-  // Check section availability on mount so links to non-existent sections are hidden
-  useEffect(() => {
-    const valid = NAV_ITEMS.filter(item => {
-      if (item.to) return true;
-      const id = item.href.replace('#', '');
-      return !!document.getElementById(id);
-    });
-    setAvailableLinks(valid);
-  }, []);
-
   // Scroll-spy with IntersectionObserver
   useEffect(() => {
-    const sectionIds = ['how-it-works', 'features', 'faq'];
+    const sectionIds = ['hero', 'how-it-works', 'features', 'faq'];
     const sections = sectionIds
       .map(id => document.getElementById(id))
       .filter(Boolean);
@@ -74,11 +65,16 @@ export default function Header() {
 
     sections.forEach(sec => observer.observe(sec));
     return () => observer.disconnect();
-  }, [availableLinks]);
+  }, []);
 
   // Smooth-scroll navigation
   const handleNavClick = useCallback((e, href) => {
     e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/' + href);
+      setMenuOpen(false);
+      return;
+    }
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
 
@@ -90,20 +86,26 @@ export default function Header() {
       } else {
         window.location.hash = href;
       }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     setMenuOpen(false);
-  }, []);
+  }, [location.pathname, navigate]);
 
   // Handle Logo click (scroll to top)
   const handleLogoClick = useCallback((e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setActiveSection('');
-    if (window.history.pushState) {
-      window.history.pushState(null, '', window.location.pathname);
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveSection('hero');
+      if (window.history.pushState) {
+        window.history.pushState(null, '', window.location.pathname);
+      }
     }
     setMenuOpen(false);
-  }, []);
+  }, [location.pathname, navigate]);
 
   // Body scroll lock on mobile menu open
   useEffect(() => {

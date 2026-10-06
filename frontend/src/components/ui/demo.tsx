@@ -1,15 +1,18 @@
-import React from "react";
-import { FeaturesSectionWithHoverEffects } from "@/components/blocks/feature-section-with-hover-effects";
+import { InfiniteRibbon } from "./infinite-ribbon";
 
-function FeaturesSectionWithHoverEffectsDemo() {
+export function InfiniteRibbonPreview() {
   return (
-    <div className="min-h-screen w-full">
-      <div className="absolute top-0 left-0 w-full">
-        <FeaturesSectionWithHoverEffects />
-      </div>
-    </div>
+    <>
+      <InfiniteRibbon className="absolute" duration={42} rotation={5}>
+        Craft crisp dashboards, lively landing pages, and polished product flows
+        with components that feel ready from the first click.
+      </InfiniteRibbon>
+      <InfiniteRibbon duration={42} reverse={true} rotation={-5}>
+        Craft crisp dashboards, lively landing pages, and polished product flows
+        with components that feel ready from the first click.
+      </InfiniteRibbon>
+    </>
   );
 }
 
-export { FeaturesSectionWithHoverEffectsDemo };
-export default FeaturesSectionWithHoverEffectsDemo;
+export default InfiniteRibbonPreview;
